@@ -9,28 +9,28 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z
   .object({
-    name: z
+    nameRegister: z
       .string()
       .nonempty("This field is required")
       .min(3, "Name must contains minimum 3 signs"),
-    email: z
+    emailRegister: z
       .string()
       .nonempty("This field is required")
       .email("This field must contains correct address email"),
-    password: z
+    passwordRegister: z
       .string()
       .nonempty("This field is required")
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8}$/,
         "This field must contains at least one upper, lower letter and digit all minimum 8 signs"
       ),
-    confirmPassword: z.string(),
+    confirmPasswordRegister: z.string(),
   })
   .refine(
-    (dataPassword) => dataPassword.password === dataPassword.confirmPassword,
+    (dataPassword) => dataPassword.passwordRegister === dataPassword.confirmPasswordRegister,
     {
       message: "Confirm password must be match to password",
-      path: ["confirmPassword"],
+      path: ["confirmPasswordRegister"],
     }
   );
 

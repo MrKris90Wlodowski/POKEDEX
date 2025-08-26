@@ -7,16 +7,30 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
+const schema = z.object({
+    emailLogin: z
+    .string()
+    .nonempty("This field is required"),
+    passwordLogin: z
+    .string()
+    .nonempty("This field is required")
+})
+
 const LoginForm = () => {
 
-    const { register, reset, handleSubmit, formState: { errors } } = useForm()
+    const { register, reset, handleSubmit, formState: { errors } } = useForm({resolver: zodResolver(schema)})
+
+    const dataLogin = (formValue) => {
+        console.log(formValue);
+        reset();
+    }
 
   return (
     <Wrapper>
-      <Form>
+      <Form onSubmit={handleSubmit(dataLogin)}>
         <Input
-          id="emailRegister"
-          name="emailRegister"
+          id="emailLogin"
+          name="emailLogin"
           type="email"
           placeholder="pikachu90@poke.com"
           register={register}
@@ -25,8 +39,8 @@ const LoginForm = () => {
           EMAIL:
         </Input>
         <Input
-          id="passwordRegister"
-          name="passwordRegister"
+          id="passwordLogin"
+          name="passwordLogin"
           type="password"
           placeholder="GengaR13"
           register={register}
