@@ -1,4 +1,4 @@
-const Input = ({ id, type, name, children }) => {
+const Input = ({ id, type, name, children, register, errors }) => {
   return (
     <div>
       <label htmlFor={name}>{children}</label>
