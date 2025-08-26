@@ -51,36 +51,40 @@ const RegisterForm = () => {
     <Wrapper>
       <Form onSubmit={handleSubmit(dataRegister)}>
         <Input
-          id="name"
-          name="name"
+          id="nameRegister"
+          name="nameRegister"
           type="text"
+          placeholder="Ash Ketchum"
           register={register}
           errors={errors}
         >
           NAME:
         </Input>
         <Input
-          id="email"
-          name="email"
+          id="emailRegister"
+          name="emailRegister"
           type="email"
+          placeholder="pikachu90@poke.com"
           register={register}
           errors={errors}
         >
           EMAIL:
         </Input>
         <Input
-          id="password"
-          name="password"
+          id="passwordRegister"
+          name="passwordRegister"
           type="password"
+          placeholder="GengaR13"
           register={register}
           errors={errors}
         >
           PASSWORD:
         </Input>
         <Input
-          id="confirmPassword"
-          name="confirmPassword"
+          id="confirmPasswordRegister"
+          name="confirmPasswordRegister"
           type="password"
+          placeholder="GengaR13"
           register={register}
           errors={errors}
         >
