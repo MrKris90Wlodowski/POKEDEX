@@ -1,3 +1,4 @@
+import Arena from "./components/subpages/Arena"
 import Edition from "./components/subpages/Edition"
 import Favourite from "./components/subpages/Favourite "
 import Home from "./components/subpages/Home"
@@ -14,6 +15,7 @@ const App = () => {
      <Registration/>
      <Login/>
      <Favourite/>
+     <Arena/>
      <Ranking/>
      <Edition/>
     </>
