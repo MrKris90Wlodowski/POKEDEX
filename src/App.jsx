@@ -1,15 +1,21 @@
-import CreatePokeForm from "./components/features/CreatePokeForm"
-import LoginForm from "./components/features/LoginForm"
-import RegisterForm from "./components/features/RegisterForm"
+import Edition from "./components/subpages/Edition"
+import Favourite from "./components/subpages/Favourite "
+import Home from "./components/subpages/Home"
+import Login from "./components/subpages/Login"
+import Ranking from "./components/subpages/Ranking"
+import Registration from "./components/subpages/Registration"
 
 const App = () => {
 
   return (
     <>
      <h1>HELLO IN POKEDEX</h1>
-     <RegisterForm></RegisterForm>
-     <LoginForm></LoginForm>
-     <CreatePokeForm></CreatePokeForm>
+     <Home/>
+     <Registration/>
+     <Login/>
+     <Favourite/>
+     <Ranking/>
+     <Edition/>
     </>
   )
 }
