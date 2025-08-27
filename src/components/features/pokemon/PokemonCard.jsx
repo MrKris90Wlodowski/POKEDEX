@@ -2,11 +2,11 @@ import Wrapper from "../../shared/Wrapper";
 import Text from "../../shared/Text";
 import Image  from "../../shared/Image";
 
-const PokemonCard = ({ source, name, height, weight, exp, ability }) => {
+const PokemonCard = ({ sourceImg, name, height, weight, exp, ability }) => {
     return (
         <Wrapper>
             <Wrapper>
-                <Image source={source} name={name}/>
+                <Image src={sourceImg} alt={name}/>
             </Wrapper>
             <Text>{name}</Text>
             <Wrapper>
