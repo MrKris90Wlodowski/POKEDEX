@@ -1,16 +1,14 @@
-import Wrapper from "../shared/Wrapper";
-import Input from "../shared/Input";
-import Form from "../shared/Form";
-import Button from "../shared/Button";
+
+import Wrapper from "../../shared/Wrapper";
+import Input from "../../shared/Input";
+import Form from "../../shared/Form";
+import Button from "../../shared/Button";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 const schema = z.object({
-    nameCreatePoke: z
-    .string()
-    .nonempty("This field is required"),
     weightCreatePoke: z
     .string()
     .nonempty("This field is required"),
@@ -22,7 +20,7 @@ const schema = z.object({
     .nonempty("This field is required"),
 })
 
-const CreatePokeForm = () => {
+const EditPokeForm = () => {
   const {
     register,
     reset,
@@ -30,7 +28,7 @@ const CreatePokeForm = () => {
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
 
-  const dataCreate = (formValue) => {
+  const dataEdit = (formValue) => {
         console.log(formValue);
         reset();
     }
@@ -38,20 +36,10 @@ const CreatePokeForm = () => {
 
   return (
     <Wrapper>
-      <Form onSubmit={handleSubmit(dataCreate)}>
+      <Form onSubmit={handleSubmit(dataEdit)}>
         <Input
-          id="nameCreatePoke"
-          name="nameCreatePoke"
-          type="text"
-          placeholder="Pikachu"
-          register={register}
-          errors={errors}
-        >
-          NAME:
-        </Input>
-        <Input
-          id="weightCreatePoke"
-          name="weightCreatePoke"
+          id="weightEditPoke"
+          name="weightEditPoke"
           type="text"
           placeholder="6 kg"
           register={register}
@@ -60,8 +48,8 @@ const CreatePokeForm = () => {
           WEIGHT:
         </Input>
         <Input
-          id="heightCreatePoke"
-          name="heightCreatePoke"
+          id="heightEditPoke"
+          name="heightEditPoke"
           type="text"
           placeholder="0,4 m"
           register={register}
@@ -70,8 +58,8 @@ const CreatePokeForm = () => {
           HEIGHT
         </Input>
         <Input
-          id="expCreatePoke"
-          name="expCreatePoke"
+          id="expEditPoke"
+          name="expEditPoke"
           type="text"
           placeholder="112"
           register={register}
@@ -79,14 +67,10 @@ const CreatePokeForm = () => {
         >
           EXP:
         </Input>
-        <Wrapper>
-          <Button>LEFT</Button>
-          <Button>RIGHT</Button>
-        </Wrapper>
-        <Button type="submit" >CREATE POKE</Button>
+        <Button type="submit" >EDIT POKE</Button>
       </Form>
     </Wrapper>
   );
 };
 
-export default CreatePokeForm;
+export default EditPokeForm;

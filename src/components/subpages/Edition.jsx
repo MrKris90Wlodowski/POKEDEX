@@ -1,11 +1,10 @@
-import EditPokeForm from "../features/EditPokeForm"
-import RegisterForm from "../features/RegisterForm"
+import CreatePokeForm from "../features/forms/CreatePokeForm"
 import Wrapper from "../shared/Wrapper"
 
 const Edition = () => {
     return (
         <Wrapper>
-            <EditPokeForm/>
+            <CreatePokeForm/>
         </Wrapper>
     )
 }

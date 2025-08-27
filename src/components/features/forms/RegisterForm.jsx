@@ -1,11 +1,11 @@
-import Button from "../shared/Button";
-import Input from "../shared/Input";
-import Wrapper from "../shared/Wrapper";
-import Form from "../shared/Form";
+import Button from "../../shared/Button";
+import Form from "../../shared/Form";
+import Input from "../../shared/Input";
+import Wrapper from "../../shared/Wrapper";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z
   .object({

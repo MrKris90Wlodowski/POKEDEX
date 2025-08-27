@@ -1,7 +1,7 @@
-import Wrapper from "../shared/Wrapper";
-import Input from "../shared/Input";
-import Form from "../shared/Form";
-import Button from "../shared/Button";
+import Wrapper from "../../shared/Wrapper";
+import Input from "../../shared/Input";
+import Form from "../../shared/Form";
+import Button from "../../shared/Button";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

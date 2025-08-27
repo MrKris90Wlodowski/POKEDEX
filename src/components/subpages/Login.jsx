@@ -1,4 +1,4 @@
-import LoginForm from "../features/LoginForm"
+import LoginForm from "../features/forms/LoginForm"
 import Wrapper from "../shared/Wrapper"
 
 const Login = () => {

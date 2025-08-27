@@ -1,4 +1,4 @@
-import RegisterForm from "../features/RegisterForm"
+import RegisterForm from "../features/forms/RegisterForm"
 import Wrapper from "../shared/Wrapper"
 
 const Registration = () => {
