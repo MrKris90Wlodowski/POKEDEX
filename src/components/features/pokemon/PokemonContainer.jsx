@@ -3,23 +3,24 @@ import PokemonCard from "./PokemonCard";
 import usePokemon from "../../../hooks/usePokemon";
 
 const PokemonContainer = () => {
-  const { pokemon, loading } = usePokemon(94);
+  const { pokemon, loading } = usePokemon();
 
   if (loading) return <p>Loading...</p>;
   console.log(pokemon);
 
   return (
     <Wrapper>
-      {/* ({ sourceImg, name, height, weight, exp, ability })   */}
+        {pokemon.map((poke,index) => (
       <PokemonCard
-        name={pokemon.name}
-        exp={pokemon.base_experience}
-        height={pokemon.height}
-        weight={pokemon.weight}
-        ability={pokemon.abilities[0].ability.name}
-        sourceImg={pokemon.sprites.back_default
-}
+        key={index}
+        name={poke.name}
+        exp={poke.base_experience}
+        height={poke.height}
+        weight={poke.weight}
+        ability={poke.abilities[0].ability.name}
+        sourceImg={poke.sprites.front_default}
       />
+        ))}
     </Wrapper>
   );
 };
