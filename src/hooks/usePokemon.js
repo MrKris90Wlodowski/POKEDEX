@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 const POKE_URL = "https://pokeapi.co/api/v2/pokemon?limit=200";
 
 const usePokemon = (id) => {
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemonsList, setPokemonsList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,13 +15,13 @@ const usePokemon = (id) => {
         );
       })
       .then((dataPoke) => {
-        setPokemon(dataPoke);
+        setPokemonsList(dataPoke);
         setLoading(false);
       })
       .catch((error) => console.error(error));
   }, []);
 
-  return { pokemon, loading };
+  return { pokemonsList, loading };
 };
 
 export default usePokemon;

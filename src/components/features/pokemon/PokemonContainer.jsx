@@ -3,14 +3,14 @@ import PokemonCard from "./PokemonCard";
 import usePokemon from "../../../hooks/usePokemon";
 
 const PokemonContainer = () => {
-  const { pokemon, loading } = usePokemon();
+  const { pokemonsList, loading } = usePokemon();
 
   if (loading) return <p>Loading...</p>;
-  console.log(pokemon);
+  console.log(pokemonsList);
 
   return (
     <Wrapper>
-        {pokemon.map((poke,index) => (
+        {pokemonsList.map((poke,index) => (
       <PokemonCard
         key={index}
         name={poke.name}
