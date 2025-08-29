@@ -7,6 +7,8 @@ const PokemonContainer = ({value, className}) => {
 
   if (loading) return <p>Loading...</p>;
   console.log(pokemonsList);
+  console.log(pokemonsList.length);
+
 
   const filteredPokemon = pokemonsList.filter(poke => (
     (poke.name.toLowerCase()).includes(value.trim().toLowerCase())
