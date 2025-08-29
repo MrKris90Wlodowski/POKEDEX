@@ -4,11 +4,11 @@ import Image  from "../../shared/Image";
 
 const PokemonCard = ({ sourceImg, name, height, weight, exp, ability }) => {
     return (
-        <Wrapper>
-            <Wrapper>
+        <Wrapper className="w-48 h-auto p-4 border-2 border-white rounded-2xl">
+            <Wrapper className="flex items-center justify-center border-2 border-white rounded-2xl">
                 <Image src={sourceImg} alt={name}/>
             </Wrapper>
-            <Text tag="h3">{name}</Text>
+            <Text tag="h3" className="my-2 font-black">{name}</Text>
             <Wrapper>
                 <Text strong={"HEIGHT:"}> {height}</Text>
                 <Text strong={"WEIGHT:"}> {weight}</Text>
