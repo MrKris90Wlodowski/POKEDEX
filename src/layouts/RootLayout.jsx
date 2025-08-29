@@ -4,8 +4,8 @@ import Footer from "../components/subpages/Footer";
 
 const RootLayout = () => {
   return (
-    <Wrapper>
-      <nav style={{ display: "flex", gap: "12px", padding: "10px" }}>
+    <Wrapper className="flex flex-col min-h-screen">
+      <nav className="flex gap-4 p-4 bg-blue-500">
         <Link to="">HOME</Link>
         <Link to="/registration">REGISTRATION</Link>
         <Link to="/login">LOGIN</Link>
@@ -14,7 +14,7 @@ const RootLayout = () => {
         <Link to="/ranking">RANKING</Link>
         <Link to="/edition">EDITION</Link>
       </nav>
-      <Wrapper style={{ display: "flex", gap: "12px", padding: "10px" }}>
+      <Wrapper className="flex items-center justify-center flex-grow h-auto">
         <Outlet />
       </Wrapper>
       <Footer/>

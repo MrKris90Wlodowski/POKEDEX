@@ -9,7 +9,7 @@ const PokemonCard = ({ sourceImg, name, height, weight, exp, ability }) => {
                 <Image src={sourceImg} alt={name}/>
             </Wrapper>
             <Text tag="h3" className="my-2 font-black">{name}</Text>
-            <Wrapper>
+            <Wrapper> 
                 <Text strong={"HEIGHT:"}> {height}</Text>
                 <Text strong={"WEIGHT:"}> {weight}</Text>
                 <Text strong={"BASE EXP:"}> {exp}</Text>

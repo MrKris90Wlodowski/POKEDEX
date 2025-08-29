@@ -2,7 +2,7 @@ import Wrapper from "../../shared/Wrapper";
 import PokemonCard from "./PokemonCard";
 import usePokemon from "../../../hooks/usePokemon";
 
-const PokemonContainer = ({value}) => {
+const PokemonContainer = ({value, className}) => {
   const { pokemonsList, loading } = usePokemon();
 
   if (loading) return <p>Loading...</p>;
@@ -13,7 +13,7 @@ const PokemonContainer = ({value}) => {
   ))
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
         {filteredPokemon.map((poke,index) => (
       <PokemonCard
         key={index}
