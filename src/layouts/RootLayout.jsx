@@ -1,5 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import Wrapper from "../components/shared/Wrapper";
+import Footer from "../components/subpages/Footer";
 
 const RootLayout = () => {
   return (
@@ -16,6 +17,7 @@ const RootLayout = () => {
       <Wrapper style={{ display: "flex", gap: "12px", padding: "10px" }}>
         <Outlet />
       </Wrapper>
+      <Footer/>
     </Wrapper>
   );
 };

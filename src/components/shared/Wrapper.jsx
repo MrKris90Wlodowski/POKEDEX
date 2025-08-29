@@ -1,6 +1,6 @@
-const Wrapper = ({children, style}) => {
+const Wrapper = ({children, style, className}) => {
     return (
-        <div style={style}>
+        <div style={style} className={className}>
             {children}
         </div>
     )

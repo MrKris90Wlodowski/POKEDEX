@@ -1,8 +1,8 @@
-const Text = ({children, tag, strong}) => {
+const Text = ({children, tag, strong, className}) => {
     const Tag = tag || "p"
 
     return (
-        <Tag><strong>{strong}</strong>{children}</Tag>
+        <Tag className={className}><strong>{strong}</strong>{children}</Tag>
     )
 }
 
