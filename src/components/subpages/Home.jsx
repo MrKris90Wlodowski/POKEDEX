@@ -16,7 +16,7 @@ const Home = () => {
     <Wrapper>
       <Text tag="h1">HOME POKEDEX</Text>
       <SearchBarPokemon onSearch={handleSearch} value={searchValue}/>
-      <PokemonContainer/>
+      <PokemonContainer value={searchValue}/>
     </Wrapper>
   );
 };

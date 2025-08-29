@@ -2,15 +2,19 @@ import Wrapper from "../../shared/Wrapper";
 import PokemonCard from "./PokemonCard";
 import usePokemon from "../../../hooks/usePokemon";
 
-const PokemonContainer = () => {
+const PokemonContainer = ({value}) => {
   const { pokemonsList, loading } = usePokemon();
 
   if (loading) return <p>Loading...</p>;
   console.log(pokemonsList);
 
+  const filteredPokemon = pokemonsList.filter(poke => (
+    (poke.name.toLowerCase()).includes(value.trim().toLowerCase())
+  ))
+
   return (
     <Wrapper>
-        {pokemonsList.map((poke,index) => (
+        {filteredPokemon.map((poke,index) => (
       <PokemonCard
         key={index}
         name={poke.name}
