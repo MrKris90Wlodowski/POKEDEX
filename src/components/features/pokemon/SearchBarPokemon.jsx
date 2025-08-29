@@ -1,13 +1,9 @@
 import Input from "../../shared/Input"
-import { useState } from "react"
 
-const SearchBarPokemon = ({onSearch }) => {
-    const [value, setValue] = useState("");
-    console.log(value);
+const SearchBarPokemon = ({onSearch, value}) => {
 
     const handleChange = (e) => {
-        const inputValue = e.target.value;
-        setValue(inputValue);
+        const inputValue = (e.target.value);
         onSearch(inputValue);
     }
 
