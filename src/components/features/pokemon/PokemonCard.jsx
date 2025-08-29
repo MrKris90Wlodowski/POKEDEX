@@ -8,10 +8,10 @@ const PokemonCard = ({ sourceImg, name, height, weight, exp, ability }) => {
             <Wrapper className="flex items-center justify-center border-2 border-white rounded-2xl">
                 <Image src={sourceImg} alt={name}/>
             </Wrapper>
-            <Text tag="h3" className="my-2 font-black">{name}</Text>
+            <Text tag="h3" className="my-2 font-black uppercase">{name}</Text>
             <Wrapper> 
-                <Text strong={"HEIGHT:"}> {height}</Text>
-                <Text strong={"WEIGHT:"}> {weight}</Text>
+                <Text strong={"HEIGHT:"}> {height/10} m</Text>
+                <Text strong={"WEIGHT:"}> {weight/10} kg</Text>
                 <Text strong={"BASE EXP:"}> {exp}</Text>
                 <Text strong={"ABILITY:"}> {ability}</Text>
             </Wrapper>
