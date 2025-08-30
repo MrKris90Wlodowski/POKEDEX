@@ -10,11 +10,7 @@
 }
 
 @layer base {
-  button {
-    @apply px-4 py-2 bg-blue-500 rounded-lg text-white hover:bg-blue-700 transition ease-in-out duration-300;
-  }
-
   input {
-    @apply px-2 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500;
+    @apply px-2 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500;
   }
 }
