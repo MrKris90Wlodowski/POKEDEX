@@ -1,18 +1,24 @@
+import { useEffect } from "react";
 import Wrapper from "../../shared/Wrapper";
 import PokemonCard from "./PokemonCard";
 import usePokemon from "../../../hooks/usePokemon";
 
-const PokemonContainer = ({value, className}) => {
+const PokemonContainer = ({value, className, onRecordLength}) => {
   const { pokemonsList, loading } = usePokemon();
 
-  if (loading) return <p>Loading...</p>;
+  // if (loading) return <p>Loading...</p>;
   console.log(pokemonsList);
   console.log(pokemonsList.length);
-
 
   const filteredPokemon = pokemonsList.filter(poke => (
     (poke.name.toLowerCase()).includes(value.trim().toLowerCase())
   ))
+
+  useEffect(() => {
+    onRecordLength(filteredPokemon.length)
+  },[filteredPokemon, onRecordLength])
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <Wrapper className={className}>
