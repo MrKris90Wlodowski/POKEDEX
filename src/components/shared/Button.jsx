@@ -5,14 +5,24 @@ const Button = ({
   children,
   onClick,
   disabled,
+  variant,
+  className
 }) => {
 
+  const baseClass = "px-4 py-2 rounded-lg cursor-pointer transition duration-300 ease-in-out"
+  const variants = {
+    default: "bg-blue-500 hover:bg-blue-700 transition duration-300 ease-in-out",
+    light: "bg-white text-black",
+    dark: "bg-black text-white"
+  }
+  const disabledClass = "bg-gray-500"
+
     const buttonClass = clsx(
-        "px-4 py-2 text-white rounded-lg cursor-pointer ", 
-        disabled 
-      ? "bg-gray-500"
-      : "bg-blue-500 hover:bg-blue-700 transition duration-300 ease-in-out"
+      baseClass,
+      disabled ? disabledClass : variants[variant],
+      className
     )
+
 
   return (
     <button

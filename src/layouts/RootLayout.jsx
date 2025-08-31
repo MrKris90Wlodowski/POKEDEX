@@ -1,6 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import Wrapper from "../components/shared/Wrapper";
 import Footer from "../components/subpages/Footer";
+import ThemeButton from "../components/features/theme/ThemeButton";
 
 const RootLayout = () => {
   return (
@@ -13,6 +14,7 @@ const RootLayout = () => {
         <Link to="/arena">ARENA</Link>
         <Link to="/ranking">RANKING</Link>
         <Link to="/edition">EDITION</Link>
+        <ThemeButton/>
       </nav>
       <Wrapper className="flex items-center justify-center flex-grow h-auto">
         <Outlet />
