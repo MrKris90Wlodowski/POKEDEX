@@ -41,8 +41,8 @@ const Home = () => {
     poke.name.toLowerCase().includes(searchValue.trim().toLowerCase())
   );
 
-  const firstIndex = (currentPage - 1) * currentPage;
-  const lastIndex = (15) * currentPage;
+  const firstIndex = (currentPage - 1) * 15;
+  const lastIndex = currentPage * 15;
 
   const paginationArrayPokemons = filteredArrayPokemons.slice(
     firstIndex,
