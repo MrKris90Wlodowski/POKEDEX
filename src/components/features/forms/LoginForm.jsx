@@ -48,7 +48,7 @@ const LoginForm = () => {
         >
           PASSWORD:
         </Input>
-        <Button type="submit">Login</Button>
+        <Button type="submit" variant="default">Login</Button>
       </Form>
     </Wrapper>
   );

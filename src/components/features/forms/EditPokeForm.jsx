@@ -67,7 +67,7 @@ const EditPokeForm = () => {
         >
           EXP:
         </Input>
-        <Button type="submit" >EDIT POKE</Button>
+        <Button type="submit" variant="default">EDIT POKE</Button>
       </Form>
     </Wrapper>
   );

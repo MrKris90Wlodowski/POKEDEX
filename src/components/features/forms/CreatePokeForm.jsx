@@ -80,10 +80,10 @@ const CreatePokeForm = () => {
           EXP:
         </Input>
         <Wrapper>
-          <Button>LEFT</Button>
-          <Button>RIGHT</Button>
+          <Button variant="default">LEFT</Button>
+          <Button variant="default">RIGHT</Button>
         </Wrapper>
-        <Button type="submit" >CREATE POKE</Button>
+        <Button type="submit" variant="default">CREATE POKE</Button>
       </Form>
     </Wrapper>
   );

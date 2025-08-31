@@ -90,7 +90,7 @@ const RegisterForm = () => {
         >
           CONFIRM PASSWORD:
         </Input>
-        <Button type="submit">REGISTER</Button>
+        <Button type="submit" variant="default">REGISTER</Button>
       </Form>
     </Wrapper>
   );
