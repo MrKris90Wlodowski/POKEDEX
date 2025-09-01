@@ -1,6 +1,6 @@
-const Form = ({onSubmit, children}) => {
+const Form = ({onSubmit, className, children}) => {
     return (
-        <form onSubmit={onSubmit}>{children}</form>
+        <form onSubmit={onSubmit} className={className}>{children}</form>
     )
 }
 

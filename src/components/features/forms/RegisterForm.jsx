@@ -7,6 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import useTheme from "../../../hooks/useTheme";
+
 const schema = z
   .object({
     nameRegister: z
@@ -35,6 +37,8 @@ const schema = z
   );
 
 const RegisterForm = () => {
+  const { theme } = useTheme();
+
   const {
     register,
     reset,
@@ -48,8 +52,8 @@ const RegisterForm = () => {
   };
 
   return (
-    <Wrapper>
-      <Form onSubmit={handleSubmit(dataRegister)}>
+    <Wrapper className="p-8 border-4 rounded-2xl" variant={theme}>
+      <Form onSubmit={handleSubmit(dataRegister)} className="flex flex-col gap-8 ">
         <Input
           id="nameRegister"
           name="nameRegister"

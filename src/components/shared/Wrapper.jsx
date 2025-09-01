@@ -6,14 +6,8 @@ const Wrapper = ({ children, style, className, variant}) => {
     dark: "bg-[var(--black)] text-[var(--white)]",
   };
 
-//   const variantsBorrder = {
-//     light: "border-[var(--black)]",
-//     dark: "border-[var(--white)]"
-//   }
-
   const wrapperClass = clsx(
         variants[variant],
-        // variants[variantBorder],
         className
     )
 
