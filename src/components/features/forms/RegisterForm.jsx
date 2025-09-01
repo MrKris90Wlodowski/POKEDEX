@@ -39,6 +39,7 @@ const schema = z
 
 const RegisterForm = () => {
   const { theme } = useTheme();
+  const { loading, error, registerRecord } = useRegister();
 
   const {
     register,
@@ -48,6 +49,7 @@ const RegisterForm = () => {
   } = useForm({ resolver: zodResolver(schema) });
 
   const dataRegister = (formValue) => {
+    registerRecord(formValue);
     console.log(formValue);
     reset();
   };

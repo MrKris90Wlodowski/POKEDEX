@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 const POKE_URL = "https://pokeapi.co/api/v2/pokemon?limit=150";
 
-const usePokemon = (id) => {
+const usePokemon = () => {
   const [pokemonsList, setPokemonsList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
