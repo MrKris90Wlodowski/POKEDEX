@@ -35,7 +35,7 @@ const Home = () => {
   };
 
   // State and handle PokemonContainer
-  const { pokemonsList, loading } = usePokemon();
+  const { error, pokemonsList, loading } = usePokemon();
 
   const filteredArrayPokemons = pokemonsList.filter((poke) =>
     poke.name.toLowerCase().includes(searchValue.trim().toLowerCase())
@@ -58,6 +58,7 @@ const Home = () => {
       <SearchBarPokemon onSearch={handleSearch} value={searchValue} />
       <PokemonContainer
         className="grid grid-cols-5 gap-6 p-6"
+        error={error}
         loading={loading}
         pokemonsArray={paginationArrayPokemons}
       />

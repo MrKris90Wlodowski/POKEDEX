@@ -4,6 +4,7 @@ const POKE_URL = "https://pokeapi.co/api/v2/pokemon?limit=150";
 const usePokemon = (id) => {
   const [pokemonsList, setPokemonsList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -18,10 +19,14 @@ const usePokemon = (id) => {
         setPokemonsList(dataPoke);
         setLoading(false);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        setLoading(false);
+        setError(error);
+        console.error(error);
+      });
   }, []);
 
-  return { pokemonsList, loading };
+  return { error, pokemonsList, loading };
 };
 
 export default usePokemon;

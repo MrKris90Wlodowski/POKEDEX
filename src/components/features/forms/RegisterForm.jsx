@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import useTheme from "../../../hooks/useTheme";
+import useRegister from "../../../services/useRegister"; 
 
 const schema = z
   .object({
