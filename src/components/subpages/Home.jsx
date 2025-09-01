@@ -54,7 +54,7 @@ const Home = () => {
   }, [filteredArrayPokemons]);
 
   return (
-    <Wrapper>
+    <Wrapper className="flex flex-col items-center justify-center">
       <SearchBarPokemon onSearch={handleSearch} value={searchValue} />
       <PokemonContainer
         className="grid grid-cols-5 gap-6 p-6"

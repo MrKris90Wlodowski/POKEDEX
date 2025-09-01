@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import useTheme from "../../../hooks/useTheme";
-import useRegister from "../../../services/useRegister"; 
+import useRegister from "../../../services/useRegister";
 
 const schema = z
   .object({
@@ -30,7 +30,8 @@ const schema = z
     confirmPasswordRegister: z.string(),
   })
   .refine(
-    (dataPassword) => dataPassword.passwordRegister === dataPassword.confirmPasswordRegister,
+    (dataPassword) =>
+      dataPassword.passwordRegister === dataPassword.confirmPasswordRegister,
     {
       message: "Confirm password must be match to password",
       path: ["confirmPasswordRegister"],
@@ -55,8 +56,11 @@ const RegisterForm = () => {
   };
 
   return (
-    <Wrapper className="p-8 border-4 rounded-2xl" variant={theme}>
-      <Form onSubmit={handleSubmit(dataRegister)} className="flex flex-col gap-8 ">
+    <Wrapper className="p-8 m-8 border-4 rounded-2xl w-150" variant={theme}>
+      <Form
+        onSubmit={handleSubmit(dataRegister)}
+        className="flex flex-col gap-8 "
+      >
         <Input
           id="nameRegister"
           name="nameRegister"
@@ -97,7 +101,13 @@ const RegisterForm = () => {
         >
           CONFIRM PASSWORD:
         </Input>
-        <Button type="submit" variant="default">REGISTER</Button>
+        <Button
+          type="submit"
+          variant="default"
+          className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl"
+        >
+          REGISTER
+        </Button>
       </Form>
     </Wrapper>
   );

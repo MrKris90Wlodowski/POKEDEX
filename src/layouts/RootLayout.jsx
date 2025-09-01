@@ -12,12 +12,12 @@ const RootLayout = () => {
     <Wrapper className="flex flex-col min-h-screen" variant={theme}>
       <nav className="flex gap-4 p-8 bg-blue-500">
         <Link to=""><Wrapper className="w-48 h-16"><Image src={logoPokemon} alt="logo Pokemon"/></Wrapper></Link>
-        <Link to="/registration">REGISTRATION</Link>
-        <Link to="/login">LOGIN</Link>
-        <Link to="/favourite">FAVOURITE</Link>
-        <Link to="/arena">ARENA</Link>
-        <Link to="/ranking">RANKING</Link>
-        <Link to="/edition">EDITION</Link>
+        <Link to="/registration" className="text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl">REGISTRATION</Link>
+        <Link to="/login" className="text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl">LOGIN</Link>
+        <Link to="/favourite" className="text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl">FAVOURITE</Link>
+        <Link to="/arena" className="text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl">ARENA</Link>
+        <Link to="/ranking" className="text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl">RANKING</Link>
+        <Link to="/edition" className="text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl">EDITION</Link>
         <ThemeButton/>
       </nav>
       <Wrapper className="flex items-center justify-center flex-grow h-auto">
