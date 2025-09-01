@@ -1,9 +1,10 @@
-// import { useState } from "react";
 import Wrapper from "../../shared/Wrapper";
 import Button from "../../shared/Button";
 import Text from "../../shared/Text";
+import useTheme from "../../../hooks/useTheme";
 
 const PaginationPokemon = ({ currentPage, lastPage, onChange }) => {
+  const { theme } = useTheme()
 
   return (
     <Wrapper className="flex gap-4 my-7">
@@ -13,7 +14,7 @@ const PaginationPokemon = ({ currentPage, lastPage, onChange }) => {
       <Button disabled={currentPage === 1} onClick={() => onChange("PREV")} variant="default">
         PREV
       </Button>
-      <Wrapper className="flex items-center justify-center border-2 border-white rounded-lg w-11">
+      <Wrapper variant={theme} className="flex items-center justify-center border-2 rounded-lg w-11">
         <Text>{currentPage}</Text>
       </Wrapper>
       <Button disabled={currentPage === lastPage} onClick={() => onChange("NEXT")} variant="default">
