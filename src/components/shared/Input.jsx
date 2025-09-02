@@ -13,7 +13,7 @@ const Input = ({ id, type, name, children, register, value, errors, placeholder,
 
   return (
     <div className="flex flex-col">
-      <label htmlFor={name}>{children}</label>
+      <label htmlFor={name} className="font-medium">{children}</label>
       <input id={id} type={type} name={name} placeholder={placeholder} className={inputClass} value={value} onChange={onChange} {...(register ? register(name) : {})}/>
       {errors?.[id] && <p style={{color: "red"}}>{errors[id].message}</p>}
     </div>

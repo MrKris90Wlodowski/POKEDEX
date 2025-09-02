@@ -1,4 +1,3 @@
-
 import Wrapper from "../../shared/Wrapper";
 import Input from "../../shared/Input";
 import Form from "../../shared/Form";
@@ -7,20 +6,17 @@ import Button from "../../shared/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useTheme } from "../../../hooks/useTheme"
 
 const schema = z.object({
-    weightCreatePoke: z
-    .string()
-    .nonempty("This field is required"),
-    heightCreatePoke: z
-    .string()
-    .nonempty("This field is required"),
-    expCreatePoke: z
-    .string()
-    .nonempty("This field is required"),
-})
+  weightCreatePoke: z.string().nonempty("This field is required"),
+  heightCreatePoke: z.string().nonempty("This field is required"),
+  expCreatePoke: z.string().nonempty("This field is required"),
+});
 
 const EditPokeForm = () => {
+  const { theme } = useTheme;
+
   const {
     register,
     reset,
@@ -29,14 +25,13 @@ const EditPokeForm = () => {
   } = useForm({ resolver: zodResolver(schema) });
 
   const dataEdit = (formValue) => {
-        console.log(formValue);
-        reset();
-    }
-
+    console.log(formValue);
+    reset();
+  };
 
   return (
-    <Wrapper>
-      <Form onSubmit={handleSubmit(dataEdit)}>
+    <Wrapper className="p-8 m-8 border-4 rounded-2xl w-150">
+      <Form onSubmit={handleSubmit(dataEdit)} className="flex flex-col gap-8">
         <Input
           id="weightEditPoke"
           name="weightEditPoke"
@@ -44,6 +39,8 @@ const EditPokeForm = () => {
           placeholder="6 kg"
           register={register}
           errors={errors}
+          variant={theme}
+          className="focus:outline-none"
         >
           WEIGHT:
         </Input>
@@ -67,7 +64,13 @@ const EditPokeForm = () => {
         >
           EXP:
         </Input>
-        <Button type="submit" variant="default">EDIT POKE</Button>
+        <Button
+          type="submit"
+          variant="default"
+          className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl"
+        >
+          EDIT POKE
+        </Button>
       </Form>
     </Wrapper>
   );

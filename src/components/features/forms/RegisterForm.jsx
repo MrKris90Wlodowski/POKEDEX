@@ -59,7 +59,7 @@ const RegisterForm = () => {
     <Wrapper className="p-8 m-8 border-4 rounded-2xl w-150" variant={theme}>
       <Form
         onSubmit={handleSubmit(dataRegister)}
-        className="flex flex-col gap-8 "
+        className="flex flex-col gap-8"
       >
         <Input
           id="nameRegister"
@@ -68,6 +68,8 @@ const RegisterForm = () => {
           placeholder="Ash Ketchum"
           register={register}
           errors={errors}
+          variant={theme}
+          className="focus:outline-none"
         >
           NAME:
         </Input>
@@ -78,6 +80,8 @@ const RegisterForm = () => {
           placeholder="pikachu90@poke.com"
           register={register}
           errors={errors}
+          variant={theme}
+          className="focus:outline-none"
         >
           EMAIL:
         </Input>
@@ -88,6 +92,8 @@ const RegisterForm = () => {
           placeholder="GengaR13"
           register={register}
           errors={errors}
+          variant={theme}
+          className="focus:outline-none"
         >
           PASSWORD:
         </Input>
@@ -98,6 +104,8 @@ const RegisterForm = () => {
           placeholder="GengaR13"
           register={register}
           errors={errors}
+          variant={theme}
+          className="focus:outline-none"
         >
           CONFIRM PASSWORD:
         </Input>

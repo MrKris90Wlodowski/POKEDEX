@@ -10,7 +10,7 @@ const RootLayout = () => {
   const { theme } = useTheme();
   return (
     <Wrapper className="flex flex-col min-h-screen" variant={theme}>
-      <nav className="flex gap-4 p-8 bg-blue-500">
+      <nav className="flex gap-4 p-8 bg-blue-500 border-4 border-blue-700">
         <Link to="">
           <Wrapper className="w-48 h-16">
             <Image src={logoPokemon} alt="logo Pokemon" />
@@ -57,7 +57,7 @@ const RootLayout = () => {
       <Wrapper className="flex items-center justify-center flex-grow h-auto">
         <Outlet />
       </Wrapper>
-      <Footer />
+      <Footer/>
     </Wrapper>
   );
 };
