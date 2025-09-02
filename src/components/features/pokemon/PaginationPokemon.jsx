@@ -26,7 +26,7 @@ const PaginationPokemon = ({ currentPage, lastPage, onChange }) => {
       </Button>
       <Wrapper
         variant={theme}
-        className="flex items-center justify-center border-2 rounded-lg w-11"
+        className="flex items-center justify-center border-4 rounded-lg w-14"
       >
         <Text>{currentPage}</Text>
       </Wrapper>
