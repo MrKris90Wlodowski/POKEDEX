@@ -13,7 +13,7 @@ const RootLayout = () => {
   const { log, handleSetLog } = useAuth();
 
   const baseClass =
-    "text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl hover:bg-blue-700 transition duration-300 ease-in-out";
+    "text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl hover:bg-blue-700 transition duration-300 ease-in-out w-60 text-center";
   const activeUser = {
     login: "block",
     logout: "hidden"
@@ -22,7 +22,6 @@ const RootLayout = () => {
     login: "hidden",
     logout: "block"
   }
-
 
   const activeLinkClass = clsx(baseClass, activeUser[log]);
   const noactiveLinkClass = clsx(baseClass, noactiveUser[log]);
@@ -36,10 +35,10 @@ const RootLayout = () => {
             <Image src={logoPokemon} alt="logo Pokemon" />
           </Wrapper>
         </Link>
-        <Link to="/registration" className={linkClass}>
+        <Link to="/registration" className={noactiveLinkClass}>
           REGISTRATION
         </Link>
-        <Link to="/login" className={linkClass}>
+        <Link to="/login" className={noactiveLinkClass}>
           LOGIN
         </Link>
         <Link to="/favourite" className={activeLinkClass}>
@@ -54,7 +53,7 @@ const RootLayout = () => {
         <Link to="/edition" className={activeLinkClass}>
           EDITION
         </Link>
-        <Link to="" className={activeLinkClass}>
+        <Link to="" className={activeLinkClass} onClick={() => handleSetLog()}>
           LOGOUT
         </Link>
         <ThemeButton />

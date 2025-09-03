@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import useTheme from "../../../hooks/useTheme";
+import useLogin from "../../../services/useLogin";
 
 const schema = z.object({
   emailLogin: z.string().nonempty("This field is required"),
@@ -15,6 +16,7 @@ const schema = z.object({
 
 const LoginForm = () => {
   const { theme } = useTheme();
+  const { loginRecords } = useLogin();
 
   const {
     register,
@@ -24,6 +26,7 @@ const LoginForm = () => {
   } = useForm({ resolver: zodResolver(schema) });
 
   const dataLogin = (formValue) => {
+    loginRecords(formValue);
     console.log(formValue);
     reset();
   };
