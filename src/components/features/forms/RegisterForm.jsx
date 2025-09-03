@@ -24,7 +24,7 @@ const schema = z
       .string()
       .nonempty("This field is required")
       .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8}$/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/,
         "This field must contains at least one upper, lower letter and digit all minimum 8 signs"
       ),
     confirmPasswordRegister: z.string(),
