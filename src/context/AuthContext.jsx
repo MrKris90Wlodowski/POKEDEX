@@ -3,10 +3,10 @@ import { createContext, useState } from "react";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const [log, setLog] = useState(false);
+    const [log, setLog] = useState("logout");
 
     const handleSetLog = () => {
-        setLog(prev => !prev);
+        setLog(prev => prev === "logout" ? "login" : "logout");
     }
 
     return ( 

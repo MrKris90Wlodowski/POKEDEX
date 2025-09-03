@@ -6,12 +6,27 @@ import ThemeButton from "../components/features/theme/ThemeButton";
 import useTheme from "../hooks/useTheme";
 import logoPokemon from "../icons/pngegg.png";
 import clsx from "clsx";
+import useAuth from "../hooks/useAuth";
 
 const RootLayout = () => {
   const { theme } = useTheme();
+  const { log, handleSetLog } = useAuth();
 
   const baseClass =
     "text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl hover:bg-blue-700 transition duration-300 ease-in-out";
+  const activeUser = {
+    login: "block",
+    logout: "hidden"
+  }
+  const noactiveUser = {
+    login: "hidden",
+    logout: "block"
+  }
+
+
+  const activeLinkClass = clsx(baseClass, activeUser[log]);
+  const noactiveLinkClass = clsx(baseClass, noactiveUser[log]);
+
   const linkClass = clsx(baseClass);
   return (
     <Wrapper className="flex flex-col min-h-screen" variant={theme}>
@@ -27,19 +42,19 @@ const RootLayout = () => {
         <Link to="/login" className={linkClass}>
           LOGIN
         </Link>
-        <Link to="/favourite" className={linkClass}>
+        <Link to="/favourite" className={activeLinkClass}>
           FAVOURITE
         </Link>
-        <Link to="/arena" className={linkClass}>
+        <Link to="/arena" className={activeLinkClass}>
           ARENA
         </Link>
-        <Link to="/ranking" className={linkClass}>
+        <Link to="/ranking" className={activeLinkClass}>
           RANKING
         </Link>
-        <Link to="/edition" className={linkClass}>
+        <Link to="/edition" className={activeLinkClass}>
           EDITION
         </Link>
-        <Link to="" className={linkClass}>
+        <Link to="" className={activeLinkClass}>
           LOGOUT
         </Link>
         <ThemeButton />
