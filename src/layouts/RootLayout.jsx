@@ -30,7 +30,7 @@ const RootLayout = () => {
   return (
     <Wrapper className="flex flex-col min-h-screen" variant={theme}>
       <nav className="flex gap-4 p-8 bg-blue-500 border-4 border-[var(--yellow)]">
-        <Link to="">
+        <Link to="/">
           <Wrapper className="w-48 h-16">
             <Image src={logoPokemon} alt="logo Pokemon" />
           </Wrapper>

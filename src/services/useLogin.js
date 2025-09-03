@@ -18,7 +18,7 @@ const useLogin = () => {
   //   casual
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("");
+    navigate("/");
   };
   //   casual
 

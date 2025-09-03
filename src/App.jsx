@@ -10,7 +10,7 @@ import RootLayout from './layouts/RootLayout.jsx'
 
 const router = createBrowserRouter([
   {
-    path:"",
+    path:"/",
     element: <RootLayout/>,
     children: [
       {index: true, element: <Home/>},
