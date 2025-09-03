@@ -40,7 +40,7 @@ const RootLayout = () => {
           EDITION
         </Link>
         <Link to="" className={linkClass}>
-          LOG OUT
+          LOGOUT
         </Link>
         <ThemeButton />
       </nav>
