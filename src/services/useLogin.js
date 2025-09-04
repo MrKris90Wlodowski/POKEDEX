@@ -13,7 +13,7 @@ const useLogin = () => {
   //   function allow navigate
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/");
+    navigate("/pokemons");
   };
 
   const loginRecords = (data) => {

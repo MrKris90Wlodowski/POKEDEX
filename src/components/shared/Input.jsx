@@ -2,8 +2,8 @@ import clsx from "clsx";
 
 const Input = ({ id, type, name, children, register, value, errors, placeholder, onChange, variant, className  }) => {
   const variants = {
-    light: "bg-[var(--white)] text-[var(--black)] border-[var(--black)] focus:ring-0",
-    dark: "bg-[var(--black)] text-[var(--white)] border-[var(--white)] focus:ring-0",
+    light: "bg-[var(--white)] text-[var(--black)] border-[var(--black)] focus:ring-0 focus:bg-[var(--darkWhite)]",
+    dark: "bg-[var(--black)] text-[var(--white)] border-[var(--white)] focus:ring-0 focus:bg-[var(--lightBlack)]",
   }
 
   const inputClass = clsx(

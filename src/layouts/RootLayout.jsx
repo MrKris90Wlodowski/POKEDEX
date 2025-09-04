@@ -30,7 +30,7 @@ const RootLayout = () => {
   return (
     <Wrapper className="flex flex-col min-h-screen" variant={theme}>
       <nav className="flex gap-4 p-8 bg-blue-500 border-4 border-[var(--yellow)]">
-        <Link to="/">
+        <Link to="/pokemons">
           <Wrapper className="w-48 h-16">
             <Image src={logoPokemon} alt="logo Pokemon" />
           </Wrapper>
@@ -53,7 +53,7 @@ const RootLayout = () => {
         <Link to="/edition" className={activeLinkClass}>
           EDITION
         </Link>
-        <Link to="" className={activeLinkClass} onClick={() => handleSetLog()}>
+        <Link to="/pokemons" className={activeLinkClass} onClick={() => handleSetLog()}>
           LOGOUT
         </Link>
         <ThemeButton />
