@@ -4,6 +4,7 @@ import Text from "../../shared/Text";
 import { useParams } from "react-router-dom";
 import useTheme from "../../../hooks/useTheme";
 import useAuth from "../../../hooks/useAuth";
+import usePokeList from "../../../hooks/usePokeList";
 import { Heart } from "lucide-react";
 import { Sword } from "lucide-react";
 
@@ -11,7 +12,13 @@ const ExtendPokemonCard = () => {
   const { pokemon } = useParams();
   const { theme } = useTheme();
   const { log } = useAuth();
+  const { pokemonsList } = usePokeList();
   console.log(pokemon);
+
+  if (!pokemonsList) return <p>Loading...</p>;
+  const pokeData = pokemonsList.find( poke => Number(pokemon) === poke.id )
+  if (!pokeData) return <p>Error Poke not found</p>
+  // console.log(pokeData);
 
   return (
     <Wrapper
@@ -30,7 +37,7 @@ const ExtendPokemonCard = () => {
         </Wrapper>
         <Wrapper>
           <Text tag="h3" className="my-2 font-black uppercase">
-            POKE
+            {pokeData.name}
           </Text>
           <Text strong={"HEIGHT:"}></Text>
           <Text strong={"WEIGHT:"}></Text>

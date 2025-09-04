@@ -20,8 +20,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "pokemons", element: <Home /> },
-      // { path: "pokemons/:pokemon", element: <ExtendPokemonCard /> },
-      { path: "pokemons/pokemon", element: <ExtendPokemonCard /> },
+      { path: "pokemons/:pokemon", element: <ExtendPokemonCard /> },
       { path: "registration", element: <Registration /> },
       { path: "login", element: <Login /> },
       { path: "favourite", element: <Favourite /> },

@@ -9,8 +9,7 @@ const PokemonContainer = ({ error, loading, pokemonsArray, className }) => {
   return (
     <Wrapper className={className}>
       {pokemonsArray.map((poke) => (
-        // <Link key={poke.id}  to={`pokemons/${poke.id}`}>
-        <Link to="pokemons/pokemon">
+        <Link key={poke.id}  to={`/pokemons/${poke.id}`}>
           <PokemonCard
             key={poke.id}
             name={poke.name}
