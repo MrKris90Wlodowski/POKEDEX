@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 const POKE_URL = "https://pokeapi.co/api/v2/pokemon?limit=150";
 
-const usePokemon = () => {
+const usePokemonAPI = () => {
   const [pokemonsList, setPokemonsList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,4 +29,4 @@ const usePokemon = () => {
   return { error, pokemonsList, loading };
 };
 
-export default usePokemon;
+export default usePokemonAPI;

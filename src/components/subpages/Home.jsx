@@ -4,7 +4,7 @@ import SearchBarPokemon from "../features/pokemon/SearchBarPokemon";
 import Wrapper from "../shared/Wrapper";
 import { hash } from "zod";
 import PaginationPokemon from "../features/pokemon/PaginationPokemon";
-import usePokemon from "../../hooks/usePokemon";
+import usePokemonAPI from "../../hooks/usePokemonAPI";
 
 const Home = () => {
   // State and handle SearchBarPokemon
@@ -35,7 +35,7 @@ const Home = () => {
   };
 
   // State and handle PokemonContainer
-  const { error, pokemonsList, loading } = usePokemon();
+  const { error, pokemonsList, loading } = usePokemonAPI();
 
   const filteredArrayPokemons = pokemonsList.filter((poke) =>
     poke.name.toLowerCase().includes(searchValue.trim().toLowerCase())

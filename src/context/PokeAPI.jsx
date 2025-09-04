@@ -1,10 +1,10 @@
 import { createContext, useState } from "react"
-import  usePokemon  from "../hooks/usePokemon"
+import  usePokemonAPI  from "../hooks/usePokemonAPI"
 
 const PokeAPITheme = createContext();
 
 const PokeAPIProvider = ({children}) => {
-    const { error, pokemonsList, loading } = usePokemon();
+    const { error, pokemonsList, loading } = usePokemonAPI();
     return (
         <PokeAPITheme.Provider value={{error, pokemonsList, loading}}>
             {children}
