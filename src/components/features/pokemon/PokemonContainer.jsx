@@ -1,5 +1,6 @@
 import Wrapper from "../../shared/Wrapper";
 import PokemonCard from "./PokemonCard";
+import { Link } from "react-router-dom";
 
 const PokemonContainer = ({ error, loading, pokemonsArray, className }) => {
   if (loading) return <p>Loading...</p>;
@@ -7,16 +8,19 @@ const PokemonContainer = ({ error, loading, pokemonsArray, className }) => {
 
   return (
     <Wrapper className={className}>
-      {pokemonsArray.map((poke, index) => (
-        <PokemonCard
-          key={index}
-          name={poke.name}
-          exp={poke.base_experience}
-          height={poke.height}
-          weight={poke.weight}
-          ability={poke.abilities[0].ability.name}
-          sourceImg={poke.sprites.front_default}
-        />
+      {pokemonsArray.map((poke) => (
+        // <Link key={poke.id}  to={`pokemons/${poke.id}`}>
+        <Link to="pokemons/pokemon">
+          <PokemonCard
+            key={poke.id}
+            name={poke.name}
+            exp={poke.base_experience}
+            height={poke.height}
+            weight={poke.weight}
+            ability={poke.abilities[0].ability.name}
+            sourceImg={poke.sprites.front_default}
+          />
+        </Link>
       ))}
     </Wrapper>
   );

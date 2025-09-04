@@ -10,6 +10,7 @@ import Home from "./components/subpages/Home";
 import Login from "./components/subpages/Login";
 import Ranking from "./components/subpages/Ranking";
 import Registration from "./components/subpages/Registration";
+import ExtendPokemonCard from "./components/features/pokemon/ExtendPokemonCard.jsx";
 import RootLayout from "./layouts/RootLayout.jsx";
 
 const router = createBrowserRouter([
@@ -19,6 +20,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "pokemons", element: <Home /> },
+      // { path: "pokemons/:pokemon", element: <ExtendPokemonCard /> },
+      { path: "pokemons/pokemon", element: <ExtendPokemonCard /> },
       { path: "registration", element: <Registration /> },
       { path: "login", element: <Login /> },
       { path: "favourite", element: <Favourite /> },

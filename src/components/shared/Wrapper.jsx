@@ -1,13 +1,18 @@
 import clsx from "clsx";
 
-const Wrapper = ({ children, style, className, variant}) => {
-  const variants = {
+const Wrapper = ({ children, style, className, variant, variantBackground }) => {
+  const variantsPrimary = {
     light: "bg-[var(--white)] text-[var(--black)]",
     dark: "bg-[var(--black)] text-[var(--white)]",
   };
+  const variantsSecondary = {
+    light: "bg-[var(--darkWhite)]",
+    dark: "bg-[var(--lightBlack)]",
+  };
 
   const wrapperClass = clsx(
-        variants[variant],
+        variantsPrimary[variant],
+        variantsSecondary[variantBackground],
         className
     )
 
