@@ -6,6 +6,7 @@ import Footer from "../components/subpages/Footer";
 import ThemeButton from "../components/features/theme/ThemeButton";
 import useTheme from "../hooks/useTheme";
 import logoPokemon from "../icons/pngegg.png";
+import iconPokeball from "../icons/game.png"
 import clsx from "clsx";
 import useAuth from "../hooks/useAuth";
 
@@ -13,7 +14,8 @@ const RootLayout = () => {
   const { theme } = useTheme();
   const { log, handleSetLog } = useAuth();
 
-  const baseTextUserClass = "text-[var(--yellow)] font-black text-4xl";
+  const baseWrapperUserClass = "flex gap-1";
+  // const baseTextUserClass = "text-[var(--yellow)] font-black text-4xl";
   const baseLinkClass =
     "text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl hover:bg-blue-700 transition duration-300 ease-in-out w-56 text-center";
   const activeUser = {
@@ -28,7 +30,9 @@ const RootLayout = () => {
   const activeLinkClass = clsx(baseLinkClass, activeUser[log]);
   const noactiveLinkClass = clsx(baseLinkClass, noactiveUser[log]);
 
-  const activeUserClass = clsx(baseTextUserClass, activeUser[log]);
+  // const activeUserClass = clsx(baseTextUserClass, activeUser[log]);
+  const activeWrapperUserClass = clsx(baseWrapperUserClass, activeUser[log]);
+
 
   // const linkClass = clsx(baseClass);
   return (
@@ -70,7 +74,10 @@ const RootLayout = () => {
             </Wrapper>
           </Wrapper>
           <Wrapper className="flex gap-8 justify-end">
-            <Text className={activeUserClass}>POKE_TRAINER:</Text>
+            <Wrapper className={activeWrapperUserClass}>
+              <Image src={iconPokeball} alt="icon pokeball" className="w-10 h-10"/>
+              <Text className="text-[var(--yellow)] font-black text-4xl">POKE_TRAINER:</Text>
+            </Wrapper>
             <ThemeButton />
           </Wrapper>
         </Wrapper>

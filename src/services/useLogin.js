@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
   const { handleSetLog } = useAuth();
+  const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -30,6 +31,8 @@ const useLogin = () => {
         );
         if (recordsFilteredEmail && recordsFilteredEmail.length > 0) {
           if (rercordsFilteredPassword && rercordsFilteredPassword.length > 0) {
+            setUserData(rercordsFilteredPassword[0]);
+            console.log(rercordsFilteredPassword[0]);
             // check condition
           } else {
             // in near future place for notistack message invalid password
@@ -41,8 +44,9 @@ const useLogin = () => {
           console.log("NO MATCH EMAIL");
           return;
         }
-         handleSetLog();
-         handleNavigate()
+        // setUserData(dataRecords);
+        handleSetLog();
+        handleNavigate()
       })
       .catch((error) => {
         setLoading(false);
@@ -51,7 +55,7 @@ const useLogin = () => {
       });
   };
 
-  return { error, loading, loginRecords };
+  return { error, loading, loginRecords, userData };
 };
 
 export default useLogin;

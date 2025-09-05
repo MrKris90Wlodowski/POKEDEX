@@ -23,7 +23,7 @@ const ExtendPokemonCard = () => {
 
   return (
     <Wrapper
-      className="flex gap-8 p-8 border-4 w-5xl rounded-4xl"
+      className="flex gap-8 p-8 m-8 border-4 w-5xl rounded-4xl"
       variantBackground={theme}
     >
       <Wrapper className="border-4 rounded-4xl h-96 w-96" variant={theme}>
