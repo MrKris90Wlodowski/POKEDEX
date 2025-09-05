@@ -3,11 +3,12 @@ import Input from "../../shared/Input";
 import Form from "../../shared/Form";
 import Button from "../../shared/Button";
 
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import useTheme from "../../../hooks/useTheme";
-import useLogin from "../../../services/useLogin";
+import useAuth from "../../../hooks/useAuth"
 
 const schema = z.object({
   emailLogin: z.string().nonempty("This field is required"),
@@ -16,7 +17,14 @@ const schema = z.object({
 
 const LoginForm = () => {
   const { theme } = useTheme();
-  const { loginRecords } = useLogin();
+  const {loginRecords } = useAuth();
+
+   //   function allow navigate
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("/pokemons");
+  };
+
 
   const {
     register,
@@ -28,6 +36,7 @@ const LoginForm = () => {
   const dataLogin = (formValue) => {
     loginRecords(formValue);
     console.log(formValue);
+    handleNavigate();
     reset();
   };
 

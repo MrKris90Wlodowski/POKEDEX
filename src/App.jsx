@@ -1,6 +1,5 @@
 import {
   createBrowserRouter,
-  BrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import Arena from "./components/subpages/Arena";
