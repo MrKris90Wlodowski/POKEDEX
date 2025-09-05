@@ -1,10 +1,10 @@
 import Wrapper from "../shared/Wrapper";
-import Text from "../shared/Text";
+import SortButtons from "../features/pokemon/SortButtons"
 
 const Ranking = () => {
   return (
     <Wrapper>
-      <Text>RANKING</Text>
+      <SortButtons/>
     </Wrapper>
   );
 };

@@ -1,5 +1,4 @@
 import BASE_API_URL from "../config/baseAPI";
-// import { useNavigate } from "react-router-dom";
 import { createContext, useState } from "react";
 
 const AuthContext = createContext();

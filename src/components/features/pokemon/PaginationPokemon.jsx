@@ -12,7 +12,7 @@ const PaginationPokemon = ({ currentPage, lastPage, onChange }) => {
         disabled={currentPage === 1}
         onClick={() => onChange("FIRST")}
         variant="default"
-        className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl"
+        className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
       >
         FIRST
       </Button>
@@ -20,7 +20,7 @@ const PaginationPokemon = ({ currentPage, lastPage, onChange }) => {
         disabled={currentPage === 1}
         onClick={() => onChange("PREV")}
         variant="default"
-        className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl"
+        className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
       >
         PREV
       </Button>
@@ -34,7 +34,7 @@ const PaginationPokemon = ({ currentPage, lastPage, onChange }) => {
         disabled={currentPage === lastPage}
         onClick={() => onChange("NEXT")}
         variant="default"
-        className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl"
+        className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
       >
         NEXT
       </Button>
@@ -42,7 +42,7 @@ const PaginationPokemon = ({ currentPage, lastPage, onChange }) => {
         disabled={currentPage === lastPage}
         onClick={() => onChange("LAST")}
         variant="default"
-        className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl"
+        className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
       >
         LAST
       </Button>

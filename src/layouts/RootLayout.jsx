@@ -12,7 +12,7 @@ import useAuth from "../hooks/useAuth";
 
 const RootLayout = () => {
   const { theme } = useTheme();
-  const { log, handleSetLog } = useAuth();
+  const { log, handleSetLog, userData } = useAuth();
 
   const baseWrapperUserClass = "flex gap-1";
   // const baseTextUserClass = "text-[var(--yellow)] font-black text-4xl";
@@ -76,7 +76,7 @@ const RootLayout = () => {
           <Wrapper className="flex gap-8 justify-end">
             <Wrapper className={activeWrapperUserClass}>
               <Image src={iconPokeball} alt="icon pokeball" className="w-10 h-10"/>
-              <Text className="text-[var(--yellow)] font-black text-4xl">POKE_TRAINER:</Text>
+              <Text className="text-[var(--yellow)] font-black text-4xl">POKE_TRAINER: { userData?.name}</Text>
             </Wrapper>
             <ThemeButton />
           </Wrapper>
