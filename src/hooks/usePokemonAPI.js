@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-const POKE_URL = "https://pokeapi.co/api/v2/pokemon?limit=150";
+import POKE_API_URL from "../config/basePokeAPI"
+const POKE_API_150 = `${POKE_API_URL}?limit=150"`
+// const POKE_URL = "https://pokeapi.co/api/v2/pokemon?limit=150";
 
 const usePokemonAPI = () => {
   const [pokemonsList, setPokemonsList] = useState([]);
@@ -8,7 +10,7 @@ const usePokemonAPI = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${POKE_URL}`)
+    fetch(`${POKE_API_150}`)
       .then((res) => res.json())
       .then((data) => {
         return Promise.all(
