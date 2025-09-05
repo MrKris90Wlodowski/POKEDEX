@@ -9,7 +9,7 @@ const ThemeButton = () => {
   return (
     <Wrapper>
       <Button variant={theme} onClick={toggleTheme}>
-        <Wrapper>
+        <Wrapper className="flex gap-4">
           <Sun />
           <Moon />
         </Wrapper>

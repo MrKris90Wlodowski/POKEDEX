@@ -17,7 +17,7 @@ const PokemonContainer = ({ error, loading, pokemonsArray, className }) => {
             height={poke.height}
             weight={poke.weight}
             ability={poke.abilities[0].ability.name}
-            sourceImg={poke.sprites.front_default}
+            sourceImg={poke.sprites.other["official-artwork"].front_default}
           />
         </Link>
       ))}
