@@ -2,6 +2,7 @@ import Wrapper from "../../shared/Wrapper";
 import Input from "../../shared/Input";
 import Form from "../../shared/Form";
 import Button from "../../shared/Button";
+import Image from "../../shared/Image";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -81,16 +82,19 @@ const CreatePokeForm = () => {
         >
           EXP:
         </Input>
-        <Wrapper>
+        <Wrapper className="w-132 h-132 border-2 rounded-2xl">
+          <Image/>
+        </Wrapper>
+        <Wrapper className="flex gap-8">
           <Button
             variant="default"
-            className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl"
+            className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl flex-1"
           >
             LEFT
           </Button>
           <Button
             variant="default"
-            className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl"
+            className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl flex-1"
           >
             RIGHT
           </Button>

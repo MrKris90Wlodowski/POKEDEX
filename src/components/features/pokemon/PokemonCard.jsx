@@ -25,8 +25,8 @@ const PokemonCard = ({ sourceImg, name, height, weight, exp, ability, id, classN
         <Text strong={"ABILITY:"}> {ability}</Text>
         {id && (
           <Wrapper className="flex gap-8">
-            <Text className="font-black text-green-700">WIN:</Text>
-            <Text className="font-black text-red-700">LOSS:</Text>
+            <Text className="font-bold text-green-700">WIN:</Text>
+            <Text className="font-bold text-red-700">LOSS:</Text>
           </Wrapper>
         )}
       </Wrapper>

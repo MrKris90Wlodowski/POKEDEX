@@ -23,7 +23,7 @@ const ExtendPokemonCard = () => {
 
   return (
     <Wrapper
-      className="flex gap-8 p-8 m-8 border-4 w-5xl rounded-4xl"
+      className="flex gap-8 p-8 m-8 border-4 w-5xl rounded-4xl relative"
       variantBackground={theme}
     >
       <Wrapper className="border-4 rounded-4xl h-96 w-96" variant={theme}>
@@ -34,9 +34,9 @@ const ExtendPokemonCard = () => {
         />
       </Wrapper>
       <Wrapper className="flex flex-col justify-between">
-        <Wrapper className="flex" variantLog={log}>
-          <Text className="text-2xl font-black text-green-700">W:</Text>
-          <Text className="text-2xl font-black text-red-700">L:</Text>
+        <Wrapper className="flex absolute top-8 right-8" variantLog={log}>
+          <Text className="text-2xl font-bold text-green-700">WIN:</Text>
+          <Text className="text-2xl font-bold text-red-700">LOSS:</Text>
           <Sword />
           <Heart />
         </Wrapper>
