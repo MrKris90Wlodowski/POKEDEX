@@ -40,7 +40,6 @@ const ExtendPokemonCard = () => {
           <Sword />
           <Heart />
         </Wrapper>
-        {/* pokeData.sprites.front_default */}
         <Wrapper>
           <Text tag="h3" className="my-2 font-black uppercase">
             {pokeData.name}

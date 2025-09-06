@@ -37,12 +37,12 @@ const SortButtons = ({ onSort }) => {
   };
 
   return (
-    <Wrapper className="flex gap-8">
+    <Wrapper className="flex gap-8 mb-8">
       <Button
         variant="default"
         className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-60"
         onClick={() => {
-          
+          // onSort("WEIGHT");
           handlerButtonA();
         }}
         disabled={buttonA}
@@ -53,7 +53,7 @@ const SortButtons = ({ onSort }) => {
         variant="default"
         className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-60"
         onClick={() => {
-          
+          onSort("WEIGHT");
           handlerButtonB();
         }}
         disabled={buttonB}

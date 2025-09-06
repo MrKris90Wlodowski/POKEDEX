@@ -82,7 +82,7 @@ const RootLayout = () => {
           </Wrapper>
         </Wrapper>
       </nav>
-      <Wrapper className="flex items-center justify-center flex-grow h-auto">
+      <Wrapper className="flex items-center justify-center flex-grow h-auto p-8">
         <Outlet />
       </Wrapper>
       <Footer />

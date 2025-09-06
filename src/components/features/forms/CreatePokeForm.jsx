@@ -31,7 +31,7 @@ const CreatePokeForm = () => {
   };
 
   return (
-    <Wrapper className="p-8 m-8 border-4 rounded-2xl w-150">
+    <Wrapper className="p-8  border-4 rounded-2xl w-150">
       <Form onSubmit={handleSubmit(dataCreate)} className="flex flex-col gap-8">
         <Input
           id="nameCreatePoke"
