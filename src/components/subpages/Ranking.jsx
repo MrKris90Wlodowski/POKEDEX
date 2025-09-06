@@ -14,6 +14,14 @@ const Ranking = () => {
       const weightSort = [...pokemonsSort].sort((a,b) => b.weight - a.weight)
       setPokemonsSort(weightSort);
     }
+    if (action === "HEIGHT") {
+      const weightSort = [...pokemonsSort].sort((a,b) => b.height - a.height)
+      setPokemonsSort(weightSort);
+    }
+    if (action === "EXP") {
+      const weightSort = [...pokemonsSort].sort((a,b) => b.base_experience - a.base_experience)
+      setPokemonsSort(weightSort);
+    }
   }
 
   console.log(pokemonsSort);

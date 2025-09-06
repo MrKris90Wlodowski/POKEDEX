@@ -11,6 +11,7 @@ import Ranking from "./components/subpages/Ranking";
 import Registration from "./components/subpages/Registration";
 import ExtendPokemonCard from "./components/features/pokemon/ExtendPokemonCard.jsx";
 import RootLayout from "./layouts/RootLayout.jsx";
+import CreatePokeForm from "./components/features/forms/CreatePokeForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: "arena", element: <Arena /> },
       { path: "ranking", element: <Ranking /> },
       { path: "edition", element: <Edition /> },
+      { path: "edition/create-pokemon", element: <CreatePokeForm /> }
     ],
   },
 ]);

@@ -18,7 +18,7 @@ const PokemonCard = ({ sourceImg, name, height, weight, exp, ability, id, classN
         {name}
       </Text>
       <Wrapper>
-        {id && <Text strong={"ID:"}>{id}</Text>}
+        {id && <Text strong={"ID:"}> {id}</Text>}
         <Text strong={"HEIGHT:"}> {height / 10} m</Text>
         <Text strong={"WEIGHT:"}> {weight / 10} kg</Text>
         <Text strong={"BASE EXP:"}> {exp}</Text>

@@ -42,7 +42,7 @@ const SortButtons = ({ onSort }) => {
         variant="default"
         className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-60"
         onClick={() => {
-          // onSort("WEIGHT");
+          onSort("EXP");
           handlerButtonA();
         }}
         disabled={buttonA}
@@ -64,7 +64,7 @@ const SortButtons = ({ onSort }) => {
         variant="default"
         className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-60"
         onClick={() => {
-          
+          onSort("HEIGHT");
           handlerButtonC();
         }}
         disabled={buttonC}
