@@ -15,7 +15,7 @@ const useRegister = () => {
         name: data.nameRegister,
         email: data.emailRegister,
         password: data.passwordRegister,
-      }),
+      })
     }).catch((error) => {
       setLoading(false);
       setError(error);

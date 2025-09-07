@@ -4,7 +4,7 @@ import Text from "../shared/Text";
 const Favourite = () => {
   return (
     <Wrapper>
-      <Text>FAVOURITE POKEMON</Text>
+      <Text className="text-6xl font-black">HEY TRAINER! ADD YOUR FAVOURITE POKE :)</Text>
     </Wrapper>
   );
 };

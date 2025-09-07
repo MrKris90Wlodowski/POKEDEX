@@ -9,8 +9,11 @@ import useAuth from "../../../hooks/useAuth";
 import usePokemonsArrayAPI from "../../../hooks/usePokemonsArrayAPI";
 import { Heart } from "lucide-react";
 import { Sword } from "lucide-react";
+import useAddFavouritePoke from "../../../services/useAddFavouritePoke";
 
 const ExtendPokemonCard = () => {
+  const { addFavorPoke } = useAddFavouritePoke();
+
   const [favourite, setFavourite] = useState(false);
   const [battle, setBattle] = useState(false);
   const { pokemon } = useParams();
@@ -46,8 +49,8 @@ const ExtendPokemonCard = () => {
           className="w-96 h-96"
         />
       </Wrapper>
-      <Wrapper className="flex flex-col justify-between">
-        <Wrapper variant={log}>
+      <Wrapper className="flex flex-col justify-end">
+        <Wrapper className="absolute top-8" variantLog={log}>
           <Text className="text-2xl font-bold text-green-700">WIN:</Text>
           <Text className="text-2xl font-bold text-red-700">LOSS:</Text>
         </Wrapper>
@@ -57,21 +60,33 @@ const ExtendPokemonCard = () => {
             className={swordClass}
           />
           <Heart
-            onClick={() => setFavourite((prev) => !prev)}
+            onClick={() => {
+              setFavourite((prev) => !prev);
+              addFavorPoke(pokeData);
+            }}
             className={heartClass}
           />
         </Wrapper>
         <Wrapper>
-          <Text tag="h3" className="text-4xl mb-12 font-black uppercase text-center">
+          <Text
+            tag="h3"
+            className="text-4xl mb-12 font-black uppercase text-center"
+          >
             {pokeData.name}
           </Text>
           <Wrapper className="flex gap-16">
             <Wrapper className="flex flex-col gap-8">
-              <Text className="text-2xl" strong={"HEIGHT: "}>{pokeData.height / 10} m</Text>
-              <Text className="text-2xl" strong={"WEIGHT: "}>{pokeData.weight / 10} kg</Text>
+              <Text className="text-2xl" strong={"HEIGHT: "}>
+                {pokeData.height / 10} m
+              </Text>
+              <Text className="text-2xl" strong={"WEIGHT: "}>
+                {pokeData.weight / 10} kg
+              </Text>
             </Wrapper>
             <Wrapper className="flex flex-col gap-8">
-              <Text className="text-2xl" strong={"BASE EXP: "}>{pokeData.base_experience}</Text>
+              <Text className="text-2xl" strong={"BASE EXP: "}>
+                {pokeData.base_experience}
+              </Text>
               <Text className="text-2xl" strong={"ABILITY: "}>
                 {pokeData.abilities[0].ability.name}
               </Text>
