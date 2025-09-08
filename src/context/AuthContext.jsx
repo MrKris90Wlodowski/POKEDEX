@@ -6,14 +6,28 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [log, setLog] = useState("logout");
   const [userData, setUserData] = useState(null);
+  const [pokemonData, setPokemonData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const REGISTER_URL = `${BASE_API_URL}/users`;
+  const USER_URL = `${BASE_API_URL}/users`;
+  const POKE_URL = `${BASE_API_URL}/pokemons`
 
   const handleSetLog = () => {
     setLog((prev) => (prev === "logout" ? "login" : "logout"));
   };
+
+  const userPokemonArray = (data) => {
+    setLoading(true);
+    fetch(`${POKE_URL}?idUser=${data.id}`)
+    .then(res => res.json())
+    .then(dataRecords => setPokemonData(dataRecords))
+    .catch((error) => {
+      setLoading(false);
+      setError(error);
+      console.log(error);
+    })
+  }
   
 
   const useLogut = () => {
@@ -22,7 +36,7 @@ const AuthProvider = ({ children }) => {
 
   const loginRecords = (data) => {
     setLoading(true);
-    fetch(`${REGISTER_URL}`)
+    fetch(`${USER_URL}`)
       .then((res) => res.json())
       .then((dataRecords) => {
         const records = dataRecords;
@@ -36,6 +50,8 @@ const AuthProvider = ({ children }) => {
           if (rercordsFilteredPassword && rercordsFilteredPassword.length > 0) {
             setUserData(rercordsFilteredPassword[0]);
             console.log(rercordsFilteredPassword[0]);
+
+            userPokemonArray(rercordsFilteredPassword[0])
             // check condition
           } else {
             // in near future place for notistack message invalid password
@@ -47,9 +63,7 @@ const AuthProvider = ({ children }) => {
           console.log("NO MATCH EMAIL");
           return;
         }
-        // setUserData(dataRecords);
         handleSetLog();
-        // handleNavigate();
       })
       .catch((error) => {
         setLoading(false);
@@ -59,7 +73,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ log, handleSetLog, loginRecords, useLogut, userData, loading, error }}>
+    <AuthContext.Provider value={{ log, handleSetLog, loginRecords, useLogut, userData, pokemonData, loading, error }}>
       {children}
     </AuthContext.Provider>
   );

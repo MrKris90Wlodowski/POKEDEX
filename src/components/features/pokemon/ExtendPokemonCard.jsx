@@ -13,14 +13,15 @@ import useAddFavouritePoke from "../../../services/useAddFavouritePoke";
 
 const ExtendPokemonCard = () => {
   const { addFavorPoke } = useAddFavouritePoke();
-
-  const [favourite, setFavourite] = useState(false);
-  const [battle, setBattle] = useState(false);
+  const { log, userData, pokemonData } = useAuth();
   const { pokemon } = useParams();
+
+  const pokemonDataFind = pokemonData.find((poke) => poke.id === Number(pokemon));
+  
+  const [favourite, setFavourite] = useState( pokemonDataFind?.isFavor ?? false);
+  const [battle, setBattle] = useState(false);
   const { theme } = useTheme();
-  const { log } = useAuth();
   const { pokemonsList } = usePokemonsArrayAPI();
-  console.log(pokemon);
 
   const baseClass = " w-12 h-12 font-black cursor-pointer";
   const activeClass =
@@ -34,11 +35,12 @@ const ExtendPokemonCard = () => {
   const pokeData = pokemonsList.find((poke) => Number(pokemon) === poke.id);
   if (!pokeData) return <p>Error Poke not found</p>;
 
-  console.log(pokeData);
+  // console.log(pokeData);
+  // console.log(userData);
 
   return (
     <Wrapper
-      // key={}
+      key={pokeData.id}
       className="flex gap-8 p-8 border-4 w-5xl rounded-4xl relative"
       variantBackground={theme}
     >
@@ -62,7 +64,7 @@ const ExtendPokemonCard = () => {
           <Heart
             onClick={() => {
               setFavourite((prev) => !prev);
-              addFavorPoke(pokeData);
+              addFavorPoke(pokeData, userData);
             }}
             className={heartClass}
           />
