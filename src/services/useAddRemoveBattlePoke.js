@@ -1,19 +1,19 @@
 import { useState } from "react";
 import BASE_API_URL from "../config/baseAPI";
 
-const useAddFavouritePoke = () => {
+const useAddRemoveBattlePoke = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const FAVOR_API_URL = `${BASE_API_URL}/pokemons`;
+  const BATTLE_API_URL = `${BASE_API_URL}/pokemons`;
 
-  const addFavorPoke = (data, invidualID, pokemonArray, boolenState) => {
+  const addRemoveBattlePoke = (data, invidualID, pokemonArray, boolenState) => {
     setLoading(true);
     if (boolenState === false) {
-      fetch(`${FAVOR_API_URL}`, {
+      fetch(`${BASE_API_URL}`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
+        body: {
           id: `${data.id}-${invidualID.id}`,
           idUser: invidualID.id,
           name: data.name,
@@ -23,15 +23,18 @@ const useAddFavouritePoke = () => {
           ability: data.abilities[0].ability.name,
           image: data.sprites.other["official-artwork"].front_default,
           isFavor: true,
-        }),
-      }).catch((error) => {
+          isBattle: false,
+        },
+      }).catch(() => {
         setLoading(false);
         setError(error);
         console.log(error);
       });
     } else {
-        const uniqeID = pokemonArray.find(poke => poke.id === `${data.id}-${invidualID.id}`)
-      fetch(`${FAVOR_API_URL}/${uniqeID.id}`, {
+      const uniqeID = pokemonArray.find(
+        (poke) => poke.id === `${data.id}-${invidualID.id}`
+      );
+      fetch(`${BATTLE_API_URL}/${uniqeID.id}`, {
         method: "DELETE",
       }).catch((error) => {
         setLoading(false);
@@ -39,8 +42,8 @@ const useAddFavouritePoke = () => {
         console.log(error);
       });
     }
-  };
-  return { error, loading, addFavorPoke };
+  }; 
+  return { error, loading, addRemoveBattlePoke }
 };
 
-export default useAddFavouritePoke;
+export default useAddRemoveBattlePoke;

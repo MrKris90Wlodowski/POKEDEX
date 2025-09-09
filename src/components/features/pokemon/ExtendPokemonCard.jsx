@@ -9,10 +9,12 @@ import useAuth from "../../../hooks/useAuth";
 import usePokemonsArrayAPI from "../../../hooks/usePokemonsArrayAPI";
 import { Heart } from "lucide-react";
 import { Sword } from "lucide-react";
-import useAddFavouritePoke from "../../../services/useAddFavouritePoke";
+import useAddRemoveFavouritePoke from "../../../services/useAddRemoveFavouritePoke";
+import useAddRemoveBattlePoke from "../../../services/useAddRemoveBattlePoke";
 
 const ExtendPokemonCard = () => {
-  const { addFavorPoke } = useAddFavouritePoke();
+  const { addRemoveBattlePoke } = useAddRemoveBattlePoke();
+  const { addRemoveFavorPoke } = useAddRemoveFavouritePoke();
   const { log, userData, pokemonData } = useAuth();
   const { pokemon } = useParams();
 
@@ -63,13 +65,16 @@ console.log(pokemonDataFind);
         </Wrapper>
         <Wrapper className="flex absolute top-8 right-8 gap-2" variantLog={log}>
           <Sword
-            onClick={() => setBattle((prev) => !prev)}
+            onClick={() => {
+              setFavourite((prev) => !prev);
+              addRemoveBattlePoke(pokeData, userData, pokemonData, favourite);
+            }}
             className={swordClass}
           />
           <Heart
             onClick={() => {
               setFavourite((prev) => !prev);
-              addFavorPoke(pokeData, userData, pokemonData, favourite);
+              addRemoveFavorPoke(pokeData, userData, pokemonData, favourite);
             }}
             className={heartClass}
           />
