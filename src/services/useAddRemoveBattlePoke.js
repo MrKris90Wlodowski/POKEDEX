@@ -24,6 +24,9 @@ const useAddRemoveBattlePoke = () => {
           image: data.sprites.other["official-artwork"].front_default,
           isFavor: true,
           isBattle: false,
+          // winBattle: null,
+          // lossBattle: null,
+          // isEdit: false
         },
       }).catch(() => {
         setLoading(false);

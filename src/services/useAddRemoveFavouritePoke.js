@@ -23,7 +23,10 @@ const useAddRemoveFavouritePoke = () => {
           ability: data.abilities[0].ability.name,
           image: data.sprites.other["official-artwork"].front_default,
           isFavor: true,
-          isBattle:false,
+          isBattle: false,
+          // winBattle: null,
+          // lossBattle: null,
+          // isEdit: false
         }),
       }).catch((error) => {
         setLoading(false);

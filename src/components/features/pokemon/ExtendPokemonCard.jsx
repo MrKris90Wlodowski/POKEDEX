@@ -18,17 +18,18 @@ const ExtendPokemonCard = () => {
   const { log, userData, pokemonData } = useAuth();
   const { pokemon } = useParams();
 
-  const pokemonDataFind = pokemonData.find((poke) => `${poke.id}` === `${pokemon}-${userData.id}`);
-  
-  const [favourite, setFavourite] = useState( pokemonDataFind?.isFavor ?? false);
+  const pokemonDataFind = pokemonData?.find(
+    (poke) => `${poke.id}` === `${pokemon}-${userData.id}`
+  );
+
+  const [favourite, setFavourite] = useState(pokemonDataFind?.isFavor ?? false);
   const [battle, setBattle] = useState(false);
   const { theme } = useTheme();
   const { pokemonsList } = usePokemonsArrayAPI();
 
-
   console.log(pokemon);
   console.log(pokemonData);
-console.log(pokemonDataFind);
+  console.log(pokemonDataFind);
 
   const baseClass = " w-12 h-12 font-black cursor-pointer";
   const activeClass =
