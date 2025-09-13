@@ -60,7 +60,7 @@ const ExtendPokemonCard = () => {
         <Wrapper className="flex absolute top-8 right-8 gap-2" variantLog={log}>
           <Sword
             onClick={() => {
-              setFavourite((prev) => !prev);
+              setBattle((prev) => !prev);
               addRemoveBattlePoke(pokeData, userData, pokemonData, favourite);
             }}
             className={swordClass}
