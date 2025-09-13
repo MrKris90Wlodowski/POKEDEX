@@ -27,10 +27,6 @@ const ExtendPokemonCard = () => {
   const { theme } = useTheme();
   const { pokemonsList } = usePokemonsArrayAPI();
 
-  console.log(pokemon);
-  console.log(pokemonData);
-  console.log(pokemonDataFind);
-
   const baseClass = " w-12 h-12 font-black cursor-pointer";
   const activeClass =
     "text-red-700 font-black w-12 h-12 border-4 rounded-lg cursor-pointer";
@@ -42,9 +38,6 @@ const ExtendPokemonCard = () => {
   if (!pokemonsList) return <p>Loading...</p>;
   const pokeData = pokemonsList.find((poke) => Number(pokemon) === poke.id);
   if (!pokeData) return <p>Error Poke not found</p>;
-
-  // console.log(pokeData);
-  // console.log(userData);
 
   return (
     <Wrapper

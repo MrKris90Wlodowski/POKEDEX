@@ -19,7 +19,7 @@ const useGetRecordPoke = () => {
         console.log(error);
   })
   };
-  return { loading, error,pokeRecord}
+  return { loading, error, pokeRecord}
 };
 
 export default useGetRecordPoke
