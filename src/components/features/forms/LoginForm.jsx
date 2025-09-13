@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import useTheme from "../../../hooks/useTheme";
 import useAuth from "../../../hooks/useAuth"
+import { useSnackbar } from "notistack";
 
 const schema = z.object({
   emailLogin: z.string().nonempty("This field is required"),
@@ -18,6 +19,7 @@ const schema = z.object({
 const LoginForm = () => {
   const { theme } = useTheme();
   const {loginRecords } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
 
    //   function allow navigate
   const navigate = useNavigate();
@@ -35,6 +37,7 @@ const LoginForm = () => {
 
   const dataLogin = (formValue) => {
     loginRecords(formValue);
+    enqueueSnackbar(`LOGIN SUCCESSFUL`,{variant: "success"})
     console.log(formValue);
     handleNavigate();
     reset();

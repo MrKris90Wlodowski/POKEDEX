@@ -9,6 +9,7 @@ import * as z from "zod";
 
 import useTheme from "../../../hooks/useTheme";
 import useRegister from "../../../services/useRegister";
+import { useSnackbar } from "notistack";
 
 const schema = z
   .object({
@@ -41,6 +42,7 @@ const schema = z
 const RegisterForm = () => {
   const { theme } = useTheme();
   const { loading, error, registerRecord } = useRegister();
+  const { enqueueSnackbar } = useSnackbar();
 
   const {
     register,
@@ -51,6 +53,7 @@ const RegisterForm = () => {
 
   const dataRegister = (formValue) => {
     registerRecord(formValue);
+    enqueueSnackbar(`User register`, {variant: "success"})
     console.log(formValue);
     reset();
   };
