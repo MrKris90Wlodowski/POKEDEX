@@ -12,7 +12,7 @@ import useAuth from "../hooks/useAuth";
 
 const RootLayout = () => {
   const { theme } = useTheme();
-  const { log, handleSetLog, userData } = useAuth();
+  const { log, logoutRecords, handleSetLog, userData } = useAuth();
 
   const baseWrapperUserClass = "flex gap-1";
   // const baseTextUserClass = "text-[var(--yellow)] font-black text-4xl";
@@ -67,7 +67,11 @@ const RootLayout = () => {
               <Link
                 to="/pokemons"
                 className={activeLinkClass}
-                onClick={() => handleSetLog()}
+                onClick={() =>{ 
+                  handleSetLog();
+                  logoutRecords();
+                }
+                }
               >
                 LOGOUT
               </Link>

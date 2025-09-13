@@ -36,11 +36,17 @@ const LoginForm = () => {
   } = useForm({ resolver: zodResolver(schema) });
 
   const dataLogin = (formValue) => {
-    loginRecords(formValue);
-    enqueueSnackbar(`LOGIN SUCCESSFUL`,{variant: "success"})
-    console.log(formValue);
-    handleNavigate();
-    reset();
+    loginRecords(formValue)
+    .then( resultLogin => {
+      if (resultLogin.success === true) {
+        console.log(formValue);
+        enqueueSnackbar(resultLogin.message,{variant: "success"});
+        handleNavigate();
+        reset();
+      } else {
+        enqueueSnackbar(resultLogin.message,{variant: "error"});
+      }
+    })
   };
 
   return (

@@ -30,12 +30,13 @@ const AuthProvider = ({ children }) => {
   }
   
 
-  const useLogut = () => {
+  const logoutRecords = () => {
     setUserData(null);
   };
 
   const loginRecords = (data) => {
     setLoading(true);
+    return (
     fetch(`${USER_URL}`)
       .then((res) => res.json())
       .then((dataRecords) => {
@@ -50,30 +51,30 @@ const AuthProvider = ({ children }) => {
           if (rercordsFilteredPassword && rercordsFilteredPassword.length > 0) {
             setUserData(rercordsFilteredPassword[0]);
             console.log(rercordsFilteredPassword[0]);
-
             userPokemonArray(rercordsFilteredPassword[0])
+            handleSetLog();
+            return {message: "LOGIN SUCCESSFUL", success: true};
             // check condition
           } else {
             // in near future place for notistack message invalid password
             console.log("NO MATCH PASSWORD");
-            return;
+            return {message: "LOGIN FAILED", success: false}
           }
         } else {
           // in near future place for notistack message invalid email
           console.log("NO MATCH EMAIL");
-          return;
+          return {message: "LOGIN FAILED", success: false}
         }
-        handleSetLog();
       })
       .catch((error) => {
         setLoading(false);
         setError(error);
         console.log(error);
-      });
+      }));
   };
 
   return (
-    <AuthContext.Provider value={{ log, handleSetLog, loginRecords, useLogut, userData, pokemonData, loading, error }}>
+    <AuthContext.Provider value={{ log, handleSetLog, loginRecords, logoutRecords, userData, pokemonData, loading, error }}>
       {children}
     </AuthContext.Provider>
   );
