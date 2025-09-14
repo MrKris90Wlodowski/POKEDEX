@@ -11,12 +11,14 @@ import { Heart } from "lucide-react";
 import { Sword } from "lucide-react";
 import useAddRemoveFavouritePoke from "../../../services/useAddRemoveFavouritePoke";
 import useAddRemoveBattlePoke from "../../../services/useAddRemoveBattlePoke";
+import useFavouritePoke from "../../../services/useFavouritePoke";
 
 const ExtendPokemonCard = () => {
   const { addRemoveBattlePoke } = useAddRemoveBattlePoke();
   const { addRemoveFavorPoke } = useAddRemoveFavouritePoke();
   const { log, userData, pokemonData } = useAuth();
   const { pokemon } = useParams();
+  const { favouritePoke } = useFavouritePoke();
 
   const pokemonDataFind = pokemonData?.find(
     (poke) => `${poke.id}` === `${pokemon}-${userData.id}`
@@ -61,14 +63,15 @@ const ExtendPokemonCard = () => {
           <Sword
             onClick={() => {
               setBattle((prev) => !prev);
-              addRemoveBattlePoke(pokeData, userData, pokemonData, favourite);
+              // addRemoveBattlePoke(pokeData, userData, pokemonData, favourite);
             }}
             className={swordClass}
           />
           <Heart
             onClick={() => {
               setFavourite((prev) => !prev);
-              addRemoveFavorPoke(pokeData, userData, pokemonData, favourite);
+              // addRemoveFavorPoke(pokeData, userData, pokemonData, favourite);
+              favouritePoke(pokemon, userData, pokemonsList)
             }}
             className={heartClass}
           />
