@@ -9,23 +9,21 @@ import useAuth from "../../../hooks/useAuth";
 import usePokemonsArrayAPI from "../../../hooks/usePokemonsArrayAPI";
 import { Heart } from "lucide-react";
 import { Sword } from "lucide-react";
-import useAddRemoveFavouritePoke from "../../../services/useAddRemoveFavouritePoke";
-import useAddRemoveBattlePoke from "../../../services/useAddRemoveBattlePoke";
 import useFavouritePoke from "../../../services/useFavouritePoke";
+import useBattlePoke from "../../../services/useBattlePoke";
 
 const ExtendPokemonCard = () => {
-  const { addRemoveBattlePoke } = useAddRemoveBattlePoke();
-  const { addRemoveFavorPoke } = useAddRemoveFavouritePoke();
   const { log, userData, pokemonData } = useAuth();
   const { pokemon } = useParams();
   const { favouritePoke } = useFavouritePoke();
+  const { battlePoke } = useBattlePoke();
 
   const pokemonDataFind = pokemonData?.find(
     (poke) => `${poke.id}` === `${pokemon}-${userData.id}`
   );
 
   const [favourite, setFavourite] = useState(pokemonDataFind?.isFavor ?? false);
-  const [battle, setBattle] = useState(false);
+  const [battle, setBattle] = useState(pokemonDataFind?.isBattle ?? false);
   const { theme } = useTheme();
   const { pokemonsList } = usePokemonsArrayAPI();
 
@@ -63,14 +61,13 @@ const ExtendPokemonCard = () => {
           <Sword
             onClick={() => {
               setBattle((prev) => !prev);
-              // addRemoveBattlePoke(pokeData, userData, pokemonData, favourite);
+              battlePoke(pokemon, userData, pokemonsList)
             }}
             className={swordClass}
           />
           <Heart
             onClick={() => {
               setFavourite((prev) => !prev);
-              // addRemoveFavorPoke(pokeData, userData, pokemonData, favourite);
               favouritePoke(pokemon, userData, pokemonsList)
             }}
             className={heartClass}
