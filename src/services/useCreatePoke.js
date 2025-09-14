@@ -20,7 +20,7 @@ const useCreatePoke = () => {
         weight: dataForm.weightCreatePoke,
         height: dataForm.heightCreatePoke,
         // ability: dataForm.abilities[0].ability.name,
-        image: dataForm.sprites.other["official-artwork"].front_default,
+        image: dataForm.imageCreatePoke,
         isFavor: false,
         isBattle: false,
         winBattle: null,

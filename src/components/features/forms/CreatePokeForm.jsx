@@ -10,12 +10,14 @@ import * as z from "zod";
 import useTheme from "../../../hooks/useTheme";
 import usePokemonImage from "../../../hooks/usePokemonImage";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
   nameCreatePoke: z.string().nonempty("This field is required"),
   weightCreatePoke: z.string().nonempty("This field is required"),
   heightCreatePoke: z.string().nonempty("This field is required"),
   expCreatePoke: z.string().nonempty("This field is required"),
+  imageCreatePoke: z.string()
 });
 
 const CreatePokeForm = () => {
@@ -23,8 +25,13 @@ const CreatePokeForm = () => {
   const { pokemonsImage } = usePokemonImage();
   const [image, setImage] = useState(0);
 
+ const navigate = useNavigate();
+ const handleNavigate = () => {
+  navigate("/pokemons")
+ }
+
   const handlePrev = () => {
-    setImage(prev => (prev === 0 - 1 ? pokemonsImage.length - 1 : prev - 1));
+    setImage(prev => (prev === 0 ? pokemonsImage.length - 1 : prev - 1));
   }
   const handleNext = () => {
     setImage(prev => (prev === pokemonsImage.length - 1 ? 0 : prev + 1));
@@ -39,6 +46,7 @@ const CreatePokeForm = () => {
 
   const dataCreate = (formValue) => {
     console.log(formValue);
+    handleNavigate();
     reset();
   };
 
@@ -94,7 +102,9 @@ const CreatePokeForm = () => {
           EXP:
         </Input>
         <Wrapper className="w-132 h-132 border-2 rounded-2xl">
+          <Input id="imageCreatePoke" name="imageCreatePoke" type="hidden" register={register} value={pokemonsImage[image]}>
           <Image src={pokemonsImage[image]} />
+          </Input>
         </Wrapper>
         <Wrapper className="flex gap-8">
           <Button
