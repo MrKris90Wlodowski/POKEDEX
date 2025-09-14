@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import useTheme from "../../../hooks/useTheme";
+import usePokemonImage from "../../../hooks/usePokemonImage";
+import { useState } from "react";
 
 const schema = z.object({
   nameCreatePoke: z.string().nonempty("This field is required"),
@@ -18,6 +20,8 @@ const schema = z.object({
 
 const CreatePokeForm = () => {
   const { theme } = useTheme();
+  const { pokemonsImage } = usePokemonImage();
+  const [image, setImage] = useState(0);
 
   const {
     register,
@@ -83,18 +87,20 @@ const CreatePokeForm = () => {
           EXP:
         </Input>
         <Wrapper className="w-132 h-132 border-2 rounded-2xl">
-          <Image/>
+          <Image src={pokemonsImage[image]} />
         </Wrapper>
         <Wrapper className="flex gap-8">
           <Button
             variant="default"
             className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl flex-1"
+            onClick={() => setImage((prev) => prev - 1)}
           >
             LEFT
           </Button>
           <Button
             variant="default"
             className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl flex-1"
+            onClick={() => setImage((prev) => prev + 1)}
           >
             RIGHT
           </Button>

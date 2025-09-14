@@ -3,10 +3,10 @@ import Button from "../shared/Button";
 import Text from "../shared/Text";
 import Wrapper from "../shared/Wrapper";
 import { useNavigate } from "react-router-dom";
-import usePokemonImage from "../../hooks/usePokemonImage";
+// import usePokemonImage from "../../hooks/usePokemonImage";
 
 const Edition = () => {
-  const { pokemonsImage } = usePokemonImage();
+  // const { pokemonsImage } = usePokemonImage();
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("/edition/create-pokemon");
@@ -17,9 +17,7 @@ const Edition = () => {
       <Button
         onClick={() => {
           handleNavigate();
-          console.log(
-          pokemonsImage[20]
-          );
+          // console.log(pokemonsImage[7]);
         }}
         className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-80 bg-blue-500 hover:bg-blue-700 transition duration-300 ease-in-out"
       >
