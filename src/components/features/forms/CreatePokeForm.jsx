@@ -23,6 +23,13 @@ const CreatePokeForm = () => {
   const { pokemonsImage } = usePokemonImage();
   const [image, setImage] = useState(0);
 
+  const handlePrev = () => {
+    setImage(prev => (prev === 0 - 1 ? pokemonsImage.length - 1 : prev - 1));
+  }
+  const handleNext = () => {
+    setImage(prev => (prev === pokemonsImage.length - 1 ? 0 : prev + 1));
+  }
+
   const {
     register,
     reset,
@@ -93,16 +100,16 @@ const CreatePokeForm = () => {
           <Button
             variant="default"
             className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl flex-1"
-            onClick={() => setImage((prev) => prev - 1)}
+            onClick={handlePrev}
           >
-            LEFT
+            PREV
           </Button>
           <Button
             variant="default"
             className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl flex-1"
-            onClick={() => setImage((prev) => prev + 1)}
+            onClick={handleNext}
           >
-            RIGHT
+            NEXT
           </Button>
         </Wrapper>
         <Button
