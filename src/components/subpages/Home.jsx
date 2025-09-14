@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PokemonContainer from "../features/pokemon/PokemonContainer";
 import SearchBarPokemon from "../features/pokemon/SearchBarPokemon";
 import Wrapper from "../shared/Wrapper";
-import { hash } from "zod";
+// import { hash } from "zod";
 import PaginationPokemon from "../features/pokemon/PaginationPokemon";
 import usePokemonAPI from "../../hooks/usePokemonAPI";
 

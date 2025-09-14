@@ -7,9 +7,10 @@ const useDownloadUserPoke = () => {
   const [error, setError] = useState(null);
   const [userPokemons, setUserPokemons] = useState([]);
   const { userData } = useAuth();
-  const BASE_API_USER = `${BASE_API_URL}/pokemons?idUser=${userData.id}`;
+//   const BASE_API_USER = `${BASE_API_URL}/pokemons?idUser=${userData.id}`;
 
   useEffect(() => {
+    const BASE_API_USER = `${BASE_API_URL}/pokemons?idUser=${userData.id}`;
     setLoading(true);
     fetch(BASE_API_USER)
       .then((res) => res.json())
