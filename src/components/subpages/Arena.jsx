@@ -2,7 +2,7 @@ import Wrapper from "../shared/Wrapper";
 // import Text from "../shared/Text";
 import Button from "../shared/Button";
 import PokemonCard from "../features/pokemon/PokemonCard";
-import picturePokeball from "../../icons/pokeball.png";
+import picturePokeball from "../../icons/pngimg.com - pokeball_PNG21.png";
 import { Flag } from "lucide-react";
 
 const Arena = () => {

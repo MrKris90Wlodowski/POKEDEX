@@ -11,12 +11,17 @@ import { Heart } from "lucide-react";
 import { Sword } from "lucide-react";
 import useFavouritePoke from "../../../services/useFavouritePoke";
 import useBattlePoke from "../../../services/useBattlePoke";
+import useDownloadUserPoke from "../../../services/useDownloadUserPoke";
+
 
 const ExtendPokemonCard = () => {
   const { log, userData, pokemonData } = useAuth();
   const { pokemon } = useParams();
   const { favouritePoke } = useFavouritePoke();
   const { battlePoke } = useBattlePoke();
+  // const { userPokemons } = useDownloadUserPoke();
+  // console.log(userPokemons);
+  // const favorPokemons = userPokemons.filter(poke => poke.isFavor === true);
 
   const pokemonDataFind = pokemonData?.find(
     (poke) => `${poke.id}` === `${pokemon}-${userData.id}`

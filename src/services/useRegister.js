@@ -15,6 +15,7 @@ const useRegister = () => {
         name: data.nameRegister,
         email: data.emailRegister,
         password: data.passwordRegister,
+        counterEditPoke: 0
       })
     }).catch((error) => {
       setLoading(false);
