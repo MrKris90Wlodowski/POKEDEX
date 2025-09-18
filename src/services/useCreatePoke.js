@@ -19,7 +19,7 @@ const useCreatePoke = () => {
   const createPoke = async (userData, dataForm) => {
     setLoading(true);
     try {
-      const counter = await getCounter(userData.id); // zawsze świeży counter
+      const counter = await getCounter(userData.id); 
 
       await fetch(FAVOR_API_URL, {
         method: "POST",
@@ -40,7 +40,7 @@ const useCreatePoke = () => {
         }),
       });
 
-      // opcjonalnie: zwiększ counter usera (PUT/PATCH do /users/:id)
+      // IN FUTURE (PUT/PATCH  /users/:id)
     } catch (err) {
       console.error("ERROR IS ", err);
       setError(err);

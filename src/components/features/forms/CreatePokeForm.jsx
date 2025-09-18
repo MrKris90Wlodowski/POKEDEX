@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import useTheme from "../../../hooks/useTheme";
 import usePokemonImage from "../../../hooks/usePokemonImage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useCreatePoke from "../../../services/useCreatePoke";
 import useAuth from "../../../hooks/useAuth";
@@ -48,6 +48,10 @@ const CreatePokeForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
+
+  useEffect(() => {
+    setValue("imageCreatePoke",pokemonsImage[image])
+  },[setValue,pokemonsImage,image])
 
   const dataCreate = (formValue) => {
     createPoke(userData, formValue)
