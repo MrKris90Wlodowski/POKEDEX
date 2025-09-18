@@ -11,6 +11,8 @@ import useTheme from "../../../hooks/useTheme";
 import usePokemonImage from "../../../hooks/usePokemonImage";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useCreatePoke from "../../../services/useCreatePoke";
+import useAuth from "../../../hooks/useAuth";
 
 const schema = z.object({
   nameCreatePoke: z.string().nonempty("This field is required"),
@@ -24,6 +26,8 @@ const CreatePokeForm = () => {
   const { theme } = useTheme();
   const { pokemonsImage } = usePokemonImage();
   const [image, setImage] = useState(0);
+  const { createPoke } = useCreatePoke();
+  const { userData } = useAuth();
 
  const navigate = useNavigate();
  const handleNavigate = () => {
@@ -39,12 +43,14 @@ const CreatePokeForm = () => {
 
   const {
     register,
+    setValue,
     reset,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
 
   const dataCreate = (formValue) => {
+    createPoke(userData, formValue)
     console.log(formValue);
     handleNavigate();
     reset();
