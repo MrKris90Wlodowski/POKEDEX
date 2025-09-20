@@ -3,10 +3,11 @@ import Button from "../shared/Button";
 import Text from "../shared/Text";
 import Wrapper from "../shared/Wrapper";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 // import usePokemonImage from "../../hooks/usePokemonImage";
 
 const Edition = () => {
-  // const { pokemonsImage } = usePokemonImage();
+  const { pokemonData } = useAuth()
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("/edition/create-pokemon");
