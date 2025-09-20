@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useCreatePoke from "../../../services/useCreatePoke";
 import useAuth from "../../../hooks/useAuth";
+import { useSnackbar } from "notistack";
 
 const schema = z.object({
   nameCreatePoke: z.string().nonempty("This field is required"),
@@ -29,6 +30,7 @@ const CreatePokeForm = () => {
   const { createPoke } = useCreatePoke();
   const { userData, pokemonData } = useAuth();
   const [editPoke, setEditPoke] = useState([]);
+  const { enqueueSnackbar } = useSnackbar();
 
 //  const isEditPoke = pokemonData?.filter(poke => poke.isEdit === true).map(poke => poke.image);
 
@@ -63,7 +65,7 @@ const CreatePokeForm = () => {
   },[setValue,pokemonsImage,image])
 
   const dataCreate = (formValue) => {
-    createPoke(userData, formValue)
+    createPoke(userData, formValue, enqueueSnackbar)
     console.log(formValue);
     handleNavigate();
     reset();
@@ -145,6 +147,7 @@ const CreatePokeForm = () => {
           type="submit"
           variant="default"
           className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl"
+          disabled={editPoke?.some(img => img === pokemonsImage[image])}
         >
           CREATE POKE
         </Button>

@@ -3,6 +3,7 @@ import BASE_API_URL from "../config/baseAPI";
 import useAuth from "../hooks/useAuth";
 
 
+
 const useCreatePoke = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -11,6 +12,7 @@ const useCreatePoke = () => {
   const USER_API_URL = `${BASE_API_URL}/users`;
   const FAVOR_API_URL = `${BASE_API_URL}/pokemons`;
   const baseCreatePokeID = 151;
+
 
     const getAddNewCreate = (newPoke) => {
     setPokemonData(prev => [...prev, newPoke])
@@ -34,7 +36,7 @@ const useCreatePoke = () => {
     });
   }
 
-  const createPoke = async (userData, dataForm) => {
+  const createPoke = async (userData, dataForm, notifyMessage) => {
     setLoading(true);
     try {
       const counter = await getCounter(userData); 
@@ -59,8 +61,11 @@ const useCreatePoke = () => {
         body: JSON.stringify(newPokemon),
       })
       const addConterPoke = await getAddCounter(userData);
-      const addNewEdit = getAddNewCreate(newPokemon)
-      ;
+      const addNewEdit = getAddNewCreate(newPokemon);
+
+      if (notifyMessage) {
+         notifyMessage(`Pokemon ${newPokemon.name} created!`, { variant: "success" });
+      }
 
       // IN FUTURE (PUT/PATCH  /users/:id)
     } catch (err) {
