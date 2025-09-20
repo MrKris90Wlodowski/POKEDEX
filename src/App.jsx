@@ -27,7 +27,8 @@ const router = createBrowserRouter([
       { path: "arena", element: <Arena /> },
       { path: "ranking", element: <Ranking /> },
       { path: "edition", element: <Edition /> },
-      { path: "edition/create-pokemon", element: <CreatePokeForm /> }
+      { path: "edition/create-pokemon", element: <CreatePokeForm /> },
+      // { path: "edition/edit-pokemon", element: <EditPokeForm /> }
     ],
   },
 ]);
