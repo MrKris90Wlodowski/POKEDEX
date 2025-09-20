@@ -1,14 +1,20 @@
 import { useState } from "react";
 import BASE_API_URL from "../config/baseAPI";
+import useAuth from "../hooks/useAuth";
+
 
 const useCreatePoke = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const { setPokemonData } = useAuth();
 
   const USER_API_URL = `${BASE_API_URL}/users`;
   const FAVOR_API_URL = `${BASE_API_URL}/pokemons`;
   const baseCreatePokeID = 151;
+
+    const getAddNewCreate = (newPoke) => {
+    setPokemonData(prev => [...prev, newPoke])
+  }
 
   const getCounter = async (userData) => {
     const res = await fetch(`${USER_API_URL}/${userData.id}`);
@@ -33,11 +39,8 @@ const useCreatePoke = () => {
     try {
       const counter = await getCounter(userData); 
 
-      await fetch(FAVOR_API_URL, {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-          id: `${baseCreatePokeID + counter}-${userData.id}`,
+      const newPokemon = {
+        id: `${baseCreatePokeID + counter}-${userData.id}`,
           idUser: userData.id,
           name: dataForm.nameCreatePoke,
           exp: dataForm.expCreatePoke,
@@ -49,9 +52,14 @@ const useCreatePoke = () => {
           winBattle: null,
           lossBattle: null,
           isEdit: true,
-        }),
+      }
+      await fetch(FAVOR_API_URL, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(newPokemon),
       })
       const addConterPoke = await getAddCounter(userData);
+      const addNewEdit = getAddNewCreate(newPokemon)
       ;
 
       // IN FUTURE (PUT/PATCH  /users/:id)

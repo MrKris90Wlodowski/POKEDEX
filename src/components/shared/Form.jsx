@@ -1,6 +1,3 @@
-// IMPORT
-// brak dodatkowych importów
-
 // VARIABLES
 const Form = ({ onSubmit, className, children }) => {
 

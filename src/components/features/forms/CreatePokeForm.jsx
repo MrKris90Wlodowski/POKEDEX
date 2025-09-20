@@ -27,8 +27,17 @@ const CreatePokeForm = () => {
   const { pokemonsImage } = usePokemonImage();
   const [image, setImage] = useState(0);
   const { createPoke } = useCreatePoke();
-  const { userData } = useAuth();
+  const { userData, pokemonData } = useAuth();
+  const [editPoke, setEditPoke] = useState([]);
 
+//  const isEditPoke = pokemonData?.filter(poke => poke.isEdit === true).map(poke => poke.image);
+
+ useEffect(() => {
+   const isEditPoke = pokemonData?.filter(poke => poke.isEdit === true).map(poke => poke.image);
+   setEditPoke(isEditPoke)
+ },[pokemonData])
+
+//  console.log(isEditPoke);
  const navigate = useNavigate();
  const handleNavigate = () => {
   navigate("/pokemons")
@@ -113,7 +122,7 @@ const CreatePokeForm = () => {
         </Input>
         <Wrapper className="w-132 h-132 border-2 rounded-2xl">
           <Input id="imageCreatePoke" name="imageCreatePoke" type="hidden" register={register} value={pokemonsImage[image]}>
-          <Image src={pokemonsImage[image]} />
+          <Image src={pokemonsImage[image]} className={editPoke?.some(img => img === pokemonsImage[image]) ? "filter grayscale opacity-50" : ""}/>
           </Input>
         </Wrapper>
         <Wrapper className="flex gap-8">
