@@ -1,9 +1,15 @@
-const Text = ({children, tag, strong, className}) => {
-    const Tag = tag || "p"
+// VARIABLES
+const Text = ({ children, tag, strong, className }) => {
+  const Tag = tag || "p" // domyślny tag to <p>
 
-    return (
-        <Tag className={className}><strong>{strong}</strong>{children}</Tag>
-    )
+  // RENDER
+  return (
+    <Tag className={className}>
+      {strong && <strong>{strong}</strong>}
+      {children}
+    </Tag>
+  )
 }
 
-export default Text;
+// EXPORT
+export default Text

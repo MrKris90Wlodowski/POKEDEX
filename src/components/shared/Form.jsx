@@ -1,7 +1,16 @@
-const Form = ({onSubmit, className, children}) => {
-    return (
-        <form onSubmit={onSubmit} className={className}>{children}</form>
-    )
+// IMPORT
+// brak dodatkowych importów
+
+// VARIABLES
+const Form = ({ onSubmit, className, children }) => {
+
+  // RENDER
+  return (
+    <form onSubmit={onSubmit} className={className}>
+      {children}
+    </form>
+  )
 }
 
-export default Form;
+// EXPORT
+export default Form
