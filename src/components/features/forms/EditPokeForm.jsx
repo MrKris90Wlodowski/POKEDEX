@@ -7,9 +7,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import useTheme from "../../../hooks/useTheme";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { useEffect, useState } from "react";
+import useCreatePoke from "../../../services/useCreatePoke";
+import { useSnackbar } from "notistack";
 
 const schema = z.object({
   weightCreatePoke: z.string().nonempty("This field is required"),
@@ -18,28 +20,47 @@ const schema = z.object({
 });
 
 const EditPokeForm = () => {
-  const { theme } = useTheme;
+  const { theme } = useTheme();
   const { id } = useParams();
   const { pokemonData } = useAuth();
   const [editPoke, setEditPoke] = useState([]);
-
-  useEffect(() => {
-    const isEditPoke = pokemonData?.filter((poke) => poke.isEdit === true);
-    setEditPoke(isEditPoke);
-  }, [pokemonData]);
-
-  const renamePoke = editPoke.find(poke => String(poke.id) === String(id))
-  // console.log(renamePoke);
+  const navigate = useNavigate();
+  const { editPokemon } = useCreatePoke();
+  const { enqueueSnackbar } = useSnackbar();
 
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(schema) });
+  } = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      weightCreatePoke: "",
+      heightCreatePoke: "",
+      expCreatePoke: "",
+    },
+  });
+
+  useEffect(() => {
+    const isEditPoke = pokemonData?.filter((poke) => poke.isEdit === true);
+    setEditPoke(isEditPoke);
+
+    const renamePoke = isEditPoke?.find((p) => String(p.id) === String(id));
+    if (renamePoke) {
+      reset({
+        weightCreatePoke: renamePoke.weight,
+        heightCreatePoke: renamePoke.height,
+        expCreatePoke: renamePoke.exp,
+      });
+    }
+  }, [pokemonData, id, reset]);
 
   const dataEdit = (formValue) => {
+    const renamePoke = editPoke?.find((p) => String(p.id) === String(id));
     console.log(formValue);
+    editPokemon(renamePoke, formValue, enqueueSnackbar);
+      navigate("/pokemons");
     reset();
   };
 
@@ -47,34 +68,35 @@ const EditPokeForm = () => {
     <Wrapper className="p-8 border-4 rounded-2xl w-150">
       <Form onSubmit={handleSubmit(dataEdit)} className="flex flex-col gap-8">
         <Input
-          id="weightEditPoke"
-          name="weightEditPoke"
+          id="weightCreatePoke"
+          name="weightCreatePoke"
           type="text"
-          placeholder={renamePoke?.weight}
+          placeholder="Weight"
           register={register}
           errors={errors}
           variant={theme}
-          className="focus:outline-none"
         >
           WEIGHT:
         </Input>
         <Input
-          id="heightEditPoke"
-          name="heightEditPoke"
+          id="heightCreatePoke"
+          name="heightCreatePoke"
           type="text"
-          placeholder={renamePoke?.height}
+          placeholder="Height"
           register={register}
           errors={errors}
+          variant={theme}
         >
-          HEIGHT
+          HEIGHT:
         </Input>
         <Input
-          id="expEditPoke"
-          name="expEditPoke"
+          id="expCreatePoke"
+          name="expCreatePoke"
           type="text"
-          placeholder={renamePoke?.exp}
+          placeholder="EXP"
           register={register}
           errors={errors}
+          variant={theme}
         >
           EXP:
         </Input>

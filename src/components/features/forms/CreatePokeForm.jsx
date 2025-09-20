@@ -27,7 +27,7 @@ const CreatePokeForm = () => {
   const { theme } = useTheme();
   const { pokemonsImage } = usePokemonImage();
   const [image, setImage] = useState(0);
-  const { createPoke } = useCreatePoke();
+  const { createPokemon } = useCreatePoke();
   const { userData, pokemonData } = useAuth();
   const [editPoke, setEditPoke] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
@@ -65,7 +65,7 @@ const CreatePokeForm = () => {
   },[setValue,pokemonsImage,image])
 
   const dataCreate = (formValue) => {
-    createPoke(userData, formValue, enqueueSnackbar)
+    createPokemon(userData, formValue, enqueueSnackbar)
     console.log(formValue);
     handleNavigate();
     reset();
