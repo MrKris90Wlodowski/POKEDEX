@@ -1,13 +1,24 @@
 import Wrapper from "../shared/Wrapper";
 import SortButtons from "../features/pokemon/SortButtons";
 import usePokemonsArrayAPI from "../../hooks/usePokemonsArrayAPI";
-import PokemonContainer from "../features/pokemon/PokemonContainer";
-import PokemonRanking from "../features/pokemon/PokemonRanking";
+import PokemonsUniversalConteiner from "../features/pokemon/PokemonsUniversalConteiner";
 import { useState } from "react";
 
 const Ranking = () => {
   const { pokemonsList } = usePokemonsArrayAPI();
   const [pokemonsSort, setPokemonsSort] = useState(pokemonsList)
+
+  const mapPropsRanking = (poke) => ({
+    id: poke.id,
+    name: poke.name,
+    exp: poke.exp || poke.base_experience,
+    weight: poke.weight,
+    height: poke.height,
+    ability: poke.ability || poke.abilities[0].ability.name,
+    sourceImg: poke.image || poke.sprites.other["official-artwork"].front_default,
+    isRecord: true,
+    className: "h-auto"
+  })
 
   const handleSort = (action) => {
     if (action === "WEIGHT") {
@@ -28,7 +39,8 @@ const Ranking = () => {
   return (
     <Wrapper className="flex flex-col items-center justify-center">
       <SortButtons onSort={handleSort}/>
-      <PokemonRanking pokemonsArray={pokemonsSort} className="flex flex-col gap-8 "/>
+      <PokemonsUniversalConteiner pokemonsArray={pokemonsSort} mapProps={mapPropsRanking} className="flex flex-col gap-8"/>
+      {/* <PokemonRanking pokemonsArray={pokemonsSort} className="flex flex-col gap-8 "/> */}
     </Wrapper>
   );
 };

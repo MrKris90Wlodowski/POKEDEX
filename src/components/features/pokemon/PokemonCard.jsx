@@ -15,7 +15,7 @@ const PokemonCard = ({
   id,
   className,
   onClick,
-  isBattle,
+  isRecord,
   isEdit
 }) => {
   const { theme } = useTheme();
@@ -38,7 +38,7 @@ const PokemonCard = ({
         {weight && <Text strong={"WEIGHT:"}> {weight / 10} kg</Text>}
         {exp && <Text strong={"BASE EXP:"}> {exp}</Text>}
         {ability && <Text strong={"ABILITY:"}> {ability}</Text>}
-        {isBattle && (
+        {isRecord && (
           <Wrapper className="flex gap-8">
             <Text className="font-bold text-green-700">WIN:</Text>
             <Text className="font-bold text-red-700">LOSS:</Text>
