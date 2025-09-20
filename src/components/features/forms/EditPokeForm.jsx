@@ -1,3 +1,4 @@
+// IMPORTS
 import Wrapper from "../../shared/Wrapper";
 import Input from "../../shared/Input";
 import Form from "../../shared/Form";
@@ -6,28 +7,38 @@ import Button from "../../shared/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+
 import useTheme from "../../../hooks/useTheme";
-import { useParams, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
-import { useEffect, useState } from "react";
 import useCreatePoke from "../../../services/useCreatePoke";
+
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 
+// SCHEMA: validation rules for edit form
 const schema = z.object({
   weightCreatePoke: z.string().nonempty("This field is required"),
   heightCreatePoke: z.string().nonempty("This field is required"),
   expCreatePoke: z.string().nonempty("This field is required"),
 });
 
+// COMPONENT
 const EditPokeForm = () => {
+  // CONTEXTS
   const { theme } = useTheme();
-  const { id } = useParams();
   const { pokemonData } = useAuth();
-  const [editPoke, setEditPoke] = useState([]);
-  const navigate = useNavigate();
   const { editPokemon } = useCreatePoke();
   const { enqueueSnackbar } = useSnackbar();
 
+  // ROUTER
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  // LOCAL STATE
+  const [editPoke, setEditPoke] = useState([]);
+
+  // REACT HOOK FORM
   const {
     register,
     reset,
@@ -42,6 +53,7 @@ const EditPokeForm = () => {
     },
   });
 
+  // EFFECT: populate form with existing data
   useEffect(() => {
     const isEditPoke = pokemonData?.filter((poke) => poke.isEdit === true);
     setEditPoke(isEditPoke);
@@ -56,17 +68,19 @@ const EditPokeForm = () => {
     }
   }, [pokemonData, id, reset]);
 
+  // FORM SUBMIT HANDLER
   const dataEdit = (formValue) => {
     const renamePoke = editPoke?.find((p) => String(p.id) === String(id));
-    console.log(formValue);
     editPokemon(renamePoke, formValue, enqueueSnackbar);
-      navigate("/pokemons");
+    navigate("/pokemons");
     reset();
   };
 
+  // RENDER
   return (
     <Wrapper className="p-8 border-4 rounded-2xl w-150">
       <Form onSubmit={handleSubmit(dataEdit)} className="flex flex-col gap-8">
+        {/* WEIGHT INPUT */}
         <Input
           id="weightCreatePoke"
           name="weightCreatePoke"
@@ -78,6 +92,8 @@ const EditPokeForm = () => {
         >
           WEIGHT:
         </Input>
+
+        {/* HEIGHT INPUT */}
         <Input
           id="heightCreatePoke"
           name="heightCreatePoke"
@@ -89,6 +105,8 @@ const EditPokeForm = () => {
         >
           HEIGHT:
         </Input>
+
+        {/* EXP INPUT */}
         <Input
           id="expCreatePoke"
           name="expCreatePoke"
@@ -100,6 +118,8 @@ const EditPokeForm = () => {
         >
           EXP:
         </Input>
+
+        {/* SUBMIT BUTTON */}
         <Button
           type="submit"
           variant="default"
@@ -112,4 +132,5 @@ const EditPokeForm = () => {
   );
 };
 
+// EXPORT
 export default EditPokeForm;

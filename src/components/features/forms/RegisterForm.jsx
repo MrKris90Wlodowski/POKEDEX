@@ -1,49 +1,57 @@
+// IMPORTS
 import Button from "../../shared/Button";
 import Form from "../../shared/Form";
 import Input from "../../shared/Input";
 import Wrapper from "../../shared/Wrapper";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 import useTheme from "../../../hooks/useTheme";
 import useRegister from "../../../services/useRegister";
 import { useSnackbar } from "notistack";
 
+// SCHEMA: validation rules for registration form
 const schema = z
   .object({
     nameRegister: z
       .string()
       .nonempty("This field is required")
-      .min(3, "Name must contains minimum 3 signs"),
+      .min(3, "Name must contain at least 3 characters"),
     emailRegister: z
       .string()
       .nonempty("This field is required")
-      .email("This field must contains correct address email"),
+      .email("Must be a valid email address"),
     passwordRegister: z
       .string()
       .nonempty("This field is required")
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/,
-        "This field must contains at least one upper, lower letter and digit all minimum 8 signs"
+        "Must contain min 8 chars, 1 uppercase, 1 lowercase, 1 digit"
       ),
     confirmPasswordRegister: z.string(),
   })
   .refine(
-    (dataPassword) =>
-      dataPassword.passwordRegister === dataPassword.confirmPasswordRegister,
+    (data) => data.passwordRegister === data.confirmPasswordRegister,
     {
-      message: "Confirm password must be match to password",
+      message: "Passwords must match",
       path: ["confirmPasswordRegister"],
     }
   );
 
+// COMPONENT
 const RegisterForm = () => {
+  // THEME CONTEXT
   const { theme } = useTheme();
+
+  // REGISTER HOOK
   const { loading, error, registerRecord } = useRegister();
+
+  // SNACKBAR NOTIFICATIONS
   const { enqueueSnackbar } = useSnackbar();
 
+  // REACT HOOK FORM
   const {
     register,
     reset,
@@ -51,19 +59,19 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
 
+  // FORM SUBMIT HANDLER
   const dataRegister = (formValue) => {
     registerRecord(formValue);
-    enqueueSnackbar(`User register`, {variant: "success"})
+    enqueueSnackbar("User registered", { variant: "success" });
     console.log(formValue);
     reset();
   };
 
+  // RENDER
   return (
     <Wrapper className="p-8 border-4 rounded-2xl w-150" variant={theme}>
-      <Form
-        onSubmit={handleSubmit(dataRegister)}
-        className="flex flex-col gap-8"
-      >
+      <Form onSubmit={handleSubmit(dataRegister)} className="flex flex-col gap-8">
+        {/* NAME INPUT */}
         <Input
           id="nameRegister"
           name="nameRegister"
@@ -76,6 +84,8 @@ const RegisterForm = () => {
         >
           NAME:
         </Input>
+
+        {/* EMAIL INPUT */}
         <Input
           id="emailRegister"
           name="emailRegister"
@@ -88,6 +98,8 @@ const RegisterForm = () => {
         >
           EMAIL:
         </Input>
+
+        {/* PASSWORD INPUT */}
         <Input
           id="passwordRegister"
           name="passwordRegister"
@@ -100,6 +112,8 @@ const RegisterForm = () => {
         >
           PASSWORD:
         </Input>
+
+        {/* CONFIRM PASSWORD INPUT */}
         <Input
           id="confirmPasswordRegister"
           name="confirmPasswordRegister"
@@ -112,6 +126,8 @@ const RegisterForm = () => {
         >
           CONFIRM PASSWORD:
         </Input>
+
+        {/* SUBMIT BUTTON */}
         <Button
           type="submit"
           variant="default"
@@ -124,4 +140,5 @@ const RegisterForm = () => {
   );
 };
 
+// EXPORT
 export default RegisterForm;
