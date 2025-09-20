@@ -6,7 +6,7 @@ import Button from "../../shared/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useTheme } from "../../../hooks/useTheme"
+import  useTheme  from "../../../hooks/useTheme"
 
 const schema = z.object({
   weightCreatePoke: z.string().nonempty("This field is required"),
