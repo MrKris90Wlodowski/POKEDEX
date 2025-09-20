@@ -6,7 +6,10 @@ import Button from "../../shared/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import  useTheme  from "../../../hooks/useTheme"
+import useTheme from "../../../hooks/useTheme";
+import { useParams } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
+import { useEffect, useState } from "react";
 
 const schema = z.object({
   weightCreatePoke: z.string().nonempty("This field is required"),
@@ -16,6 +19,17 @@ const schema = z.object({
 
 const EditPokeForm = () => {
   const { theme } = useTheme;
+  const { id } = useParams();
+  const { pokemonData } = useAuth();
+  const [editPoke, setEditPoke] = useState([]);
+
+  useEffect(() => {
+    const isEditPoke = pokemonData?.filter((poke) => poke.isEdit === true);
+    setEditPoke(isEditPoke);
+  }, [pokemonData]);
+
+  const renamePoke = editPoke.find(poke => String(poke.id) === String(id))
+  // console.log(renamePoke);
 
   const {
     register,
@@ -36,7 +50,7 @@ const EditPokeForm = () => {
           id="weightEditPoke"
           name="weightEditPoke"
           type="text"
-          placeholder="6 kg"
+          placeholder={renamePoke?.weight}
           register={register}
           errors={errors}
           variant={theme}
@@ -48,7 +62,7 @@ const EditPokeForm = () => {
           id="heightEditPoke"
           name="heightEditPoke"
           type="text"
-          placeholder="0,4 m"
+          placeholder={renamePoke?.height}
           register={register}
           errors={errors}
         >
@@ -58,7 +72,7 @@ const EditPokeForm = () => {
           id="expEditPoke"
           name="expEditPoke"
           type="text"
-          placeholder="112"
+          placeholder={renamePoke?.exp}
           register={register}
           errors={errors}
         >

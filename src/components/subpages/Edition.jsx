@@ -13,8 +13,8 @@ const Edition = () => {
   const handleNavigateToCreateForm = () => {
     navigate("/edition/create-pokemon");
   };
-  const handleNavigateToEditForm = () => {
-    navigate("/edition/edit-pokemon")
+  const handleNavigateToEditForm = (id) => {
+    navigate(`/edition/edit-pokemon/${id}`)
   }
 
   const mapPropsEdition = (poke) => ({
@@ -22,7 +22,7 @@ const Edition = () => {
     name: poke.name,
     sourceImg: poke.image,
     isEdit: true,
-    onClick: handleNavigateToEditForm,
+    onClick: () => handleNavigateToEditForm(poke.id),
     className: "h-auto"
   });
 
