@@ -71,7 +71,7 @@ const ExtendPokemonCard = () => {
   return (
     <Wrapper
       key={displayData.id}
-      className="flex gap-8 p-8 border-4 w-5xl rounded-4xl relative"
+      className="flex xl:flex-row flex-col gap-8 p-8 border-4  rounded-4xl xl:relative"
       variantBackground={theme}
     >
       {/* POKEMON IMAGE */}
@@ -87,7 +87,7 @@ const ExtendPokemonCard = () => {
       </Wrapper>
 
       {/* POKEMON DETAILS */}
-      <Wrapper className="flex flex-col justify-end">
+      <Wrapper className="flex flex-col justify-end relative">
         {/* ARENA COUNTER */}
         <Wrapper className="absolute top-8" variantLog={log}>
           <Text className="text-2xl font-bold text-green-700">WIN:</Text>
