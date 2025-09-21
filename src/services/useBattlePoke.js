@@ -24,13 +24,13 @@ const useBattlePoke = () => {
       .then((data) => {
         console.log(data);
         if ((data?.id ?? false) === `${pokeID}-${userID.id}`) {
-          const boolenIsBattle = data?.isBattle === true ? false : true;
+          // const boolenIsBattle = data?.isBattle === true ? false : true;
 
           fetch(`${BATTLE_API_URL}/${pokeID}-${userID.id}`, {
             method: "PATCH",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify({
-              isBattle: boolenIsBattle,
+              isBattle: true
             }),
           }).catch((error) => {
             setError(error);
@@ -67,7 +67,25 @@ const useBattlePoke = () => {
       })
       .finally(() => setLoading(false));
   };
-  return { error, loading, battlePoke };
+  const surrenderPoke = async(pokeID, userID, pokeArray) => {
+
+    setError(null);
+    setLoading(true);
+    try {
+      const res = await fetch(`${BATTLE_API_URL}/${pokeID}-${userID.id}`, {
+            method: "PATCH",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+              isBattle: false
+            })})
+    } catch(err) {
+      console.log("ERROR IS ",err);
+      setError(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+  return { error, loading, battlePoke, surrenderPoke };
 };
 
 export default useBattlePoke;
