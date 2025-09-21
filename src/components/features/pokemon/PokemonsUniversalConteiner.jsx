@@ -1,7 +1,9 @@
+// IMPORTS
 import { Link } from "react-router-dom";
 import Wrapper from "../../shared/Wrapper";
 import PokemonCard from "./PokemonCard";
 
+// COMPONENT
 const PokemonsUniversalConteiner = ({
   error,
   loading,
@@ -9,15 +11,18 @@ const PokemonsUniversalConteiner = ({
   showLink,
   linkPrefix,
   className,
-  mapProps
+  mapProps,
 }) => {
+  // LOADING & ERROR STATES
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>error:{error.message}</p>;
+  if (error) return <p>error: {error.message}</p>;
 
+  // RENDER
   return (
     <Wrapper className={className}>
-       {pokemonsArray.map((poke) => {
+      {pokemonsArray.map((poke) => {
         const cardProps = mapProps ? mapProps(poke) : poke;
+
         return showLink ? (
           <Link key={poke.id} to={`${linkPrefix}/${poke.id}`}>
             <PokemonCard {...cardProps} />
@@ -30,4 +35,5 @@ const PokemonsUniversalConteiner = ({
   );
 };
 
+// EXPORTS
 export default PokemonsUniversalConteiner;
