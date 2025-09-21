@@ -1,37 +1,40 @@
-import { Link, Outlet } from "react-router-dom";
-import Wrapper from "../components/shared/Wrapper";
-import Text from "../components/shared/Text";
-import Image from "../components/shared/Image";
-import Footer from "../components/subpages/Footer";
-import ThemeButton from "../components/features/theme/ThemeButton";
-import useTheme from "../hooks/useTheme";
-import logoPokemon from "../icons/pngegg.png";
-import iconPokeball from "../icons/game.png";
-import clsx from "clsx";
-import useAuth from "../hooks/useAuth";
+// IMPORTS
+import { Link, Outlet } from "react-router-dom"
+import Wrapper from "../components/shared/Wrapper"
+import Text from "../components/shared/Text"
+import Image from "../components/shared/Image"
+import Footer from "../components/subpages/Footer"
+import ThemeButton from "../components/features/theme/ThemeButton"
+import useTheme from "../hooks/useTheme"
+import logoPokemon from "../icons/pngegg.png"
+import iconPokeball from "../icons/game.png"
+import clsx from "clsx"
+import useAuth from "../hooks/useAuth"
 
+// COMPONENT
 const RootLayout = () => {
-  const { theme } = useTheme();
-  const { log, logoutRecords, handleSetLog, userData } = useAuth();
+  // VARIABLES / STATE
+  const { theme } = useTheme()
+  const { log, logoutRecords, handleSetLog, userData } = useAuth()
 
-  const baseWrapperUserClass =
-    "flex gap-1 flex-row justify-center items-center";
+  const baseWrapperUserClass = "flex gap-1 flex-row justify-center items-center"
   const baseLinkClass =
-    "text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl hover:bg-blue-700 transition duration-300 ease-in-out 2xl:w-56 md:w-96 w-56 text-center";
+    "text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl hover:bg-blue-700 transition duration-300 ease-in-out 2xl:w-56 md:w-96 w-56 text-center"
 
   const activeUser = {
     login: "block",
     logout: "hidden",
-  };
+  }
   const noactiveUser = {
     login: "hidden",
     logout: "block",
-  };
+  }
 
-  const activeLinkClass = clsx(baseLinkClass, activeUser[log]);
-  const noactiveLinkClass = clsx(baseLinkClass, noactiveUser[log]);
-  const activeWrapperUserClass = clsx(baseWrapperUserClass, activeUser[log]);
+  const activeLinkClass = clsx(baseLinkClass, activeUser[log])
+  const noactiveLinkClass = clsx(baseLinkClass, noactiveUser[log])
+  const activeWrapperUserClass = clsx(baseWrapperUserClass, activeUser[log])
 
+  // RENDER
   return (
     <Wrapper className="flex flex-col min-h-screen" variant={theme}>
       <nav className="flex gap-4 p-8 bg-blue-500 border-4 border-[var(--yellow)] w-full">
@@ -65,8 +68,8 @@ const RootLayout = () => {
                 to="/pokemons"
                 className={activeLinkClass}
                 onClick={() => {
-                  handleSetLog();
-                  logoutRecords();
+                  handleSetLog()
+                  logoutRecords()
                 }}
               >
                 LOGOUT
@@ -93,7 +96,8 @@ const RootLayout = () => {
       </Wrapper>
       <Footer />
     </Wrapper>
-  );
-};
+  )
+}
 
-export default RootLayout;
+// EXPORT
+export default RootLayout

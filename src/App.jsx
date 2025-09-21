@@ -1,19 +1,18 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Arena from "./components/subpages/Arena";
-import Edition from "./components/subpages/Edition";
+// IMPORTS
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import Arena from "./components/subpages/Arena"
+import Edition from "./components/subpages/Edition"
 import Favourite from "./components/subpages/Favourite"
-import Home from "./components/subpages/Home";
-import Login from "./components/subpages/Login";
-import Ranking from "./components/subpages/Ranking";
-import Registration from "./components/subpages/Registration";
-import ExtendPokemonCard from "./components/features/pokemon/ExtendPokemonCard.jsx";
-import RootLayout from "./layouts/RootLayout.jsx";
-import CreatePokeForm from "./components/features/forms/CreatePokeForm.jsx";
-import EditPokeForm from "./components/features/forms/EditPokeForm.jsx";
+import Home from "./components/subpages/Home"
+import Login from "./components/subpages/Login"
+import Ranking from "./components/subpages/Ranking"
+import Registration from "./components/subpages/Registration"
+import ExtendPokemonCard from "./components/features/pokemon/ExtendPokemonCard.jsx"
+import RootLayout from "./layouts/RootLayout.jsx"
+import CreatePokeForm from "./components/features/forms/CreatePokeForm.jsx"
+import EditPokeForm from "./components/features/forms/EditPokeForm.jsx"
 
+// ROUTER
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,10 +32,12 @@ const router = createBrowserRouter([
       { path: "edition/create-pokemon", element: <CreatePokeForm /> },
     ],
   },
-]);
+])
 
+// COMPONENT
 const App = () => {
-  return <RouterProvider router={router} />;
-};
+  return <RouterProvider router={router} />
+}
 
-export default App;
+// EXPORT
+export default App
