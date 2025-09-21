@@ -6,10 +6,14 @@ import useAuth from "../../hooks/useAuth";
 import useBattlePoke from "../../services/useBattlePoke";
 import clsx from "clsx";
 import { useState } from "react";
+import useFight from "../../services/useFight";
+import { useSnackbar } from "notistack";
 
 const Arena = () => {
   const { pokemonData } = useAuth();
   const { surrenderPoke } = useBattlePoke();
+  const { fightResultPoke } = useFight();
+  const { enqueueSnackbar } = useSnackbar();
 
   const arenaWarriors = pokemonData?.filter((poke) => poke.isBattle);
   const arenaCounter = arenaWarriors?.length || 0;
@@ -25,19 +29,30 @@ const Arena = () => {
     const bluePokePower = bluePoke.exp * bluePoke.weight;
     const redPokePower = redPoke.exp * redPoke.weight;
 
+    let winnerPoke = null;
+    let losserPoke = null;
+
     if (bluePokePower > redPokePower) {
-      setWinner(bluePoke);
-      setLosser(redPoke);
+      winnerPoke = bluePoke;
+      losserPoke = redPoke;
     } else if (bluePokePower < redPokePower) {
-      setWinner(redPoke);
-      setLosser(bluePoke);
-    } else {
-      setWinner(null);
-      setLosser(null);
+      winnerPoke = redPoke;
+      losserPoke = bluePoke;
     }
 
-    console.log("WINNER ", winner);
-    console.log("LOSSER ", losser);
+    setWinner(winnerPoke);
+    setLosser(losserPoke);
+
+    // Jeśli jest remis, nic nie aktualizujemy
+    if (winnerPoke && losserPoke) {
+      fightResultPoke(winnerPoke, enqueueSnackbar, true); // zwycięzca
+      fightResultPoke(losserPoke, enqueueSnackbar, false); // przegrany
+    }
+
+    setEndFight(true);
+
+    console.log("WINNER:", winnerPoke);
+    console.log("LOSSER:", losserPoke);
   };
 
   const basePokeCard = "w-48 h-auto";
@@ -63,30 +78,29 @@ const Arena = () => {
         onClickFlag={() => surrenderPoke(blueWarrior)}
       />
       <Wrapper className="flex flex-col gap-8">
-      <Button
-        variant="default"
-        className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
-        disabled={arenaCounter < 2}
-        onClick={() => {
-          handleFight(blueWarrior, redWarrior);
-          setEndFight(true);
-        }}
-      >
-        BATTLE
-      </Button>
-      {endFight && (
         <Button
           variant="default"
           className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
-          onClick={() => {
-            setEndFight(false);
-            surrenderPoke(redWarrior);
-            surrenderPoke(blueWarrior);
-          }}
+          disabled={arenaCounter < 2}
+          onClick={() => handleFight(blueWarrior, redWarrior)}
         >
-          LEAVE
+          BATTLE
         </Button>
-      )}
+        {endFight && (
+          <Button
+            variant="default"
+            className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
+            onClick={() => {
+              setEndFight(false);
+              setWinner(null);
+              setLosser(null);
+              surrenderPoke(redWarrior);
+              surrenderPoke(blueWarrior);
+            }}
+          >
+            LEAVE
+          </Button>
+        )}
       </Wrapper>
       <PokemonCard
         name={redWarrior?.name ?? "RED"}
