@@ -8,7 +8,7 @@ import useTheme from "../../hooks/useTheme";
 
 const Favourite = () => {
   const { theme } = useTheme();
-  const basePokeCardClass = "w-48 h-76 p-4 border-4 rounded-2xl";
+  const basePokeCardClass = "w-48 h-auto p-4 border-4 rounded-2xl";
   const themeClass = {
     light:
       "hover:bg-[var(--white)] relative hover:z-10 transform transition-transform-colors duration-300 ease-in-out hover:scale-150",
