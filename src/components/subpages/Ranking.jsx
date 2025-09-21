@@ -40,7 +40,6 @@ const Ranking = () => {
     <Wrapper className="flex flex-col items-center justify-center">
       <SortButtons onSort={handleSort}/>
       <PokemonsUniversalConteiner pokemonsArray={pokemonsSort} mapProps={mapPropsRanking} className="flex flex-col gap-8"/>
-      {/* <PokemonRanking pokemonsArray={pokemonsSort} className="flex flex-col gap-8 "/> */}
     </Wrapper>
   );
 };

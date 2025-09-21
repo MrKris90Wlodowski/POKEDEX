@@ -25,6 +25,7 @@ const router = createBrowserRouter([
       { path: "registration", element: <Registration /> },
       { path: "login", element: <Login /> },
       { path: "favourite", element: <Favourite /> },
+      { path: "favourite/:id", element: <ExtendPokemonCard /> },
       { path: "arena", element: <Arena /> },
       { path: "ranking", element: <Ranking /> },
       { path: "edition", element: <Edition /> },
