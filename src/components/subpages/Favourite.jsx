@@ -46,7 +46,7 @@ const Favourite = () => {
           mapProps={mapPropsFavourite}
           className="flex flex-col gap-8"
           showLink={true}
-          linkPrefix="favourite"
+          linkPrefix="/favourite"
         />
       )}
     </Wrapper>

@@ -7,62 +7,70 @@ import { useParams } from "react-router-dom";
 import useTheme from "../../../hooks/useTheme";
 import useAuth from "../../../hooks/useAuth";
 import usePokemonsArrayAPI from "../../../hooks/usePokemonsArrayAPI";
-import { Heart } from "lucide-react";
-import { Sword } from "lucide-react";
+import { Heart, Sword } from "lucide-react";
 import useFavouritePoke from "../../../services/useFavouritePoke";
 import useBattlePoke from "../../../services/useBattlePoke";
-import useDownloadUserPoke from "../../../services/useDownloadUserPoke";
-
 
 const ExtendPokemonCard = () => {
   const { log, userData, pokemonData } = useAuth();
-  const { pokemon } = useParams();
+  const { pokemon, id } = useParams();
   const { favouritePoke } = useFavouritePoke();
   const { battlePoke } = useBattlePoke();
-  
-  const arenaCounter = pokemonData?.filter(poke => poke.isBattle === true).length;
-
-
-  const pokemonDataFind = pokemonData?.find(
-    (poke) => `${poke.id}` === `${pokemon}-${userData.id}`
-  );
-
-  const [favourite, setFavourite] = useState(pokemonDataFind?.isFavor ?? false);
-  const [battle, setBattle] = useState(pokemonDataFind?.isBattle ?? false);
   const { theme } = useTheme();
   const { pokemonsList } = usePokemonsArrayAPI();
 
+  const arenaCounter = pokemonData?.filter((poke) => poke.isBattle)?.length || 0;
+
+  let displayData = null;
+
+  const [favourite, setFavourite] = useState(displayData?.isFavor ?? false);
+  const [battle, setBattle] = useState(displayData?.isBattle ?? false);
+
+  if (pokemon && pokemonsList) {
+    displayData = pokemonsList.find((poke) => Number(pokemon) === poke.id);
+  }
+
+  if (id && pokemonData) {
+    displayData = pokemonData.find((poke) => String(poke.id) === String(id));
+  }
+
+  if (!displayData) return <p>Loading...</p>;
+
   const baseTextArena = "text-4xl font-bold";
   const maxTextArena = arenaCounter === 2 ? "text-red-700 font-black" : "";
-  const maxTextClass = clsx(baseTextArena, maxTextArena)
+  const maxTextClass = clsx(baseTextArena, maxTextArena);
 
-
-  const baseClass = " w-12 h-12 font-black cursor-pointer";
+  const baseClass = "w-12 h-12 font-black cursor-pointer";
   const activeClass =
     "text-red-700 font-black w-12 h-12 border-4 rounded-lg cursor-pointer";
-  // const disabledSword =  arenaCounter === 2 ? "opacity-50 cursor-not-allowed w-12 h-12 border-4 rounded-lg font-black text-gray-400" : ""
-  const swordActiveClass = battle === true ? activeClass : arenaCounter === 2 ? "opacity-50 cursor-not-allowed w-12 h-12 border-4 rounded-lg font-black text-gray-400" : "";
 
-
+  const swordActiveClass =
+    battle === true
+      ? activeClass
+      : arenaCounter === 2
+      ? "opacity-50 cursor-not-allowed w-12 h-12 border-4 rounded-lg font-black text-gray-400"
+      : "";
 
   const heartActiveClass = favourite === true ? activeClass : "";
+
   const swordClass = clsx(baseClass, swordActiveClass);
   const heartClass = clsx(baseClass, heartActiveClass);
 
-  if (!pokemonsList) return <p>Loading...</p>;
-  const pokeData = pokemonsList.find((poke) => Number(pokemon) === poke.id);
-  if (!pokeData) return <p>Error Poke not found</p>;
+  const sourceList = pokemon ? pokemonsList : pokemonData;
 
   return (
     <Wrapper
-      key={pokeData.id}
+      key={displayData.id}
       className="flex gap-8 p-8 border-4 w-5xl rounded-4xl relative"
       variantBackground={theme}
     >
       <Wrapper className="border-4 rounded-4xl h-96 w-96" variant={theme}>
         <Image
-          src={pokeData.sprites.other["official-artwork"].front_default}
-          alt={pokeData.name}
+          src={
+            displayData?.sprites?.other?.["official-artwork"]?.front_default ||
+            displayData?.image
+          }
+          alt={displayData.name}
           className="w-96 h-96"
         />
       </Wrapper>
@@ -72,19 +80,22 @@ const ExtendPokemonCard = () => {
           <Text className="text-2xl font-bold text-red-700">LOSS:</Text>
         </Wrapper>
         <Wrapper className="flex absolute top-8 right-8 gap-2" variantLog={log}>
-          <Text className={maxTextClass}>{arenaCounter === 2 && "MAX"} {arenaCounter}/2</Text>
+          <Text className={maxTextClass}>
+            {arenaCounter === 2 && "MAX"} {arenaCounter}/2
+          </Text>
           <Sword
             onClick={() => {
               if (arenaCounter < 2) {
-              setBattle((prev) => !prev);
-              battlePoke(pokemon, userData, pokemonsList)
-            }}}
+                setBattle((prev) => !prev);
+                battlePoke(displayData.id, userData, sourceList);
+              }
+            }}
             className={swordClass}
           />
           <Heart
             onClick={() => {
               setFavourite((prev) => !prev);
-              favouritePoke(pokemon, userData, pokemonsList)
+              favouritePoke(displayData.id, userData, sourceList);
             }}
             className={heartClass}
           />
@@ -94,23 +105,24 @@ const ExtendPokemonCard = () => {
             tag="h3"
             className="text-4xl mb-12 font-black uppercase text-center"
           >
-            {pokeData.name}
+            {displayData.name}
           </Text>
           <Wrapper className="flex gap-16">
             <Wrapper className="flex flex-col gap-8">
               <Text className="text-2xl" strong={"HEIGHT: "}>
-                {pokeData.height / 10} m
+                {(displayData.height ?? displayData.height / 10) + " m"}
               </Text>
               <Text className="text-2xl" strong={"WEIGHT: "}>
-                {pokeData.weight / 10} kg
+                {(displayData.weight ?? displayData.weight / 10) + " kg"}
               </Text>
             </Wrapper>
             <Wrapper className="flex flex-col gap-8">
               <Text className="text-2xl" strong={"BASE EXP: "}>
-                {pokeData.base_experience}
+                {displayData.base_experience ?? displayData.exp}
               </Text>
               <Text className="text-2xl" strong={"ABILITY: "}>
-                {pokeData.abilities[0].ability.name}
+                {displayData?.abilities?.[0]?.ability?.name ??
+                  displayData?.ability}
               </Text>
             </Wrapper>
           </Wrapper>
