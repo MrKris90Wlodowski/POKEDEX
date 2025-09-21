@@ -4,19 +4,27 @@ import { createContext, useEffect, useState } from "react";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  // const [log, setLog] = useState("logout");
   const [log, setLog] = useState(() => {
     return localStorage.getItem("log") || "logout"
   });
 
-  useEffect(() => {
-    localStorage.setItem("log",log)
-  },[log])
+  const [userData, setUserData] = useState(() => {
+    const userFile = localStorage.getItem("userData");
+    return userFile ? JSON.parse(userFile) : null;
+  });
 
-  const [userData, setUserData] = useState(null);
-  const [pokemonData, setPokemonData] = useState(null);
+  const [pokemonData, setPokemonData] = useState(() => {
+    const pokemonFile = localStorage.getItem("pokemonData");
+    return pokemonFile ? JSON.parse(pokemonFile) : null;
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+   useEffect(() => {
+    localStorage.setItem("log",log);
+    localStorage.setItem("userData", JSON.stringify(userData));
+    localStorage.setItem("pokemonData", JSON.stringify(pokemonData))
+  },[log, userData, pokemonData])
 
   const USER_URL = `${BASE_API_URL}/users`;
   const POKE_URL = `${BASE_API_URL}/pokemons`
@@ -42,6 +50,8 @@ const AuthProvider = ({ children }) => {
     setPokemonData(null);
     setUserData(null);
     localStorage.removeItem("log");
+    localStorage.removeItem("userData");
+    localStorage.removeItem("pokemonData");
   };
 
   const loginRecords = (data) => {
