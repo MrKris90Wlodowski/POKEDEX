@@ -72,12 +72,12 @@ const useBattlePoke = () => {
     }
   };
 
-  const surrenderPoke = async (pokeID, userID) => {
+  const surrenderPoke = async (pokeID) => {
     setError(null);
     setLoading(true);
 
     try {
-      const res = await fetch(`${BATTLE_API_URL}/${pokeID}-${userID.id}`, {
+      const res = await fetch(`${BATTLE_API_URL}/${pokeID.id}`, {
         method: "PATCH",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ isBattle: false }),

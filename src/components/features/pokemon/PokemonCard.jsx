@@ -19,7 +19,8 @@ const PokemonCard = ({
   onClick,
   isRecord,
   isEdit,
-  isFight
+  isFight,
+  onClickFlag
 }) => {
   const { theme } = useTheme();
 
@@ -34,7 +35,7 @@ const PokemonCard = ({
       </Wrapper>
       { isFight &&
         <Wrapper className="absolute right-4 top-32">
-          <Flag/>
+          <Flag onClick={onClickFlag}/>
         </Wrapper>
       }
       <Text tag="h3" className="my-2 font-black uppercase">

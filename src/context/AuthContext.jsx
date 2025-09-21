@@ -1,10 +1,18 @@
 import BASE_API_URL from "../config/baseAPI";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [log, setLog] = useState("logout");
+  // const [log, setLog] = useState("logout");
+  const [log, setLog] = useState(() => {
+    return localStorage.getItem("log") || "logout"
+  });
+
+  useEffect(() => {
+    localStorage.setItem("log",log)
+  },[log])
+
   const [userData, setUserData] = useState(null);
   const [pokemonData, setPokemonData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,7 +39,9 @@ const AuthProvider = ({ children }) => {
   
 
   const logoutRecords = () => {
+    setPokemonData(null);
     setUserData(null);
+    localStorage.removeItem("log");
   };
 
   const loginRecords = (data) => {

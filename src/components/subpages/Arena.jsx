@@ -4,9 +4,11 @@ import Button from "../shared/Button";
 import PokemonCard from "../features/pokemon/PokemonCard";
 import picturePokeball from "../../icons/pngimg.com - pokeball_PNG21.png";
 import useAuth from "../../hooks/useAuth";
+import useBattlePoke from "../../services/useBattlePoke";
 
 const Arena = () => {
   const { pokemonData } = useAuth();
+  const { surrenderPoke } = useBattlePoke();
 
   const arenaWarriors = pokemonData?.filter((poke) => poke.isBattle);
   const arenaCounter = arenaWarriors?.length || 0;
@@ -23,6 +25,7 @@ const Arena = () => {
         sourceImg={blueWarrior?.image ?? picturePokeball}
         className="w-48 h-auto"
         isFight={true}
+        onClickFlag={() => surrenderPoke(blueWarrior)}
       />
       <Button
         variant="default"
@@ -38,6 +41,7 @@ const Arena = () => {
         sourceImg={redWarrior?.image ?? picturePokeball}
         className="w-48 h-auto"
         isFight={true}
+        onClickFlag={() => surrenderPoke(redWarrior)}
       />
     </Wrapper>
   );
