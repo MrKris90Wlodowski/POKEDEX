@@ -16,6 +16,8 @@ const PokemonCard = ({
   exp,
   ability,
   id,
+  winBattle,
+  lossBattle,
   className,
   onClick,
   isRecord,
@@ -61,8 +63,8 @@ const PokemonCard = ({
         {/* RECORD STATS */}
         {isRecord && (
           <Wrapper className="flex gap-8">
-            <Text className="font-bold text-green-700">WIN:</Text>
-            <Text className="font-bold text-red-700">LOSS:</Text>
+            <Text className="font-bold text-green-700">WIN: {winBattle}</Text>
+            <Text className="font-bold text-red-700">LOSS: {lossBattle}</Text>
           </Wrapper>
         )}
 

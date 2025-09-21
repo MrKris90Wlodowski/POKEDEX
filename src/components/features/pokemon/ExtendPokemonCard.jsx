@@ -90,8 +90,8 @@ const ExtendPokemonCard = () => {
       <Wrapper className="flex flex-col justify-end relative">
         {/* ARENA COUNTER */}
         <Wrapper className="absolute top-8" variantLog={log}>
-          <Text className="text-2xl font-bold text-green-700">WIN:</Text>
-          <Text className="text-2xl font-bold text-red-700">LOSS:</Text>
+          <Text className="text-2xl font-bold text-green-700">WIN: {displayData.winBattle}</Text>
+          <Text className="text-2xl font-bold text-red-700">LOSS: {displayData.lossBattle}</Text>
         </Wrapper>
 
         {/* ACTION BUTTONS */}
