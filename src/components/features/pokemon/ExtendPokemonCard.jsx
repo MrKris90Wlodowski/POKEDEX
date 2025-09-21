@@ -63,6 +63,7 @@ const ExtendPokemonCard = () => {
           <Text className="text-2xl font-bold text-red-700">LOSS:</Text>
         </Wrapper>
         <Wrapper className="flex absolute top-8 right-8 gap-2" variantLog={log}>
+          <Text>0/2</Text>
           <Sword
             onClick={() => {
               setBattle((prev) => !prev);

@@ -6,7 +6,7 @@ import Footer from "../components/subpages/Footer";
 import ThemeButton from "../components/features/theme/ThemeButton";
 import useTheme from "../hooks/useTheme";
 import logoPokemon from "../icons/pngegg.png";
-import iconPokeball from "../icons/game.png"
+import iconPokeball from "../icons/game.png";
 import clsx from "clsx";
 import useAuth from "../hooks/useAuth";
 
@@ -14,10 +14,11 @@ const RootLayout = () => {
   const { theme } = useTheme();
   const { log, logoutRecords, handleSetLog, userData } = useAuth();
 
-  const baseWrapperUserClass = "flex gap-1";
-  // const baseTextUserClass = "text-[var(--yellow)] font-black text-4xl";
+  const baseWrapperUserClass =
+    "flex gap-1 flex-row justify-center items-center";
   const baseLinkClass =
-    "text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl hover:bg-blue-700 transition duration-300 ease-in-out w-56 text-center";
+    "text-[var(--yellow)] font-black text-2xl border-4 p-3 rounded-2xl hover:bg-blue-700 transition duration-300 ease-in-out 2xl:w-56 md:w-96 w-56 text-center";
+
   const activeUser = {
     login: "block",
     logout: "hidden",
@@ -29,23 +30,19 @@ const RootLayout = () => {
 
   const activeLinkClass = clsx(baseLinkClass, activeUser[log]);
   const noactiveLinkClass = clsx(baseLinkClass, noactiveUser[log]);
-
-  // const activeUserClass = clsx(baseTextUserClass, activeUser[log]);
   const activeWrapperUserClass = clsx(baseWrapperUserClass, activeUser[log]);
 
-
-  // const linkClass = clsx(baseClass);
   return (
     <Wrapper className="flex flex-col min-h-screen" variant={theme}>
       <nav className="flex gap-4 p-8 bg-blue-500 border-4 border-[var(--yellow)] w-full">
-        <Wrapper className="flex flex-col-reverse gap-4 w-full">
-          <Wrapper className="flex justify-between">
+        <Wrapper className="flex flex-col-reverse gap-4 w-full justify-center items-center 2xl:justify-center 2xl:items-end">
+          <Wrapper className="flex w-full 2xl:flex-row flex-col gap-4 items-center">
             <Link to="/pokemons">
-              <Wrapper className="w-48 h-16">
+              <Wrapper className="w-48 h-auto md:w-96 2xl:w-48">
                 <Image src={logoPokemon} alt="logo Pokemon" />
               </Wrapper>
             </Link>
-            <Wrapper className="flex gap-4">
+            <Wrapper className="flex flex-col 2xl:flex-row gap-4 2xl:ml-auto items-center">
               <Link to="/registration" className={noactiveLinkClass}>
                 REGISTRATION
               </Link>
@@ -67,20 +64,25 @@ const RootLayout = () => {
               <Link
                 to="/pokemons"
                 className={activeLinkClass}
-                onClick={() =>{ 
+                onClick={() => {
                   handleSetLog();
                   logoutRecords();
-                }
-                }
+                }}
               >
                 LOGOUT
               </Link>
             </Wrapper>
           </Wrapper>
-          <Wrapper className="flex gap-8 justify-end">
+          <Wrapper className="flex 2xl:flex-row flex-col gap-8 justify-end">
             <Wrapper className={activeWrapperUserClass}>
-              <Image src={iconPokeball} alt="icon pokeball" className="w-10 h-10"/>
-              <Text className="text-[var(--yellow)] font-black text-4xl">POKE_TRAINER: { userData?.name}</Text>
+              <Image
+                src={iconPokeball}
+                alt="icon pokeball"
+                className="2xl:w-9 2xl:h-9 md:w-7.5 md:h-7.5 w-6 h-6"
+              />
+              <Text className="text-[var(--yellow)] font-black 2xl:text-4xl md:text-3xl">
+                POKE_TRAINER: {userData?.name}
+              </Text>
             </Wrapper>
             <ThemeButton />
           </Wrapper>

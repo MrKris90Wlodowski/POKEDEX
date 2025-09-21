@@ -16,7 +16,7 @@ const SearchBarPokemon = ({ onSearch, value }) => {
         placeholder="search poke :)"
         value={value}
         variant={theme}
-        className= "h-12 mb-8 border-4 w-96 rounded-4xl focus:outline-none"
+        className= "h-12 mb-8 border-4 md:w-96 rounded-4xl focus:outline-none w-56"
         onChange={handleChange}
       />
     </Wrapper>
