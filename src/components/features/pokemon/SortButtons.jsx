@@ -37,7 +37,7 @@ const SortButtons = ({ onSort }) => {
   };
 
   return (
-    <Wrapper className="flex gap-8 mb-8">
+    <Wrapper className="grid xl:grid-cols-4 gap-8 mb-8 md:grid-cols-2">
       <Button
         variant="default"
         className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-60"

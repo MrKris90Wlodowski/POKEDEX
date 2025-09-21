@@ -7,7 +7,7 @@ const PaginationPokemon = ({ currentPage, lastPage, onChange }) => {
   const { theme } = useTheme();
 
   return (
-    <Wrapper className="flex gap-4 my-7">
+    <Wrapper className="flex md:flex-row gap-4 my-7 flex-col justify-center items-center">
       <Button
         disabled={currentPage === 1}
         onClick={() => onChange("FIRST")}
@@ -26,7 +26,7 @@ const PaginationPokemon = ({ currentPage, lastPage, onChange }) => {
       </Button>
       <Wrapper
         variant={theme}
-        className="flex items-center justify-center border-4 rounded-lg w-14"
+        className="flex items-center justify-center border-4 rounded-lg w-14 h-14"
       >
         <Text>{currentPage}</Text>
       </Wrapper>
