@@ -59,7 +59,7 @@ const LoginForm = () => {
 
   // RENDER
   return (
-    <Wrapper className="p-8 border-4 rounded-2xl w-150">
+    <Wrapper className="p-8 border-4 rounded-2xl md:w-150 w-56">
       <Form onSubmit={handleSubmit(dataLogin)} className="flex flex-col gap-8">
         {/* EMAIL INPUT */}
         <Input

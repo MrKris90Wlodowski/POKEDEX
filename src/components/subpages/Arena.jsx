@@ -8,7 +8,7 @@ import { Flag } from "lucide-react";
 const Arena = () => {
 
   return (
-    <Wrapper className="flex justify-center items-center gap-8">
+    <Wrapper className="flex md:flex-row flex-col justify-center items-center gap-8">
       <PokemonCard
         name="BLUE"
         height="TOO SMALL"

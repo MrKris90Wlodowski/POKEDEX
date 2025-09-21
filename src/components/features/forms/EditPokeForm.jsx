@@ -78,7 +78,7 @@ const EditPokeForm = () => {
 
   // RENDER
   return (
-    <Wrapper className="p-8 border-4 rounded-2xl w-150">
+    <Wrapper className="p-8 border-4 rounded-2xl md:w-150 w-56">
       <Form onSubmit={handleSubmit(dataEdit)} className="flex flex-col gap-8">
         {/* WEIGHT INPUT */}
         <Input

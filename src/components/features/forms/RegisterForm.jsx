@@ -69,7 +69,7 @@ const RegisterForm = () => {
 
   // RENDER
   return (
-    <Wrapper className="p-8 border-4 rounded-2xl w-150" variant={theme}>
+    <Wrapper className="p-8 border-4 rounded-2xl md:w-150 w-56" variant={theme}>
       <Form onSubmit={handleSubmit(dataRegister)} className="flex flex-col gap-8">
         {/* NAME INPUT */}
         <Input

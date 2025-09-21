@@ -82,7 +82,7 @@ const CreatePokeForm = () => {
 
   // RENDER
   return (
-    <Wrapper className="p-8 border-4 rounded-2xl w-150">
+    <Wrapper className="p-8 border-4 rounded-2xl md:w-150 w-56">
       <Form onSubmit={handleSubmit(dataCreate)} className="flex flex-col gap-8">
         {/* NAME INPUT */}
         <Input
@@ -141,7 +141,7 @@ const CreatePokeForm = () => {
         </Input>
 
         {/* IMAGE SELECTION */}
-        <Wrapper className="w-132 h-132 border-2 rounded-2xl">
+        <Wrapper className="md:w-132 md:h-132 w-40 h-40 border-2 rounded-2xl">
           <Input
             id="imageCreatePoke"
             name="imageCreatePoke"
@@ -161,7 +161,7 @@ const CreatePokeForm = () => {
         </Wrapper>
 
         {/* IMAGE NAVIGATION BUTTONS */}
-        <Wrapper className="flex gap-8">
+        <Wrapper className="flex md:flex-row gap-8 flex-col">
           <Button
             variant="default"
             className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl flex-1"
