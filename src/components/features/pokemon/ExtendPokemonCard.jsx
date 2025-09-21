@@ -19,9 +19,9 @@ const ExtendPokemonCard = () => {
   const { pokemon } = useParams();
   const { favouritePoke } = useFavouritePoke();
   const { battlePoke } = useBattlePoke();
-  // const { userPokemons } = useDownloadUserPoke();
-  // console.log(userPokemons);
-  // const favorPokemons = userPokemons.filter(poke => poke.isFavor === true);
+  
+  const arenaCounter = pokemonData?.filter(poke => poke.isBattle === true).length;
+
 
   const pokemonDataFind = pokemonData?.find(
     (poke) => `${poke.id}` === `${pokemon}-${userData.id}`
@@ -32,10 +32,19 @@ const ExtendPokemonCard = () => {
   const { theme } = useTheme();
   const { pokemonsList } = usePokemonsArrayAPI();
 
+  const baseTextArena = "text-4xl font-bold";
+  const maxTextArena = arenaCounter === 2 ? "text-red-700 font-black" : "";
+  const maxTextClass = clsx(baseTextArena, maxTextArena)
+
+
   const baseClass = " w-12 h-12 font-black cursor-pointer";
   const activeClass =
     "text-red-700 font-black w-12 h-12 border-4 rounded-lg cursor-pointer";
-  const swordActiveClass = battle === true ? activeClass : "";
+  // const disabledSword =  arenaCounter === 2 ? "opacity-50 cursor-not-allowed w-12 h-12 border-4 rounded-lg font-black text-gray-400" : ""
+  const swordActiveClass = battle === true ? activeClass : arenaCounter === 2 ? "opacity-50 cursor-not-allowed w-12 h-12 border-4 rounded-lg font-black text-gray-400" : "";
+
+
+
   const heartActiveClass = favourite === true ? activeClass : "";
   const swordClass = clsx(baseClass, swordActiveClass);
   const heartClass = clsx(baseClass, heartActiveClass);
@@ -63,12 +72,13 @@ const ExtendPokemonCard = () => {
           <Text className="text-2xl font-bold text-red-700">LOSS:</Text>
         </Wrapper>
         <Wrapper className="flex absolute top-8 right-8 gap-2" variantLog={log}>
-          <Text className="text-4xl font-bold">0/2</Text>
+          <Text className={maxTextClass}>{arenaCounter === 2 && "MAX"} {arenaCounter}/2</Text>
           <Sword
             onClick={() => {
+              if (arenaCounter < 2) {
               setBattle((prev) => !prev);
               battlePoke(pokemon, userData, pokemonsList)
-            }}
+            }}}
             className={swordClass}
           />
           <Heart
