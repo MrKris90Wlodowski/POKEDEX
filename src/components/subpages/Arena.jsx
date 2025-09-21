@@ -14,7 +14,29 @@ const Arena = () => {
   const arenaCounter = arenaWarriors?.length || 0;
   const blueWarrior = arenaWarriors[0];
   const redWarrior = arenaCounter === 2 ? arenaWarriors[arenaWarriors.length-1] : null;
-  console.log(redWarrior);
+  // console.log(redWarrior);
+
+  let winner,losser;
+
+  const handleFight = (bluePoke, redPoke) => {
+    const bluePokePower = bluePoke.exp * bluePoke.weight;
+    const redPokePower = redPoke.exp * redPoke.weight;
+
+    if ( bluePokePower > redPokePower) {
+      winner = bluePoke; 
+      losser = redPoke;
+    } else  if ( bluePokePower < redPokePower) {
+      winner = redPoke; 
+      losser = bluePoke;
+    } else {
+      winner = null;
+      losser = null;
+    }
+    console.log("WINNER ", winner);
+    console.log("LOSSER ", losser)
+  }
+
+  
 
   return (
     <Wrapper className="flex md:flex-row flex-col justify-center items-center gap-8">
@@ -31,6 +53,7 @@ const Arena = () => {
         variant="default"
         className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
         disabled={arenaCounter < 2}
+        onClick={() => handleFight(blueWarrior, redWarrior)}
       >
         BATTLE
       </Button>
