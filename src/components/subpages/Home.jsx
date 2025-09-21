@@ -1,18 +1,43 @@
 import { useState, useEffect } from "react";
-import PokemonContainer from "../features/pokemon/PokemonContainer";
+// import PokemonContainer from "../features/pokemon/PokemonContainer";
 import SearchBarPokemon from "../features/pokemon/SearchBarPokemon";
 import Wrapper from "../shared/Wrapper";
 // import { hash } from "zod";
 import PaginationPokemon from "../features/pokemon/PaginationPokemon";
 import usePokemonAPI from "../../hooks/usePokemonAPI";
+import PokemonsUniversalConteiner from "../features/pokemon/PokemonsUniversalConteiner";
+import clsx from "clsx";
+import useTheme from "../../hooks/useTheme";
 
 const Home = () => {
   // State and handle SearchBarPokemon
   const [searchValue, setSearchValue] = useState("");
 
+  const { theme } = useTheme();
+  const basePokeCardClass = "w-48 h-76 p-4 border-4 rounded-2xl";
+  const themeClass = {
+    light:
+      "hover:bg-[var(--white)] relative hover:z-10 transform transition-transform-colors duration-300 ease-in-out hover:scale-150",
+    dark: "hover:bg-[var(--black)] relative hover:z-10 transform transition-transform-colors duration-300 ease-in-out hover:scale-150",
+  };
+  const pokeCardClass = clsx(basePokeCardClass, themeClass[theme]);
+
+
   const handleSearch = (value) => {
     setSearchValue(value);
   };
+
+  const mapPropsHome = (poke) => ({
+     id: poke.id,
+    name: poke.name,
+    exp: poke.exp || poke.base_experience,
+    weight: poke.weight,
+    height: poke.height,
+    ability: poke.ability || poke.abilities[0].ability.name,
+    sourceImg:
+      poke.image || poke.sprites.other["official-artwork"].front_default,
+    className: pokeCardClass
+  })
 
   // State and handle PaginationPokemon
   const [currentPage, setCurrentPage] = useState(1);
@@ -56,12 +81,14 @@ const Home = () => {
   return (
     <Wrapper className="flex flex-col items-center justify-center">
       <SearchBarPokemon onSearch={handleSearch} value={searchValue} />
-      <PokemonContainer
-        className="grid grid-cols-5 gap-6 p-6"
+      <PokemonsUniversalConteiner className="grid xl:grid-cols-5 gap-6 p-6 md:grid-cols-3"
         error={error}
         loading={loading}
         pokemonsArray={paginationArrayPokemons}
-      />
+        mapProps={mapPropsHome}
+        showLink={true}
+        linkPrefix={"/pokemons"}
+        />
       <PaginationPokemon
         currentPage={currentPage}
         lastPage={lastPage}
