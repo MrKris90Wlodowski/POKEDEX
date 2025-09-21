@@ -1,7 +1,9 @@
+// IMPORTS
 import { useState } from "react";
 import BASE_API_URL from "../config/baseAPI";
 import useAuth from "../hooks/useAuth";
 
+// VARIABLES / STATE
 const useCreatePoke = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -10,6 +12,8 @@ const useCreatePoke = () => {
   const USER_API_URL = `${BASE_API_URL}/users`;
   const FAVOR_API_URL = `${BASE_API_URL}/pokemons`;
   const baseCreatePokeID = 151;
+
+  // FUNCTIONS
 
   const getAddNewCreate = (newPoke) => {
     setPokemonData((prev) => [...prev, newPoke]);
@@ -30,7 +34,7 @@ const useCreatePoke = () => {
 
   const getAddCounter = async (userData) => {
     const counter = await getCounter(userData);
-    const res = await fetch(`${USER_API_URL}/${userData.id}`, {
+    await fetch(`${USER_API_URL}/${userData.id}`, {
       method: "PATCH",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -54,15 +58,17 @@ const useCreatePoke = () => {
         image: dataForm.imageCreatePoke,
         isFavor: false,
         isBattle: false,
-        winBattle: null,
-        lossBattle: null,
+        winBattle: 0,
+        lossBattle: 0,
         isEdit: true,
       };
+
       await fetch(FAVOR_API_URL, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(newPokemon),
       });
+
       await getAddCounter(userData);
       getAddNewCreate(newPokemon);
 
@@ -71,8 +77,6 @@ const useCreatePoke = () => {
           variant: "success",
         });
       }
-
-      // IN FUTURE (PUT/PATCH  /users/:id)
     } catch (err) {
       console.error("ERROR IS ", err);
       setError(err);
@@ -90,12 +94,15 @@ const useCreatePoke = () => {
         weight: dataForm.weightCreatePoke,
         height: dataForm.heightCreatePoke,
       };
+
       await fetch(`${FAVOR_API_URL}/${pokemonData.id}`, {
         method: "PATCH",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify( editPokemon ),
+        body: JSON.stringify(editPokemon),
       });
+
       getUpdateNewEdit(editPokemon);
+
       if (notifyMessage) {
         notifyMessage(`Updated pokemon ${pokemonData.name} attributes`, {
           variant: "success",
@@ -109,7 +116,9 @@ const useCreatePoke = () => {
     }
   };
 
+  // RETURN
   return { error, loading, createPokemon, editPokemon };
 };
 
+// EXPORT
 export default useCreatePoke;

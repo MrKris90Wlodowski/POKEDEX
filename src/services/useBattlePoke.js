@@ -1,7 +1,9 @@
+// IMPORTS
 import { useState } from "react";
 import BASE_API_URL from "../config/baseAPI";
 import useAuth from "../hooks/useAuth";
 
+// VARIABLES / STATE
 const useBattlePoke = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -9,6 +11,7 @@ const useBattlePoke = () => {
 
   const BATTLE_API_URL = `${BASE_API_URL}/pokemons`;
 
+  // FUNCTIONS
   const getAddNewCreate = (newPoke) => {
     setPokemonData((prev) => [...prev, newPoke]);
   };
@@ -52,8 +55,8 @@ const useBattlePoke = () => {
           image: pokeRecord.sprites.other["official-artwork"].front_default,
           isFavor: false,
           isBattle: true,
-          winBattle: null,
-          lossBattle: null,
+          winBattle: 0,
+          lossBattle: 0,
           isEdit: false,
         };
 
@@ -95,7 +98,9 @@ const useBattlePoke = () => {
     }
   };
 
+  // RETURN
   return { error, loading, battlePoke, surrenderPoke };
 };
 
+// EXPORT
 export default useBattlePoke;

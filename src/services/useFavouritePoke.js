@@ -1,7 +1,9 @@
+// IMPORTS
 import { useState } from "react";
 import BASE_API_URL from "../config/baseAPI";
 import useAuth from "../hooks/useAuth";
 
+// HOOK / VARIABLES / STATE
 const useFavouritePoke = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -9,6 +11,7 @@ const useFavouritePoke = () => {
 
   const FAVOR_API_URL = `${BASE_API_URL}/pokemons`;
 
+  // FUNCTIONS
   const getAddNewCreate = (newPoke) => {
     setPokemonData((prev) => [...prev, newPoke]);
   };
@@ -53,8 +56,8 @@ const useFavouritePoke = () => {
           image: pokeRecord.sprites.other["official-artwork"].front_default,
           isFavor: true,
           isBattle: false,
-          winBattle: null,
-          lossBattle: null,
+          winBattle: 0,
+          lossBattle: 0,
           isEdit: false,
         };
         await fetch(FAVOR_API_URL, {
@@ -72,7 +75,9 @@ const useFavouritePoke = () => {
     }
   };
 
+  // RETURN
   return { error, loading, favouritePoke };
 };
 
+// EXPORT
 export default useFavouritePoke;

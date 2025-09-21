@@ -1,7 +1,9 @@
+// IMPORTS
 import { useState } from "react";
 import BASE_API_URL from "../config/baseAPI";
 import useAuth from "../hooks/useAuth";
 
+// HOOK / VARIABLES / STATE
 const useFight = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -9,13 +11,12 @@ const useFight = () => {
 
   const BATTLE_API_URL = `${BASE_API_URL}/pokemons`;
 
-
+  // FUNCTIONS
   const updatePokemonData = (editPoke) => {
     setPokemonData((prev) =>
       prev.map((p) => (p.id === editPoke.id ? { ...p, ...editPoke } : p))
     );
   };
-
 
   const getCounter = async (pokeData, keySearch) => {
     const res = await fetch(`${BATTLE_API_URL}/${pokeData.id}`);
@@ -24,7 +25,6 @@ const useFight = () => {
     return data[keySearch] ?? 0;
   };
 
-  
   const updateBattleStats = async (pokeData, fightResult) => {
     try {
       const currentWin = await getCounter(pokeData, "winBattle");
@@ -76,7 +76,9 @@ const useFight = () => {
     }
   };
 
+  // RETURN
   return { fightResultPoke, loading, error };
 };
 
+// EXPORT
 export default useFight;
