@@ -1,10 +1,11 @@
 import Wrapper from "../shared/Wrapper";
-// import Text from "../shared/Text";
 import Button from "../shared/Button";
 import PokemonCard from "../features/pokemon/PokemonCard";
 import picturePokeball from "../../icons/pngimg.com - pokeball_PNG21.png";
 import useAuth from "../../hooks/useAuth";
 import useBattlePoke from "../../services/useBattlePoke";
+import clsx from "clsx";
+import { useState } from "react";
 
 const Arena = () => {
   const { pokemonData } = useAuth();
@@ -13,30 +14,36 @@ const Arena = () => {
   const arenaWarriors = pokemonData?.filter((poke) => poke.isBattle);
   const arenaCounter = arenaWarriors?.length || 0;
   const blueWarrior = arenaWarriors[0];
-  const redWarrior = arenaCounter === 2 ? arenaWarriors[arenaWarriors.length-1] : null;
-  // console.log(redWarrior);
+  const redWarrior =
+    arenaCounter === 2 ? arenaWarriors[arenaWarriors.length - 1] : null;
 
-  let winner,losser;
+  
+  const [winner, setWinner] = useState(null);
+  const [losser, setLosser] = useState(null);
 
   const handleFight = (bluePoke, redPoke) => {
     const bluePokePower = bluePoke.exp * bluePoke.weight;
     const redPokePower = redPoke.exp * redPoke.weight;
 
-    if ( bluePokePower > redPokePower) {
-      winner = bluePoke; 
-      losser = redPoke;
-    } else  if ( bluePokePower < redPokePower) {
-      winner = redPoke; 
-      losser = bluePoke;
+    if (bluePokePower > redPokePower) {
+      setWinner(bluePoke);
+      setLosser(redPoke);
+    } else if (bluePokePower < redPokePower) {
+      setWinner(redPoke);
+      setLosser(bluePoke);
     } else {
-      winner = null;
-      losser = null;
+      setWinner(null);
+      setLosser(null);
     }
-    console.log("WINNER ", winner);
-    console.log("LOSSER ", losser)
-  }
 
-  
+    console.log("WINNER ", winner);
+    console.log("LOSSER ", losser);
+  };
+
+  const basePokeCard = "w-48 h-auto";
+
+  const blueClass = clsx(basePokeCard, blueWarrior === losser ? "filter grayscale opacity-50" : "");
+  const redClass = clsx(basePokeCard, redWarrior === losser ? "filter grayscale opacity-50" : "");
 
   return (
     <Wrapper className="flex md:flex-row flex-col justify-center items-center gap-8">
@@ -45,7 +52,7 @@ const Arena = () => {
         exp={blueWarrior?.exp ?? "Rookie"}
         weight={blueWarrior?.weight ?? 1}
         sourceImg={blueWarrior?.image ?? picturePokeball}
-        className="w-48 h-auto"
+        className={blueClass}
         isFight={true}
         onClickFlag={() => surrenderPoke(blueWarrior)}
       />
@@ -62,7 +69,7 @@ const Arena = () => {
         exp={redWarrior?.exp ?? "Rookie"}
         weight={redWarrior?.weight ?? 1}
         sourceImg={redWarrior?.image ?? picturePokeball}
-        className="w-48 h-auto"
+        className={redClass}
         isFight={true}
         onClickFlag={() => surrenderPoke(redWarrior)}
       />
