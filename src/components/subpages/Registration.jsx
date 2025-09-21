@@ -1,12 +1,16 @@
+// IMPORTS
 import RegisterForm from "../features/forms/RegisterForm"
 import Wrapper from "../shared/Wrapper"
 
+// COMPONENT
 const Registration = () => {
-    return (
-        <Wrapper>
-            <RegisterForm/>
-        </Wrapper>
-    )
+  // RENDER
+  return (
+    <Wrapper>
+      <RegisterForm />
+    </Wrapper>
+  )
 }
 
+// EXPORT
 export default Registration

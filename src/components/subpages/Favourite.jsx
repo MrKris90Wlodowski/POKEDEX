@@ -1,3 +1,4 @@
+// IMPORTS
 import Wrapper from "../shared/Wrapper";
 import Text from "../shared/Text";
 import useDownloadUserPoke from "../../services/useDownloadUserPoke";
@@ -6,7 +7,9 @@ import PokemonsUniversalConteiner from "../features/pokemon/PokemonsUniversalCon
 import clsx from "clsx";
 import useTheme from "../../hooks/useTheme";
 
+// COMPONENT
 const Favourite = () => {
+  // VARIABLES / STATE
   const { theme } = useTheme();
   const basePokeCardClass = "w-48 h-auto p-4 border-4 rounded-2xl";
   const themeClass = {
@@ -18,9 +21,8 @@ const Favourite = () => {
 
   const { userPokemons } = useDownloadUserPoke();
   const favorPokemons = userPokemons.filter((poke) => poke.isFavor === true);
-  console.log(favorPokemons);
-  console.log(userPokemons);
 
+  // FUNCTIONS
   const mapPropsFavourite = (poke) => ({
     id: poke.id,
     name: poke.name,
@@ -33,6 +35,7 @@ const Favourite = () => {
     className: pokeCardClass,
   });
 
+  // RENDER
   return (
     <Wrapper>
       {favorPokemons?.length === 0 && (
@@ -53,4 +56,5 @@ const Favourite = () => {
   );
 };
 
+// EXPORT
 export default Favourite;
