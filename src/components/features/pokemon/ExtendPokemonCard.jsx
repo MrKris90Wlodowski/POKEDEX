@@ -1,5 +1,5 @@
 // IMPORTS
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import Wrapper from "../../shared/Wrapper";
 import Image from "../../shared/Image";
@@ -34,13 +34,24 @@ const ExtendPokemonCard = () => {
   const [favourite, setFavourite] = useState(displayData?.isFavor ?? false);
   const [battle, setBattle] = useState(displayData?.isBattle ?? false);
 
+  // HOOKS
+  useEffect(() => {
+    setFavourite(displayData?.isFavor ?? false);
+    setBattle(displayData?.isBattle ?? false);
+  },[displayData])
+
   // FIND POKEMON FROM ROUTE OR USER DATA
-  if (pokemon && pokemonsList) {
-    displayData = pokemonsList.find((poke) => Number(pokemon) === poke.id);
-  }
-  if (id && pokemonData) {
-    displayData = pokemonData.find((poke) => String(poke.id) === String(id));
-  }
+if (pokemon && pokemonData && userData) {
+  displayData = pokemonData.find(
+    (poke) => String(poke.id) === `${pokemon}-${userData.id}`
+  );
+}
+else if (pokemon && pokemonsList) {
+  displayData = pokemonsList.find((poke) => Number(pokemon) === poke.id);
+}
+else if (id && pokemonData) {
+  displayData = pokemonData.find((poke) => String(poke.id) === String(id));
+}
 
   if (!displayData) return <p>Loading...</p>;
 
