@@ -38,7 +38,7 @@ const ExtendPokemonCard = () => {
   useEffect(() => {
     setFavourite(displayData?.isFavor ?? false);
     setBattle(displayData?.isBattle ?? false);
-  },[displayData])
+  },[displayData, pokemonData])
 
   // FIND POKEMON FROM ROUTE OR USER DATA
 if (pokemon && pokemonData && userData) {
@@ -46,14 +46,16 @@ if (pokemon && pokemonData && userData) {
     (poke) => String(poke.id) === `${pokemon}-${userData.id}`
   );
 }
-else if (pokemon && pokemonsList) {
+
+if (!displayData && pokemon && pokemonsList) {
   displayData = pokemonsList.find((poke) => Number(pokemon) === poke.id);
 }
-else if (id && pokemonData) {
+
+if (!displayData && id && pokemonData) {
   displayData = pokemonData.find((poke) => String(poke.id) === String(id));
 }
 
-  if (!displayData) return <p>Loading...</p>;
+if (!displayData) return <p>Loading...</p>;
 
   // CSS CLASSES
   const baseTextArena = "text-4xl font-bold";

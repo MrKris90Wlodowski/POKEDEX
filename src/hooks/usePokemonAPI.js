@@ -1,8 +1,8 @@
 // IMPORTS
 import { useState, useEffect } from "react";
-import POKE_API_URL from "../config/basePokeAPI"
-const POKE_API_150 = `${POKE_API_URL}?limit=150"`
-// const POKE_URL = "https://pokeapi.co/api/v2/pokemon?limit=150";
+import POKE_API_URL from "../config/basePokeAPI";
+
+const POKE_API_150 = `${POKE_API_URL}?limit=150`;
 
 // HOOK
 const usePokemonAPI = () => {
@@ -13,25 +13,28 @@ const usePokemonAPI = () => {
 
   // EFFECT
   useEffect(() => {
-    setLoading(true);
+    const fetchPokemons = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(POKE_API_150);
+        const data = await res.json();
 
-    // FETCH DATA
-    fetch(`${POKE_API_150}`)
-      .then((res) => res.json()) 
-      .then((data) => {
-        return Promise.all(
-          data.results.map((poke) => fetch(poke.url).then((res) => res.json()))
+        const allData = await Promise.all(
+          data.results.map((poke) =>
+            fetch(poke.url).then((res) => res.json())
+          )
         );
-      })
-      .then((dataPoke) => {
-        setPokemonsList(dataPoke);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(error);
-        console.error(error);
-      });
+
+        setPokemonsList(allData);
+      } catch (err) {
+        setError(err);
+        console.error(err);
+      } finally {
+        setLoading(false); 
+      }
+    };
+
+    fetchPokemons();
   }, []);
 
   // RETURN STATE
