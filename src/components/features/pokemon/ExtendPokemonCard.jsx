@@ -25,7 +25,8 @@ const ExtendPokemonCard = () => {
   const { pokemon, id } = useParams();
 
   // COUNT ACTIVE ARENA POKEMONS
-  const arenaCounter = pokemonData?.filter((poke) => poke.isBattle)?.length || 0;
+  const arenaCounter =
+    pokemonData?.filter((poke) => poke.isBattle)?.length || 0;
 
   // DISPLAY DATA INITIALIZATION
   let displayData = null;
@@ -39,27 +40,28 @@ const ExtendPokemonCard = () => {
   useEffect(() => {
     setFavourite(displayData?.isFavor ?? false);
     setBattle(displayData?.isBattle ?? false);
-  },[displayData, pokemonData])
+  }, [displayData, pokemonData]);
 
   // FIND POKEMON FROM ROUTE OR USER DATA
-if (pokemon && pokemonData && userData) {
-  displayData = pokemonData.find(
-    (poke) => String(poke.id) === `${pokemon}-${userData.id}`
-  );
-  normalID =String(displayData.id).split("-")[0];
-}
+  if (pokemon && pokemonData && userData) {
+    displayData = pokemonData.find(
+      (poke) => String(poke.id) === `${pokemon}-${userData.id}`
+    );
+    normalID = pokemon;
+  }
 
-if (!displayData && pokemon && pokemonsList) {
-  displayData = pokemonsList.find((poke) => Number(pokemon) === poke.id);
-  normalID =displayData;
-}
+  if (!displayData && pokemon && pokemonsList) {
+    displayData = pokemonsList.find((poke) => Number(pokemon) === poke.id);
+    normalID = pokemon;
+  }
 
-if (!displayData && id && pokemonData) {
-  displayData = pokemonData.find((poke) => String(poke.id) === String(id));
-  normalID =String(displayData.id).split("-")[0];
-}
+  if (!displayData && id && pokemonData) {
+    displayData = pokemonData.find((poke) => String(poke.id) === String(id));
+    normalID = String(displayData.id).split("-")[0];
+    normalID = String(id);
+  }
 
-if (!displayData) return <p>Loading...</p>;
+  if (!displayData) return <p>Loading...</p>;
 
   // CSS CLASSES
   const baseTextArena = "text-4xl font-bold";
@@ -107,8 +109,12 @@ if (!displayData) return <p>Loading...</p>;
       <Wrapper className="flex flex-col justify-end relative">
         {/* ARENA COUNTER */}
         <Wrapper className="absolute top-8" variantLog={log}>
-          <Text className="text-2xl font-bold text-green-700">WIN: {displayData.winBattle}</Text>
-          <Text className="text-2xl font-bold text-red-700">LOSS: {displayData.lossBattle}</Text>
+          <Text className="text-2xl font-bold text-green-700">
+            WIN: {displayData.winBattle ?? 0}
+          </Text>
+          <Text className="text-2xl font-bold text-red-700">
+            LOSS: {displayData.lossBattle ?? 0}
+          </Text>
         </Wrapper>
 
         {/* ACTION BUTTONS */}
@@ -156,7 +162,8 @@ if (!displayData) return <p>Loading...</p>;
                 {displayData.base_experience ?? displayData.exp}
               </Text>
               <Text className="text-2xl" strong={"ABILITY: "}>
-                {displayData?.abilities?.[0]?.ability?.name ?? displayData?.ability}
+                {displayData?.abilities?.[0]?.ability?.name ??
+                  displayData?.ability}
               </Text>
             </Wrapper>
           </Wrapper>
