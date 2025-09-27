@@ -42,7 +42,7 @@ const PokemonCard = ({
 
       {/* FLAG BUTTON FOR FIGHT */}
       {isFight && (
-        <Wrapper className="absolute right-4 top-32">
+        <Wrapper className="absolute right-4 top-32 cursor-pointer">
           <Flag onClick={onClickFlag} />
         </Wrapper>
       )}

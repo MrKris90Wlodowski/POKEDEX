@@ -63,19 +63,19 @@ const ExtendPokemonCard = () => {
   if (!displayData) return <p>Loading...</p>;
 
   // CSS CLASSES
-  const baseTextArena = "text-4xl font-bold";
+  const baseTextArena = "text-base md:text-4xl font-bold";
   const maxTextArena = arenaCounter === 2 ? "text-red-700 font-black" : "";
   const maxTextClass = clsx(baseTextArena, maxTextArena);
 
-  const baseClass = "w-12 h-12 font-black cursor-pointer";
+  const baseClass = "md:w-12 md:h-12 font-black cursor-pointer";
   const activeClass =
-    "text-red-700 font-black w-12 h-12 border-4 rounded-lg cursor-pointer";
+    "text-red-700 font-black md:w-12 md:h-12 border-2 rounded md:rounded-lg md:border-4 cursor-pointer";
 
   const swordActiveClass =
     battle === true
       ? activeClass
       : arenaCounter === 2
-      ? "opacity-50 cursor-not-allowed w-12 h-12 border-4 rounded-lg font-black text-gray-400"
+      ? "opacity-50 cursor-not-allowed md:w-12 md:h-12 md:border-4 rounded md:rounded-lg font-black text-gray-400"
       : "";
   const heartActiveClass = favourite === true ? activeClass : "";
 
@@ -89,35 +89,35 @@ const ExtendPokemonCard = () => {
   return (
     <Wrapper
       key={displayData.id}
-      className="flex xl:flex-row flex-col gap-8 p-8 border-4  rounded-4xl relative"
+      className="flex xl:flex-row flex-col gap-8 p-4 md:p-8 border-4 rounded-2xl md:rounded-4xl relative"
       variantBackground={theme}
     >
       {/* POKEMON IMAGE */}
-      <Wrapper className="border-4 rounded-4xl h-98 w-98 flex flex-row justify-center items-center" variant={theme}>
+      <Wrapper className="border-2 md:rounded-4xl rounded-2xl md:h-98 md:w-98 w-full h-24 flex flex-row justify-center items-center" variant={theme}>
         <Image
           src={
             displayData?.sprites?.other?.["official-artwork"]?.front_default ||
             displayData?.image
           }
           alt={displayData.name}
-          className="w-98 h-98"
+          className="md:w-98 md:h-98 w-24 h-24"
         />
       </Wrapper>
 
       {/* POKEMON DETAILS */}
       <Wrapper className="flex flex-col justify-end">
         {/* ARENA COUNTER */}
-        <Wrapper className="absolute xl:top-6 md:top-112" variantLog={log}>
-          <Text className="text-2xl font-bold text-green-700">
+        <Wrapper className="absolute xl:top-6 md:top-112 top-28" variantLog={log}>
+          <Text className="text-base md:text-2xl font-bold text-green-700">
             WIN: {displayData.winBattle ?? 0}
           </Text>
-          <Text className="text-2xl font-bold text-red-700">
+          <Text className="text-base md:text-2xl font-bold text-red-700">
             LOSS: {displayData.lossBattle ?? 0}
           </Text>
         </Wrapper>
 
         {/* ACTION BUTTONS */}
-        <Wrapper className="flex absolute xl:top-8 xl:right-8 md:top-114 md:right-8 gap-2" variantLog={log}>
+        <Wrapper className="flex absolute xl:top-8 xl:right-8 md:top-114 top-29 right-4 md:right-8 gap-2" variantLog={log}>
           <Text className={maxTextClass}>
             {arenaCounter === 2 && "MAX"} {arenaCounter}/2
           </Text>
@@ -143,24 +143,24 @@ const ExtendPokemonCard = () => {
         <Wrapper>
           <Text
             tag="h3"
-            className="text-4xl mb-24 mt-38 font-black uppercase text-center"
+            className="text-2xl md:text-4xl mb-2 mt-6 md:mb-24 md:mt-38 font-black uppercase text-center"
           >
             {displayData.name}
           </Text>
-          <Wrapper className="flex gap-16">
-            <Wrapper className="flex flex-col gap-8">
-              <Text className="text-2xl" strong={"HEIGHT: "}>
+          <Wrapper className="flex md:flex-row flex-col md:gap-16">
+            <Wrapper className="flex flex-col md:gap-8">
+              <Text className="text-base md:text-2xl" strong={"HEIGHT: "}>
                 {(displayData.height ?? displayData.height / 10) + " m"}
               </Text>
-              <Text className="text-2xl" strong={"WEIGHT: "}>
+              <Text className="text-base md:text-2xl" strong={"WEIGHT: "}>
                 {(displayData.weight ?? displayData.weight / 10) + " kg"}
               </Text>
             </Wrapper>
-            <Wrapper className="flex flex-col gap-8">
-              <Text className="text-2xl" strong={"BASE EXP: "}>
+            <Wrapper className="flex flex-col md:gap-8">
+              <Text className="text-base md:text-2xl" strong={"BASE EXP: "}>
                 {displayData.base_experience ?? displayData.exp}
               </Text>
-              <Text className="text-2xl" strong={"ABILITY: "}>
+              <Text className="text-base md:text-2xl" strong={"ABILITY: "}>
                 {displayData?.abilities?.[0]?.ability?.name ??
                   displayData?.ability}
               </Text>
