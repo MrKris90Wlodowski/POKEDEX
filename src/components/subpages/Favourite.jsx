@@ -24,7 +24,7 @@ const Favourite = () => {
 
   // FUNCTIONS
   const mapPropsFavourite = (poke) => ({
-    id: poke.id,
+    id: (poke.id).split("-")[0],
     name: poke.name,
     exp: poke.exp || poke.base_experience,
     weight: poke.weight,

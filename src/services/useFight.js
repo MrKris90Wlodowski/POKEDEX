@@ -65,7 +65,7 @@ const useFight = () => {
       if (notifyMessage) {
         notifyMessage(
           `Pokemon ${updatedPoke.name} ${fightResult ? "wins" : "loses"} the fight!`,
-          { variant: "success" }
+          { variant:  fightResult ? "success" : "error" }
         );
       }
       return updatedPoke;

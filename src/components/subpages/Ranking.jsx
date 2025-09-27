@@ -20,6 +20,8 @@ const Ranking = () => {
     ability: poke.ability || poke.abilities[0].ability.name,
     sourceImg: poke.image || poke.sprites.other["official-artwork"].front_default,
     isRecord: true,
+    winBattle: poke.winBattle ?? 0,
+    lossBattle: poke.lossBattle ?? 0,
     className: "h-auto"
   })
 

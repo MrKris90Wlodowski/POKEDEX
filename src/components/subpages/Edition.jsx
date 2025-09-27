@@ -24,7 +24,7 @@ const Edition = () => {
   };
 
   const mapPropsEdition = (poke) => ({
-    id: poke.id,
+    id: (poke.id).split("-")[0],
     name: poke.name,
     sourceImg: poke.image,
     isEdit: true,

@@ -58,7 +58,6 @@ const ExtendPokemonCard = () => {
   if (!displayData && id && pokemonData) {
     displayData = pokemonData.find((poke) => String(poke.id) === String(id));
     normalID = String(displayData.id).split("-")[0];
-    normalID = String(id);
   }
 
   if (!displayData) return <p>Loading...</p>;
@@ -90,25 +89,25 @@ const ExtendPokemonCard = () => {
   return (
     <Wrapper
       key={displayData.id}
-      className="flex xl:flex-row flex-col gap-8 p-8 border-4  rounded-4xl xl:relative"
+      className="flex xl:flex-row flex-col gap-8 p-8 border-4  rounded-4xl relative"
       variantBackground={theme}
     >
       {/* POKEMON IMAGE */}
-      <Wrapper className="border-4 rounded-4xl h-96 w-96" variant={theme}>
+      <Wrapper className="border-4 rounded-4xl h-98 w-98 flex flex-row justify-center items-center" variant={theme}>
         <Image
           src={
             displayData?.sprites?.other?.["official-artwork"]?.front_default ||
             displayData?.image
           }
           alt={displayData.name}
-          className="w-96 h-96"
+          className="w-98 h-98"
         />
       </Wrapper>
 
       {/* POKEMON DETAILS */}
-      <Wrapper className="flex flex-col justify-end relative">
+      <Wrapper className="flex flex-col justify-end">
         {/* ARENA COUNTER */}
-        <Wrapper className="absolute top-8" variantLog={log}>
+        <Wrapper className="absolute xl:top-6 md:top-112" variantLog={log}>
           <Text className="text-2xl font-bold text-green-700">
             WIN: {displayData.winBattle ?? 0}
           </Text>
@@ -118,7 +117,7 @@ const ExtendPokemonCard = () => {
         </Wrapper>
 
         {/* ACTION BUTTONS */}
-        <Wrapper className="flex absolute top-8 right-8 gap-2" variantLog={log}>
+        <Wrapper className="flex absolute xl:top-8 xl:right-8 md:top-114 md:right-8 gap-2" variantLog={log}>
           <Text className={maxTextClass}>
             {arenaCounter === 2 && "MAX"} {arenaCounter}/2
           </Text>
@@ -144,7 +143,7 @@ const ExtendPokemonCard = () => {
         <Wrapper>
           <Text
             tag="h3"
-            className="text-4xl mb-12 font-black uppercase text-center"
+            className="text-4xl mb-24 mt-38 font-black uppercase text-center"
           >
             {displayData.name}
           </Text>
