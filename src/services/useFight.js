@@ -48,7 +48,7 @@ const useFight = () => {
       if (!res.ok) throw new Error(`Update failed: ${res.status}`);
 
       const updatedPoke = await res.json();
-      updatePokemonData({ ...updatedPoke, isBattle: false });
+      updatePokemonData({ ...updatedPoke});
       return updatedPoke;
     } catch (err) {
       console.error("Error updating battle stats:", err);

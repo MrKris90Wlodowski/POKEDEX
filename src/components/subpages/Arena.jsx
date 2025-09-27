@@ -20,7 +20,8 @@ const Arena = () => {
   const arenaWarriors = pokemonData?.filter((poke) => poke.isBattle);
   const arenaCounter = arenaWarriors?.length || 0;
   const blueWarrior = arenaWarriors[0];
-  const redWarrior = arenaCounter === 2 ? arenaWarriors[arenaWarriors.length - 1] : null;
+  const redWarrior =
+    arenaCounter === 2 ? arenaWarriors[arenaWarriors.length - 1] : null;
 
   const [endFight, setEndFight] = useState(false);
   const [winner, setWinner] = useState(null);
@@ -30,12 +31,12 @@ const Arena = () => {
 
   const blueClass = clsx(
     basePokeCard,
-    blueWarrior === losser ? "filter grayscale opacity-50" : ""
+    blueWarrior === losser && endFight ? "filter grayscale opacity-50" : ""
   );
 
   const redClass = clsx(
     basePokeCard,
-    redWarrior === losser ? "filter grayscale opacity-50" : ""
+    redWarrior === losser && endFight ? "filter grayscale opacity-50" : ""
   );
 
   // FUNCTIONS
@@ -58,14 +59,22 @@ const Arena = () => {
     setLosser(losserPoke);
 
     if (winnerPoke && losserPoke) {
-      fightResultPoke(winnerPoke, enqueueSnackbar, true);  
-      fightResultPoke(losserPoke, enqueueSnackbar, false); 
+      fightResultPoke(winnerPoke, enqueueSnackbar, true);
+      fightResultPoke(losserPoke, enqueueSnackbar, false);
     }
 
     setEndFight(true);
 
     console.log("WINNER:", winnerPoke);
     console.log("LOSER:", losserPoke);
+  };
+
+  const handleAfterFight = () => {
+    setWinner(null);
+    setLosser(null);
+    setEndFight(false);
+    surrenderPoke(redWarrior);
+    surrenderPoke(blueWarrior);
   };
 
   // RENDER
@@ -84,7 +93,7 @@ const Arena = () => {
         <Button
           variant="default"
           className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
-          disabled={arenaCounter < 2}
+          disabled={arenaCounter < 2 || endFight}
           onClick={() => handleFight(blueWarrior, redWarrior)}
         >
           BATTLE
@@ -95,11 +104,7 @@ const Arena = () => {
             variant="default"
             className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
             onClick={() => {
-              setEndFight(false);
-              setWinner(null);
-              setLosser(null);
-              surrenderPoke(redWarrior);
-              surrenderPoke(blueWarrior);
+              handleAfterFight();
             }}
           >
             LEAVE
@@ -115,7 +120,6 @@ const Arena = () => {
         isFight={true}
         onClickFlag={() => surrenderPoke(redWarrior)}
       />
-
     </Wrapper>
   );
 };
