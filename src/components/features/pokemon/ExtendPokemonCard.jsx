@@ -29,6 +29,7 @@ const ExtendPokemonCard = () => {
 
   // DISPLAY DATA INITIALIZATION
   let displayData = null;
+  let normalID = null;
 
   // STATE
   const [favourite, setFavourite] = useState(displayData?.isFavor ?? false);
@@ -45,14 +46,17 @@ if (pokemon && pokemonData && userData) {
   displayData = pokemonData.find(
     (poke) => String(poke.id) === `${pokemon}-${userData.id}`
   );
+  normalID =String(displayData.id).split("-")[0];
 }
 
 if (!displayData && pokemon && pokemonsList) {
   displayData = pokemonsList.find((poke) => Number(pokemon) === poke.id);
+  normalID =displayData;
 }
 
 if (!displayData && id && pokemonData) {
   displayData = pokemonData.find((poke) => String(poke.id) === String(id));
+  normalID =String(displayData.id).split("-")[0];
 }
 
 if (!displayData) return <p>Loading...</p>;
@@ -115,8 +119,8 @@ if (!displayData) return <p>Loading...</p>;
           <Sword
             onClick={() => {
               if (arenaCounter < 2) {
-                setBattle((prev) => !prev);
-                battlePoke(displayData.id, userData, sourceList);
+                setBattle(true);
+                battlePoke(normalID, userData, sourceList);
               }
             }}
             className={swordClass}
@@ -124,7 +128,7 @@ if (!displayData) return <p>Loading...</p>;
           <Heart
             onClick={() => {
               setFavourite((prev) => !prev);
-              favouritePoke(displayData.id, userData, sourceList);
+              favouritePoke(normalID, userData, sourceList);
             }}
             className={heartClass}
           />
