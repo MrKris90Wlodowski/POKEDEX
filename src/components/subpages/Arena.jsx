@@ -20,9 +20,7 @@ const Arena = () => {
     victorySong.current.volume = 0.1;
   }
   const stopSong = () => {
-    // victorySong.current.currentTime = 0;
     victorySong.current.pause()
-    // victorySong.current.volume = 0.5;
   }
 
 
@@ -55,8 +53,33 @@ const Arena = () => {
 
   // FUNCTIONS
   const handleFight = (bluePoke, redPoke) => {
-    const bluePokePower = bluePoke.exp * bluePoke.weight;
-    const redPokePower = redPoke.exp * redPoke.weight;
+    
+    //
+    const randomNumberModifier = (min,max) => {
+      return Math.floor(Math.random() * ((max - min) + 1))
+    }
+
+    const luckModifier = (num) => {
+      if (num === 10) {
+        return 1.15;
+      } else if (num === 9) {
+        return 1.10;
+      } else if (num === 8) {
+        return 1.05;
+      } else {
+        return 1;
+      }
+    }
+
+    const bluePokeLuckModifier = luckModifier(randomNumberModifier(1,10));
+    const redPokeLuckModifier = luckModifier(randomNumberModifier(1,10));
+
+    console.log(bluePokeLuckModifier);
+    console.log(redPokeLuckModifier);
+
+
+    const bluePokePower = bluePoke.exp * bluePoke.weight * bluePokeLuckModifier;
+    const redPokePower = redPoke.exp * redPoke.weight * redPokeLuckModifier;
 
     let winnerPoke = null;
     let losserPoke = null;
