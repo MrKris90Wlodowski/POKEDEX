@@ -74,11 +74,27 @@ const CreatePokeForm = () => {
 
   // FORM SUBMIT
   const dataCreate = (formValue) => {
-    createPokemon(userData, formValue, enqueueSnackbar);
-    console.log(formValue);
-    handleNavigate();
-    reset();
+  const parseValue = (value) => {
+    if (!value) return 0;
+    const numeric = value.replace(",", ".").replace(/[^\d.]/g, "");
+    return parseFloat(numeric) || 0;
   };
+
+  const weightNumber = parseValue(formValue.weightCreatePoke) * 10;
+  const heightNumber = parseValue(formValue.heightCreatePoke) * 10;
+
+  const newFormValue = {
+    ...formValue,
+    weightCreatePoke: weightNumber,
+    heightCreatePoke: heightNumber,
+  };
+
+  createPokemon(userData, newFormValue, enqueueSnackbar);
+  console.log(newFormValue);
+  handleNavigate();
+  reset();
+};
+
 
   // RENDER
   return (

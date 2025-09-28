@@ -4,15 +4,17 @@ import SortButtons from "../features/pokemon/SortButtons"
 import usePokemonsArrayAPI from "../../hooks/usePokemonsArrayAPI"
 import PokemonsUniversalConteiner from "../features/pokemon/PokemonsUniversalConteiner"
 import { useState } from "react"
+import useAuth from "../../hooks/useAuth"
 
 // COMPONENT
 const Ranking = () => {
   // VARIABLES / STATE
+  const { pokemonsUser, pokemonData } = useAuth();
   const { pokemonsList } = usePokemonsArrayAPI();
-  const [pokemonsSort, setPokemonsSort] = useState(pokemonsList);
+  const [pokemonsSort, setPokemonsSort] = useState(pokemonData);
 
   const mapPropsRanking = (poke) => ({
-    id: poke.id,
+    id: (poke.id).split("-")[0] || poke.id,
     name: poke.name,
     exp: poke.exp || poke.base_experience,
     weight: poke.weight,
@@ -22,7 +24,7 @@ const Ranking = () => {
     isRecord: true,
     winBattle: poke.winBattle ?? 0,
     lossBattle: poke.lossBattle ?? 0,
-    className: "h-auto"
+    className: "h-auto" 
   })
 
   // FUNCTIONS

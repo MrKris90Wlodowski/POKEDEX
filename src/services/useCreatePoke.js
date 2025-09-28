@@ -55,6 +55,7 @@ const useCreatePoke = () => {
         exp: dataForm.expCreatePoke,
         weight: dataForm.weightCreatePoke,
         height: dataForm.heightCreatePoke,
+        ability: "none",
         image: dataForm.imageCreatePoke,
         isFavor: false,
         isBattle: false,
