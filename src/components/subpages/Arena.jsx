@@ -9,7 +9,7 @@ import clsx from "clsx";
 import { useState, useRef } from "react";
 import useFight from "../../services/useFight";
 import { useSnackbar } from "notistack";
-import victorySongFile from "../../assets/music/champions-victory-winner-music-333682.mp3"
+import victorySongFile from "../../assets/music/champions-victory-winner-music-333682.mp3";
 
 // VARIABLES / STATE
 const Arena = () => {
@@ -18,11 +18,10 @@ const Arena = () => {
     victorySong.current.currentTime = 0;
     victorySong.current.play();
     victorySong.current.volume = 0.1;
-  }
+  };
   const stopSong = () => {
-    victorySong.current.pause()
-  }
-
+    victorySong.current.pause();
+  };
 
   const { pokemonData } = useAuth();
   const { surrenderPoke } = useBattlePoke();
@@ -53,33 +52,107 @@ const Arena = () => {
 
   // FUNCTIONS
   const handleFight = (bluePoke, redPoke) => {
-    
     //
-    const randomNumberModifier = (min,max) => {
-      return Math.floor(Math.random() * ((max - min) + 1))
-    }
+    const randomNumberModifier = (min, max) => {
+      return Math.floor(Math.random() * (max - min + 1));
+    };
 
     const luckModifier = (num) => {
       if (num === 10) {
         return 1.15;
       } else if (num === 9) {
-        return 1.10;
+        return 1.1;
       } else if (num === 8) {
         return 1.05;
       } else {
         return 1;
       }
-    }
+    };
 
-    const bluePokeLuckModifier = luckModifier(randomNumberModifier(1,10));
-    const redPokeLuckModifier = luckModifier(randomNumberModifier(1,10));
+    const bluePokeLuckModifier = luckModifier(randomNumberModifier(1, 10));
+    const redPokeLuckModifier = luckModifier(randomNumberModifier(1, 10));
+
+    const specialistModifier = (winFights, lossFights) => {
+      const allFights = winFights + lossFights;
+      if (allFights === 0) return 1;
+      const winRatio = winFights / allFights;
+
+      if (allFights > 10 && winRatio >= 0.9) {
+        return 1.5;
+      } else {
+        return 1;
+      }
+    };
+
+    const bluePokeSpecialistModifier = specialistModifier(
+      bluePoke.winBattle,
+      bluePoke.lossBattle
+    );
+    const redPokeSpecialistModifier = specialistModifier(
+      redPoke.winBattle,
+      redPoke.lossBattle
+    );
+
+    const experienceModifier = (winFights, lossFights) => {
+      const allFights = winFights + lossFights;
+      if (allFights === 0) return 0.8;
+
+      const winRatio = winFights / allFights;
+
+      // ROOKIE
+      if (allFights <= 5) {
+        return 0.8;
+      }
+      // NORMAL
+      else if (allFights > 5 && allFights <= 10) {
+        return 1;
+      }
+      // EXPERIENCED
+      else if (allFights > 10 && allFights <= 20 && winRatio > 0.5) {
+        return 1.1;
+      }
+      // GLADIATOR
+      else if (allFights > 20 && allFights <= 50 && winRatio > 0.6) {
+        return 1.25;
+      }
+      // ELITE
+      else if (allFights > 50 && allFights <= 100 && winRatio > 0.75) {
+        return 1.5;
+      }
+      // LEGEND
+      else if (allFights > 100 && winRatio > 0.9) {
+        return 2;
+      }
+      return 1;
+    };
+
+    const bluePokeExperienceModifier = experienceModifier(
+      bluePoke.winBattle,
+      bluePoke.lossBattle
+    );
+    const redPokeExperienceModifier = experienceModifier(
+      redPoke.winBattle,
+      redPoke.lossBattle
+    );
 
     console.log(bluePokeLuckModifier);
     console.log(redPokeLuckModifier);
 
+    console.log(bluePokeExperienceModifier);
+    console.log(redPokeExperienceModifier);
 
-    const bluePokePower = bluePoke.exp * bluePoke.weight * bluePokeLuckModifier;
-    const redPokePower = redPoke.exp * redPoke.weight * redPokeLuckModifier;
+    const bluePokePower =
+      bluePoke.exp *
+      bluePoke.weight *
+      bluePokeLuckModifier *
+      bluePokeSpecialistModifier *
+      bluePokeExperienceModifier;
+    const redPokePower =
+      redPoke.exp *
+      redPoke.weight *
+      redPokeLuckModifier *
+      redPokeSpecialistModifier *
+      redPokeExperienceModifier;
 
     let winnerPoke = null;
     let losserPoke = null;
@@ -132,7 +205,7 @@ const Arena = () => {
           className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
           disabled={arenaCounter < 2 || endFight}
           onClick={() => {
-            handleFight(blueWarrior, redWarrior)
+            handleFight(blueWarrior, redWarrior);
             playSong();
           }}
         >

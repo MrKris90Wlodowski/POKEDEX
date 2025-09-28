@@ -1,5 +1,6 @@
 import BASE_API_URL from "../config/baseAPI";
 import { createContext, useEffect, useState } from "react";
+import usePokemonsArrayAPI from "../hooks/usePokemonsArrayAPI";
 
 const AuthContext = createContext();
 

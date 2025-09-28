@@ -8,8 +8,8 @@ import { useState } from "react"
 // COMPONENT
 const Ranking = () => {
   // VARIABLES / STATE
-  const { pokemonsList } = usePokemonsArrayAPI()
-  const [pokemonsSort, setPokemonsSort] = useState(pokemonsList)
+  const { pokemonsList } = usePokemonsArrayAPI();
+  const [pokemonsSort, setPokemonsSort] = useState(pokemonsList);
 
   const mapPropsRanking = (poke) => ({
     id: poke.id,
