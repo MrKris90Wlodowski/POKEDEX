@@ -39,7 +39,11 @@ const Ranking = () => {
       setPokemonsSort(heightSort)
     }
     if (action === "EXP") {
-      const expSort = [...pokemonsSort].sort((a, b) => b.base_experience - a.base_experience)
+      const expSort = [...pokemonsSort].sort((a, b) => (b.base_experience || b.exp) - (a.base_experience || a.exp))
+      setPokemonsSort(expSort)
+    }
+    if (action === "RECORD") {
+      const expSort = [...pokemonsSort].sort((a, b) => (b.winBattle || 0) - (a.winBattle || 0))
       setPokemonsSort(expSort)
     }
   }
