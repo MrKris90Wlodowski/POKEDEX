@@ -6,6 +6,7 @@ import Wrapper from "../shared/Wrapper"
 // import { hash } from "zod"
 import PaginationPokemon from "../features/pokemon/PaginationPokemon"
 import usePokemonAPI from "../../hooks/usePokemonAPI"
+import useAuth from "../../hooks/useAuth"
 import PokemonsUniversalConteiner from "../features/pokemon/PokemonsUniversalConteiner"
 import clsx from "clsx"
 import useTheme from "../../hooks/useTheme"
@@ -13,8 +14,8 @@ import useTheme from "../../hooks/useTheme"
 // COMPONENT
 const Home = () => {
   // VARIABLES / STATE
-  const [searchValue, setSearchValue] = useState("")
-  const { theme } = useTheme()
+  const [searchValue, setSearchValue] = useState("");
+  const { theme } = useTheme();
   const basePokeCardClass = "w-48 h-76 p-4 border-4 rounded-2xl"
   const themeClass = {
     light: "hover:bg-[var(--white)] relative hover:z-10 transform transition-transform-colors duration-300 ease-in-out hover:scale-150",
@@ -52,7 +53,11 @@ const Home = () => {
   }
 
   // VARIABLES / STATE (Pokemons API)
+  // const { pokemonData } = useAuth();
   const { error, pokemonsList, loading } = usePokemonAPI()
+
+  // const userCreatePokemon = pokemonData?.filter((poke) => poke.isEdit === true);
+  // const userPokemon = [...pokemonsList, ...userCreatePokemon];
 
   const filteredArrayPokemons = pokemonsList.filter((poke) =>
     poke.name.toLowerCase().includes(searchValue.trim().toLowerCase())

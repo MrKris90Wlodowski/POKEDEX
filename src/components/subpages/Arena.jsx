@@ -6,12 +6,26 @@ import picturePokeball from "../../icons/pngimg.com - pokeball_PNG21.png";
 import useAuth from "../../hooks/useAuth";
 import useBattlePoke from "../../services/useBattlePoke";
 import clsx from "clsx";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import useFight from "../../services/useFight";
 import { useSnackbar } from "notistack";
+import victorySongFile from "../../assets/music/champions-victory-winner-music-333682.mp3"
 
 // VARIABLES / STATE
 const Arena = () => {
+  const victorySong = useRef(new Audio(victorySongFile));
+  const playSong = () => {
+    victorySong.current.currentTime = 0;
+    victorySong.current.play();
+    victorySong.current.volume = 0.1;
+  }
+  const stopSong = () => {
+    // victorySong.current.currentTime = 0;
+    victorySong.current.pause()
+    // victorySong.current.volume = 0.5;
+  }
+
+
   const { pokemonData } = useAuth();
   const { surrenderPoke } = useBattlePoke();
   const { fightResultPoke } = useFight();
@@ -94,7 +108,10 @@ const Arena = () => {
           variant="default"
           className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
           disabled={arenaCounter < 2 || endFight}
-          onClick={() => handleFight(blueWarrior, redWarrior)}
+          onClick={() => {
+            handleFight(blueWarrior, redWarrior)
+            playSong();
+          }}
         >
           BATTLE
         </Button>
@@ -105,6 +122,7 @@ const Arena = () => {
             className="text-[var(--yellow)] font-semibold text-2xl border-4 p-3 rounded-2xl w-40"
             onClick={() => {
               handleAfterFight();
+              stopSong();
             }}
           >
             LEAVE
