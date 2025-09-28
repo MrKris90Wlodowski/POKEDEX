@@ -14,6 +14,7 @@ import useTheme from "../../hooks/useTheme"
 // COMPONENT
 const Home = () => {
   // VARIABLES / STATE
+  const { log, pokemonsUser } = useAuth();
   const [searchValue, setSearchValue] = useState("");
   const { theme } = useTheme();
   const basePokeCardClass = "w-48 h-76 p-4 border-4 rounded-2xl"
@@ -59,7 +60,7 @@ const Home = () => {
   // const userCreatePokemon = pokemonData?.filter((poke) => poke.isEdit === true);
   // const userPokemon = [...pokemonsList, ...userCreatePokemon];
 
-  const filteredArrayPokemons = pokemonsList.filter((poke) =>
+  const filteredArrayPokemons = (log === "login" ? pokemonsUser : pokemonsList).filter((poke) =>
     poke.name.toLowerCase().includes(searchValue.trim().toLowerCase())
   )
 

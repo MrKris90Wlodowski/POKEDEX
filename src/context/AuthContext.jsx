@@ -28,22 +28,6 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem("pokemonData", JSON.stringify(pokemonData));
   }, [log, userData, pokemonData]);
 
-  // const { pokemonsList } = usePokemonsArrayAPI();
-
-  // const handleFussionArray = (normalArray, modifiedArray) => {
-  //   return normalArray.map(normal => {
-  //     const normalElement = modifiedArray.map(modified => modified.id.split("-")[0] === normal.id)
-  //     return normalElement ? {...normal, ...normalElement} : normal;
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   if (pokemonsList && pokemonData) {
-  //     const fuseArray = handleFussionArray(pokemonsList,pokemonData);
-  //     setPokemonsUser(fuseArray);
-  //   }
-  // },[pokemonsList,pokemonData])
-
   const USER_URL = `${BASE_API_URL}/users`;
   const POKE_URL = `${BASE_API_URL}/pokemons`;
 
