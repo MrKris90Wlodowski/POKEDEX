@@ -36,6 +36,12 @@ This project uses the following technologies:
 
 ## Getting Started
 
+## Repository
+
+You can find the full source code for this project on GitHub:
+
+[POKEDEX Repository](https://github.com/MrKris90Wlodowski/POKEDEX.git)
+
 # Install dependencies
 
 npm install
