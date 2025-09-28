@@ -1,6 +1,5 @@
 // IMPORT
 import Button from "../shared/Button";
-// import Text from "../shared/Text";
 import Wrapper from "../shared/Wrapper";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";

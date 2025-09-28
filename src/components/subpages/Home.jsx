@@ -1,9 +1,7 @@
 // IMPORTS
 import { useState, useEffect } from "react";
-// import PokemonContainer from "../features/pokemon/PokemonContainer"
 import SearchBarPokemon from "../features/pokemon/SearchBarPokemon";
 import Wrapper from "../shared/Wrapper";
-// import { hash } from "zod"
 import PaginationPokemon from "../features/pokemon/PaginationPokemon";
 import usePokemonAPI from "../../hooks/usePokemonAPI";
 import useAuth from "../../hooks/useAuth";
@@ -56,11 +54,7 @@ const Home = () => {
   };
 
   // VARIABLES / STATE (Pokemons API)
-  // const { pokemonData } = useAuth();
   const { error, pokemonsList, loading } = usePokemonAPI();
-
-  // const userCreatePokemon = pokemonData?.filter((poke) => poke.isEdit === true);
-  // const userPokemon = [...pokemonsList, ...userCreatePokemon];
 
   const filteredArrayPokemons = (
     log === "login"

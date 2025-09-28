@@ -2,7 +2,6 @@
 import Wrapper from "../shared/Wrapper";
 import Text from "../shared/Text";
 import useDownloadUserPoke from "../../services/useDownloadUserPoke";
-// import PokemonFavourite from "../features/pokemon/PokemonFavourite";
 import PokemonsUniversalConteiner from "../features/pokemon/PokemonsUniversalConteiner";
 import clsx from "clsx";
 import useTheme from "../../hooks/useTheme";

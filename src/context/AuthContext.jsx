@@ -74,14 +74,11 @@ const AuthProvider = ({ children }) => {
             userPokemonArray(rercordsFilteredPassword[0]);
             handleSetLog();
             return { message: "LOGIN SUCCESSFUL", success: true };
-            // check condition
           } else {
-            // in near future place for notistack message invalid password
             console.log("NO MATCH PASSWORD");
             return { message: "LOGIN FAILED", success: false };
           }
         } else {
-          // in near future place for notistack message invalid email
           console.log("NO MATCH EMAIL");
           return { message: "LOGIN FAILED", success: false };
         }
