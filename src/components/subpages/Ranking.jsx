@@ -11,10 +11,11 @@ const Ranking = () => {
   // VARIABLES / STATE
   const { pokemonsUser, pokemonData } = useAuth();
   const { pokemonsList } = usePokemonsArrayAPI();
-  const [pokemonsSort, setPokemonsSort] = useState(pokemonData);
+  const [pokemonsSort, setPokemonsSort] = useState(pokemonsUser);
+  console.log(pokemonsUser.length);
 
   const mapPropsRanking = (poke) => ({
-    id: (poke.id).split("-")[0] || poke.id,
+    id: String(poke.id).includes("-") ? (poke.id).split("-")[0] : poke.id,
     name: poke.name,
     exp: poke.exp || poke.base_experience,
     weight: poke.weight,

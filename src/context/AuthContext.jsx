@@ -112,9 +112,14 @@ const AuthProvider = ({ children }) => {
   const { pokemonsList } = usePokemonsArrayAPI();
 
   const handleFussionArray = (normalArray, modifiedArray) => {
-    return normalArray.map((normal) => {
+    const extenddArray = [
+      ...normalArray,
+      ...modifiedArray.filter((poke) => poke.isEdit),
+    ];
+
+    return extenddArray.map((normal) => {
       const modifiedElement = modifiedArray.find(
-        (modified) => modified.id.split("-")[0] === normal.id
+        (modified) => String(modified.id.split("-")[0]) === String(normal.id)
       );
       return modifiedElement ? { ...normal, ...modifiedElement } : normal;
     });
