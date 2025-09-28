@@ -82,11 +82,13 @@ const CreatePokeForm = () => {
 
   const weightNumber = parseValue(formValue.weightCreatePoke) * 10;
   const heightNumber = parseValue(formValue.heightCreatePoke) * 10;
+  const expNumber = parseValue(formValue.expCreatePoke);
 
   const newFormValue = {
     ...formValue,
     weightCreatePoke: weightNumber,
     heightCreatePoke: heightNumber,
+    expCreatePoke: expNumber
   };
 
   createPokemon(userData, newFormValue, enqueueSnackbar);
