@@ -44,15 +44,17 @@ const ExtendPokemonCard = () => {
 
   // FIND POKEMON FROM ROUTE OR USER DATA
   if (pokemon && pokemonData && userData) {
+    const pokemonFlex = pokemon.includes("-") === true ? pokemon.split("-")[0] : pokemon;
     displayData = pokemonData.find(
-      (poke) => String(poke.id) === `${pokemon}-${userData.id}`
+      (poke) => String(poke.id) === `${pokemonFlex}-${userData.id}`
     );
-    normalID = pokemon;
+    normalID = pokemonFlex;
   }
 
   if (!displayData && pokemon && pokemonsList) {
-    displayData = pokemonsList.find((poke) => Number(pokemon) === poke.id);
-    normalID = pokemon;
+    const pokemonFlex = pokemon.includes("-") === true ? pokemon.split("-")[0] : pokemon;
+    displayData = pokemonsList.find((poke) => Number(pokemonFlex) === poke.id);
+    normalID = pokemonFlex;
   }
 
   if (!displayData && id && pokemonData) {
@@ -60,7 +62,7 @@ const ExtendPokemonCard = () => {
     normalID = String(displayData.id).split("-")[0];
   }
 
-  if (!displayData) return <p>Loading...</p>;
+  if (!displayData) return <p className="text-6xl font-black">Loading...</p>;
 
   // CSS CLASSES
   const baseTextArena = "text-base md:text-4xl font-bold";
